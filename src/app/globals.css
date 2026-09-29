@@ -63,3 +63,21 @@ h3 { font-size:22px; font-weight:750; line-height:1.2; letter-spacing:-.6px; mar
 @media(max-width:480px) { .site-header,main,.site-footer { padding-inline:20px; } .site-header { flex-wrap:wrap; padding-top:22px; padding-bottom:16px; gap:12px; } .site-header nav { width:100%; justify-content:space-between; } .site-header nav a { min-height:36px; } .issue-line { font-size:8px; } h1 { font-size:clamp(51px,13.6vw,65px); letter-spacing:-.8px; } .hero { padding-top:30px; } .intro { font-size:16px; } .button { font-size:12px; gap:12px; } .preview-note { font-size:9px; } .manifesto-strip { font-size:18px; gap:10px 18px; } .strip-note { font-size:9px; } .workflow { padding-block:40px; } h2 { font-size:34px; } .folio { display:none; } .art-caption { font-size:8px; } .art-footnote { font-size:9px; } .site-footer { flex-direction:column; align-items:flex-start; gap:10px; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none!important; transition:none!important; } }
 @media print { .site-header,.site-footer,.button,.skip-link,.hero-art { display:none; } body { background:white; color:black; } main { padding:0; } .hero,.principles { display:block; padding:20px 0; } .workflow-grid li { break-inside:avoid; } a[href^="http"]::after { content:' (' attr(href) ')'; } }
+
+/* The comic world is decorative. Copy never moves with the artwork. */
+.comic-world { position:relative; isolation:isolate; display:block; overflow:hidden; margin-inline:-48px; padding:75px 48px 80px; min-height:740px; background:var(--paper); }
+.comic-world-art { position:absolute; inset:0; z-index:-3; perspective:1000px; pointer-events:none; }
+.comic-world-plane { position:absolute; inset:-18px; transform-style:preserve-3d; }
+.comic-world-image { object-fit:cover; object-position:center; }
+.comic-world-shade { position:absolute; inset:0; z-index:-2; pointer-events:none; background:linear-gradient(90deg,rgba(244,240,231,.99) 0%,rgba(244,240,231,.97) 30%,rgba(244,240,231,.84) 41%,rgba(244,240,231,.16) 59%,transparent 72%); }
+.comic-world .hero-copy { position:relative; max-width:560px; }
+.comic-world h1 { font-size:clamp(64px,7.5vw,100px); }
+.comic-world .intro { max-width:400px; }
+.world-caption { position:absolute; right:42px; bottom:36px; display:flex; flex-direction:column; gap:5px; padding:12px 16px; background:var(--accent); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink); transform:rotate(-3deg); font-family:var(--mono); font-size:9px; }
+.world-caption strong { font-family:var(--display); font-weight:400; font-size:25px; line-height:1.1; }
+@media(max-width:1000px) and (min-width:801px) { .comic-world h1 { font-size:74px; } .comic-world-shade { background:linear-gradient(90deg,var(--paper) 0%,rgba(244,240,231,.97) 36%,rgba(244,240,231,.6) 55%,transparent 80%); } }
+@media(max-width:800px) { .comic-world { margin-inline:-24px; padding:42px 24px 380px; min-height:0; } .comic-world-art { top:230px; } .comic-world-image { object-position:65% center; } .comic-world-shade { background:linear-gradient(180deg,var(--paper) 0%,var(--paper) 38%,rgba(244,240,231,.94) 49%,rgba(244,240,231,.2) 65%,transparent 76%); } .comic-world h1 { font-size:clamp(60px,11vw,84px); } .world-caption { bottom:25px; right:30px; } }
+@media(max-width:480px) { .comic-world { margin-inline:-20px; padding:34px 20px 330px; } .comic-world-art { top:340px; } .comic-world-shade { background:linear-gradient(180deg,var(--paper) 0%,var(--paper) 43%,rgba(244,240,231,.94) 53%,rgba(244,240,231,.12) 69%,transparent 82%); } .comic-world h1 { font-size:clamp(51px,13.6vw,65px); } .world-caption { right:22px; bottom:24px; } }
+@media(prefers-reduced-motion:reduce), (pointer:coarse) { .comic-world-plane { transform:none!important; } }
+@media print { .comic-world { min-height:0; padding:20px 0; margin:0; } .comic-world-art,.comic-world-shade,.world-caption { display:none; } }
+.comic-world .preview-note { width:fit-content; padding:3px 6px; background:var(--paper); }

@@ -100,3 +100,28 @@ Validation: lint, TypeScript, production build, desktop browser review, 390px
 mobile layout without horizontal overflow, keyboard anchor activation, and no
 captured browser console errors. Build and tracing roots are explicitly scoped
 to ComicReady. Next.js generated agent guidance is included for future work.
+
+## Local cloud-storage caveat
+On this machine, macOS evicted some files inside `node_modules` to cloud-only
+storage, causing stalled reads and `ECANCELED` errors. The current local session
+uses a symlink to a fresh lockfile-based install under
+`/private/tmp/comicready-runtime-0929/node_modules`; the previous directory was
+preserved under ignored `work/node_modules-cloud-backup`. Neither location is
+committed. On a fresh checkout, use `npm ci` normally. If the temporary directory
+is cleared, remove the `node_modules` symlink and run `npm ci` again, preferably
+with the checkout outside cloud-managed folders. The sandbox also blocked
+Turbopack's internal port binding; `npm run build -- --webpack` is the supported
+alternative used to verify this visual revision.
+
+## Dimensional hero
+`public/art/comic-world-v1.png` supplies the original AI-generated comic-paper
+background. `ARTWORK.md` records the full generation prompt. Motion provides
+bounded mouse movement with no automatic animation; touch and reduced-motion
+visitors see a static background. The artwork is decorative and no project data
+is sent anywhere by this interaction.
+
+Dimensional hero verification: lint passed; the production Webpack build passed
+including TypeScript; desktop and 390px mobile rendering were reviewed; pointer
+movement changed only the artwork transform; no horizontal overflow or browser
+console errors were observed. Reduced motion is handled by Motion and a CSS
+fallback; OS-level reduced-motion emulation was not available in the browser tool.

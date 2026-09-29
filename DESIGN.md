@@ -59,3 +59,16 @@ current unfinished app as a development preview. Every future real rule links to
 an official source. Use “Cannot determine from published guidelines” and
 “Payment not disclosed; confirm with organizer.” when appropriate. Guidance is
 not an acceptance guarantee or legal opinion.
+
+## Dimensional comic world — latest visual revision
+The hero uses a frame-filling, AI-generated original comic-paper environment:
+layered inked panels with curled edges, perspective, ivory paper, city scenes,
+muted gold and vermilion. Asset: public/art/comic-world-v1.png. Decorative only;
+not a creator submission or a real opportunity. The source artwork was generated
+with the built-in image-generation tool; prompt is recorded in ARTWORK.md.
+The artwork moves gently with a mouse (at most 9px horizontally, 6px vertically,
+0.6 degrees of perspective tilt) using Motion springs. No automatic looping or
+scroll-linked motion. Pointer exit resets the scene. Touch and reduced-motion
+users receive static artwork. Copy remains stationary on an opaque-to-transparent
+paper gradient. On mobile the visual sits below the headline and primary action.
+Text, source links, results and forms never sit on busy comic art.
