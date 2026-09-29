@@ -90,3 +90,13 @@ current; package-lock.json records the exact installed dependency tree.
 - Full accessibility and end-to-end checker verification remain for later checkpoints.
 - Next.js correctly ignored the unrelated parent lockfile and reported that fact
   as a warning. The current Git root is isolated within ComicReady.
+
+## Visual revision — independent press direction
+Replaced the initial soft-card/serif design with bold condensed lettering,
+square ink panels, restrained vermilion/yellow accents, and an original SVG comic
+proof illustration. DESIGN.md reflects this direction. The development notice
+is shorter near the action with full status explained lower on the page.
+Validation: lint, TypeScript, production build, desktop browser review, 390px
+mobile layout without horizontal overflow, keyboard anchor activation, and no
+captured browser console errors. Build and tracing roots are explicitly scoped
+to ComicReady. Next.js generated agent guidance is included for future work.

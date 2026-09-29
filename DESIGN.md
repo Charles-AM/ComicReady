@@ -1,73 +1,61 @@
-# ComicReady design system
+# ComicReady — independent press / working proof
 
-## Intent
-An editorial workbench for independent comic creators: precise, creative, calm,
-and transparent. Help people understand requirements and the next action quickly.
-Page margins, small folios, fine rules, and restrained panel groupings evoke print
-production without borrowing comic artwork. Never use copyrighted panels or characters.
+## Direction
+A practical tool from the world of independent comics and small-press publishing.
+The visual reference is a comic maker's printed proof: confident lettering, ruled
+panels, generous gutters, registration marks, numbered pages, and handwritten
+editorial touches. The rejected first direction (soft green cards and literary
+serif headlines) was too generic and has been replaced.
 
-## References reviewed
-- https://styles.refero.design/ — coherent visual systems rather than isolated screens.
-- https://typeui.sh/ — deliberate typography and component consistency.
-- https://designmd.me/ — explicit, reusable design decisions.
-- https://designmd.supply/ — document tokens before implementation.
-- https://getdesign.md/ — shared vocabulary for consistent UI.
-- https://collectui.com/ — scanning hierarchy and focused forms.
-These are conceptual references, not assets or interfaces to copy.
+Use original geometric storyboard drawings, never copyrighted comic panels,
+characters, or stock anime. No superhero bursts, fake halftone wallpaper, or
+neon effects. The interface is a useful tool, not a comic-book costume.
 
-## Tokens
-- Paper: #F6F3EC; surface: #FFFDF8.
-- Ink: #20251F; secondary ink: #596052; line: #D6D9CB.
-- Accent: #DBF078, used with ink text; primary button: ink with paper text.
-- Success: #315D41 / #EAF2E9; preparation: #715315 / #FFF2D0.
-- Ineligible: #923B32 / #FBEAE6; unknown: #55596C / #ECECF3.
-- Body/UI: system sans-serif; editorial headline: Georgia, serif.
-- Body 16–18px, line-height 1.6; labels 14px; metadata 13px.
-- Headline fluid 40–76px, line-height 1.05; section titles 28–40px.
-- Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64, 96px.
-- Maximum page width: 1160px; reading width: 680px.
-- Corners: 8px controls, 16px cards, 24px feature panels.
-- Borders: 1px; shadow: 0 8px 30px rgb(32 37 31 / 5%), rarely used.
+References reviewed: styles.refero.design, typeui.sh, designmd.me,
+designmd.supply, getdesign.md, collectui.com. Apply their emphasis on coherent
+systems, explicit design decisions, and hierarchy; do not copy their screens.
 
-## Responsive behavior
-Start at 320px. Use 20px side padding on phones, 32px on tablets, 48px
-on large screens. One-column forms and findings; split supporting content at 800px.
-Never hide source links on phones. Wrap navigation and long URLs. Touch targets
-are at least 44px. No horizontally scrolling form or result content.
+## Tokens and typography
+- Paper #F4F0E7; white sheet #FFFDF7; ink #21211F.
+- Vermilion #B93424 for editorial labels; yellow #F1D45C for limited emphasis.
+- Muted ink #656057; rules #B9B3A6.
+- Display: Impact / Haettenschweiler / Arial Narrow / sans-serif, uppercase,
+  48–100px, compact line height. It evokes cover lettering without novelty fonts.
+- Body: Arial / Helvetica / sans-serif, 16–18px, 1.55 line height.
+- Marginal notes, folios, labels: monospace, 10–12px, letter spacing .08em.
+- Spacing: 4, 8, 12, 16, 24, 32, 48, 64, 96px.
+- Maximum content width 1200px; phone margins 20px, desktop margins 48px.
+- Square corners; 1px dividers and 2px panel borders. No diffuse shadows.
+  Physical paper art may use a small solid offset edge.
 
-## Component states
-- Default: legible ink, explicit labels, fine borders, visible link underlines.
-- Hover: darker border or subtle surface shift; no essential hover-only content.
-- Focus: 3px #42643B outline, 3px offset; never remove keyboard focus.
-- Disabled: lower emphasis, native disabled semantics, visible reason nearby.
-- Loading: plain status text with aria-live; avoid indefinite decorative spinners.
-- Error: red text plus a written explanation associated with the field.
-- Success: green text plus a check and explicit outcome; never color alone.
+## Components
+Listing: flat panel, organizer label, strong title, status, deadline/timezone,
+compensation, verification timestamp, descriptive source/detail links.
+Question: numbered fieldset, explicit label, source, helper text, unknown choice,
+inline validation. Sequential sample pages and total story length stay distinct.
+Finding: outcome word and symbol, explanation and official source. Four separate
+outcomes: meets requirements, not eligible, preparation, cannot determine.
+Checklist: native checkbox, action, source; completed text remains readable.
+Show the local-device storage notice and keep print controls functional.
 
-## Applied examples
-- Listing card: organizer eyebrow, title, status, deadline/timezone, payment
-  disclosure, verification timestamp, then a descriptive details link.
-- Form question: visible label, why it matters, a source link, an input, and a
-  separate unknown option. Distinguish sequential sample pages from story length.
-- Result finding: outcome word/icon, requirement, explanation, official source.
-  Group eligibility, preparation, and uncertainty separately. A prominent summary
-  names the next action without promising acceptance. Unknown is never a pass.
-- Checklist item: native checkbox, action sentence, source, optional explanation.
-  Completed text remains readable. Show local-device storage notice and reset.
+## States
+Default: ink text and crisp borders. Hover: yellow background or stronger rule.
+Focus: 3px vermilion outline with 4px offset. Disabled: native semantics and an
+explanation. Loading: aria-live status. Error: written message plus icon and red
+accent. Success: explicit text plus check, never color alone. Every control must
+perform a real action; do not show future features as decorative buttons.
 
-## Motion and accessibility
-Use Motion from motion/react for 120–180ms reveals, short step transitions,
-and checklist feedback. Respect reduced motion with MotionConfig and CSS;
-all information and controls must function with animation disabled.
-Use semantic landmarks, one h1, orderly heading levels, explicit form labels,
-fieldsets for grouped choices, skip navigation, and keyboard-operable controls.
-Keep normal text at WCAG AA contrast. Do not communicate results with color alone.
-Printing removes navigation and controls, retains source URLs, timestamps,
-findings and checklist state, and avoids splitting individual findings.
+## Responsive, accessibility and motion
+Stack the hero and workflow below 800px. Scale lettering down without clipping.
+Keep source text selectable and wrap long URLs. Touch targets at least 44px.
+Semantic landmarks, skip link, one h1, explicit labels, orderly headings,
+keyboard access, readable contrast. Respect prefers-reduced-motion. Motion is
+reserved for brief feedback, never essential information; avoid decorative loops.
+Print on white, hide navigation/actions, retain URLs, timestamps and outcomes.
 
-## Content integrity
-No acceptance guarantees or legal ratings. Link each real rule to an official
-source. Show “Cannot determine from published guidelines” for ambiguity and
-“Payment not disclosed; confirm with organizer.” for undisclosed payment.
-Fixtures must be visibly labeled as development examples and never inserted
-into a live database. There are no fabricated live calls in this scaffold.
+## Integrity
+No fabricated calls, timestamps, deadlines, payment or rights terms. Label the
+current unfinished app as a development preview. Every future real rule links to
+an official source. Use “Cannot determine from published guidelines” and
+“Payment not disclosed; confirm with organizer.” when appropriate. Guidance is
+not an acceptance guarantee or legal opinion.
