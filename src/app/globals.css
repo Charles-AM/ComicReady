@@ -612,6 +612,11 @@ h3 {
   height: 100%;
 }
 
+.cover-art-photo {
+  object-fit: cover;
+  object-position: center;
+}
+
 .cover-art-shade {
   position: absolute;
   inset: 0;
