@@ -160,3 +160,5 @@ legend { font-weight:700; padding:0 8px; }
 .checklist-item>a { font-size:11px; margin-left:28px; }
 @media(max-width:850px){.results-grid{grid-template-columns:1fr}.result-counts{grid-template-columns:1fr 1fr}.result-counts a:nth-child(2){border-right:0}.result-counts a:nth-child(-n+2){border-bottom:1px solid var(--line)}.result-banner{padding:24px}}
 @media print { .no-print,.result-counts,.text-button { display:none!important; } .results-grid { display:block; } .finding,.checklist-item { break-inside:avoid; } .finding-group { margin-bottom:20px; } .checklist-panel { margin-top:25px; } .result-banner,.finding,.checklist-panel { background:white; } .page-section { border:0; padding:0; } .result-title { font-size:32px; } input[type=checkbox] { appearance:auto; } }
+.reading h2 { margin-top:36px; }
+.honeypot { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }

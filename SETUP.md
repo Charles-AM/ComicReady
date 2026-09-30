@@ -7,7 +7,7 @@ source. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` locally to include the fiction
 practice call. Fixtures are never inserted into the database.
 
 ## Supabase
-1. Create a Supabase project and run `supabase/migrations/202609300001_core.sql`
+1. Create a Supabase project and run both files in `supabase/migrations/`, in filename order,
    in the SQL editor (or apply all migrations with the Supabase CLI).
 2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
    Never put a service-role key in a `NEXT_PUBLIC_` variable. The app does not
@@ -43,4 +43,44 @@ Local database tests run the actual migration in PGlite (Postgres), with an
 `auth.uid()` test shim. They check RLS for anonymous users, ordinary signed-in
 users, admins, drafts, transactional rollback, and publication verification.
 They do not replace a final test against your hosted Supabase Auth instance.
-No Supabase credentials have been supplied in this development session.
+Hosted setup is separate from local verification; do not assume it has completed from passing local tests.
+
+
+## Netlify
+Import `Charles-AM/ComicReady` from GitHub. Use the Free plan and repository root,
+with `npm run build` as build command and `.next` as publish directory. The checked-in
+`netlify.toml` selects Node 24 and disables development fixtures. Let Netlify use its
+automatic Next.js adapter. Set both Supabase public variables below before deploying.
+Do not add a service-role key. Check the deployment log and open the resulting URL.
+No production domain or successful deployment is assumed by this repository.
+
+## Environment variables
+- `NEXT_PUBLIC_SUPABASE_URL`: your project's HTTPS API URL.
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: its public publishable key (RLS enforces access).
+- `COMICREADY_ENABLE_DEV_FIXTURES`: optional; `false` on hosted production.
+
+Changing a public variable requires a fresh build. Keep `.env.local` untracked.
+In Supabase Auth URL settings, set Site URL to the deployed HTTPS origin. There is
+no public registration page, and password login does not use a callback route.
+
+## Measurement and corrections
+The second migration provides daily event aggregates and a private correction inbox.
+The admin dashboard lists these; marking a correction reviewed does not edit a rule.
+Update, verify, and publish the corresponding opportunity separately. Event rows older
+than 90 days are pruned on event ingestion. Remove old correction text manually when
+no longer needed. No personal identifiers or story details belong in correction text.
+Counts are approximate and may include repeats; the anonymous endpoint is not an
+anti-fraud system. Corrections have a global hourly cap and a form honeypot. For a
+larger launch, add host-side abuse controls without collecting story facts.
+
+## Hosted release checks
+1. Create an Auth user privately and grant its UUID admin membership.
+2. Confirm login works and an ordinary authenticated user cannot write calls.
+3. Save a draft with source-linked rules, preview it, and verify public URLs return 404.
+4. Re-read official guidelines, verify, then publish a real call. Check it anonymously.
+5. Complete a fit check on mobile; test unknown answers, checklist reload and printing.
+6. Submit a correction and confirm only an admin can view it. Confirm counts update.
+7. Close/unpublish the call and verify public behavior. Restore only after review.
+
+Keyboard focus, semantic labels and reduced-motion behavior are implemented; include
+an operating-system reduced-motion and screen-reader pass in the hosted acceptance review.

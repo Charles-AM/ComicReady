@@ -24,3 +24,4 @@ export async function saveCall(_state:ActionState,form:FormData):Promise<ActionS
   revalidatePath('/opportunities');revalidatePath('/admin');return {success:doc.published?'Published and verified.':'Draft saved.',id:doc.id};
  }catch{return {error:'Check all fields, URLs, rule comparisons, and the deadline timezone. A sourced requirement is required.'};}
 }
+export async function resolveCorrection(form:FormData){const db=await adminDb();if(!db)redirect('/admin/login');const id=String(form.get('id'));const {error}=await db.from('corrections').update({resolved:true}).eq('id',id);if(error)throw new Error('Could not resolve correction.');revalidatePath('/admin');}

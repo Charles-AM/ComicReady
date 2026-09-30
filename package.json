@@ -7,11 +7,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check": "npm run lint && npm test && npm run typecheck && npm run build",
     "test": "vitest run"
   },
   "dependencies": {

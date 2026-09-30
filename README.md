@@ -1,17 +1,12 @@
 # ComicReady
 
-Submission-readiness guidance for independent comic creators, based on reviewed,
-source-linked requirements. Never an acceptance guarantee or legal opinion.
+A mobile-responsive submission-readiness tool for independent comic creators.
+Reviewed, source-linked rules produce separate eligibility, preparation, and
+unknown findings. They never promise acceptance or replace legal advice.
 
-## Current checkpoint
-Checkpoint 1: Next.js App Router foundation, TypeScript, Tailwind, Motion provider,
-responsive introductory page, design specification, and environment template.
-The opportunity directory, checker, Supabase schema, admin, and analytics are
-subsequent checkpoints, not implemented features. No live calls or fabricated
-opportunity data are included. Nothing has been deployed or pushed to GitHub.
+## Run
 
-## Local development
-Use Node.js 22 or newer (Node 24 LTS recommended).
+Use Node 24, then:
 
 ```sh
 npm ci
@@ -19,109 +14,68 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open http://localhost:3000. The scaffold runs without Supabase credentials.
+Without Supabase, the app displays one manually reviewed Sector 13 call from its
+official organizer. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` to exercise a clearly
+labeled fictional practice anthology. These fixtures are never seeded to a database.
+With Supabase configured, only its published records appear publicly.
+
+## What works
+
+- Search and filter the opportunity directory; inspect original sources and verification times.
+- Answer relevant project questions, receive deterministic findings, mark a checklist,
+  and print/save it using the browser. Facts and progress stay on that browser/device.
+- Admin-only call/rule editing, private preview, verification, publication, closure,
+  correction review, and aggregate funnel counts.
+- Supabase RLS hides drafts and rules from public readers, including public pages
+  viewed while signed in as an administrator.
+- Privacy preference, correction form, accessible labels/focus, responsive layouts,
+  reduced-motion support, and print styling.
+
+There are no comic uploads, public accounts, generative eligibility chatbot,
+application submissions, payments, or individual tracking profiles.
+
+## Verify
 
 ```sh
-npm run lint
-npm run typecheck
-npm run build
-npm start
+npm run check
 ```
 
-Dependencies are locked in package-lock.json after installation. `npm run check`
-runs lint, type checking, and the production build. No rules tests exist yet;
-meaningful rules-engine tests will be added with that module in checkpoint 4.
+Runs lint, meaningful rules/database/request tests, TypeScript, and the production
+build. Database tests execute both migrations in PGlite with a small test Auth shim;
+real Supabase sign-in and hosted deployment still need integration verification.
+Webpack is used for portable production builds. The lockfile records compatible
+installed versions; use `npm ci` for reproducibility.
 
-## Environment
-- `NEXT_PUBLIC_SUPABASE_URL`: future Supabase project URL.
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: future public publishable key, protected
-  by database row-level security once the database checkpoint is implemented.
-- `COMICREADY_ENABLE_DEV_FIXTURES`: reserved, default false; currently unused.
-Never put service-role credentials or admin identities in public source code.
+## Deploy and administer
 
-## Development checkpoints
-1. Scaffold, README, environment example, DESIGN.md.
-2. Responsive landing and searchable opportunity list.
-3. Database migration, admin authorization, opportunity management.
-4. Pure typed rule evaluation and meaningful tests.
-5. Conditional project form, findings, device-local printable checklist.
-6. Aggregate measurement, accessibility review, Netlify configuration, docs.
+See [SETUP.md](SETUP.md) for Supabase migrations, the private admin allowlist,
+Netlify configuration, required environment variables, and the release checklist.
+The repository includes Netlify build settings and a GitHub Actions check workflow.
+It remains a standard Next.js app and is portable to other Next-compatible hosts.
 
-## Repository isolation
-This directory has its own `.git`. Before every commit, run
-`git rev-parse --show-toplevel` and confirm it ends in `/ComicReady`.
-No GitHub account is required for local development. The intended remote is
-https://github.com/Charles-AM/ComicReady.git; connect it only after checking its
-existing history. Do not force push over unknown remote content.
+## Structure
 
-## Architecture and product constraints
-App routes live in `src/app`, reusable UI in `src/components`, and future pure
-rules in `src/lib`. Review DESIGN.md before styling additional screens. Public
-users will not need accounts or upload files. Auth will protect only the private
-admin area. Reviewed rules must keep their official sources and manual timestamps.
-Missing input must never become a silent pass or fail. Compensation that is not
-disclosed must not be labeled unpaid. Applications belong on organizer websites.
+- `src/lib/engine.ts`: pure rules evaluation, independent of UI and database.
+- `src/lib/model.ts`: typed opportunities, project facts, and requirements.
+- `src/lib/catalog.ts`: reviewed fallback entry and explicit development fixture.
+- `src/lib/supabase/`: anonymous public reads and cookie-backed admin authorization.
+- `supabase/migrations/`: schema, RLS, transactional admin saves, aggregate events.
+- `tests/`: behavioral rules, real Postgres policy, and input-validation tests.
+- `DESIGN.md` and `ARTWORK.md`: visual system and artwork provenance.
 
-## Official documentation consulted
-- https://nextjs.org/docs/app/getting-started/installation
-- https://tailwindcss.com/docs/installation/framework-guides/nextjs
-- https://motion.dev/docs/react
-- https://supabase.com/docs/guides/auth/server-side/creating-a-client
-- https://supabase.com/docs/guides/database/postgres/row-level-security
-- https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
+## Measurement
 
-## Toolchain compatibility
-Next.js 16.3.7 uses lint plugins whose current peer ranges require ESLint 9 and
-TypeScript below 6.1. This scaffold uses ESLint 9.39.5 and TypeScript 6.0.3;
-ESLint 10 and TypeScript 7 were tried and failed inside those plugins. ESLint 9
-currently has an upstream deprecation notice. Upgrade the lint toolchain when
-Next.js's bundled plugins support ESLint 10. Runtime framework versions remain
-current; package-lock.json records the exact installed dependency tree.
+The private dashboard reports daily aggregate counts for opportunity views, checks
+started/completed, print-dialog requests, official-link clicks, and corrections.
+No project facts, persistent visitor identifiers, IP addresses, or referrers are
+stored in these tables. Counts are approximate interactions, not unique users or
+confirmed submissions/PDF saves. Browser opt-out, DNT, and GPC suppress optional
+client measurement; a submitted correction still increments its functional count.
+Host infrastructure may retain its own request logs.
 
-## Checkpoint 1 verification — 2026-09-29
-- Dependencies installed successfully with the project-local npm cache.
-- `npm run lint`: passed with zero warnings.
-- `npm run typecheck`: passed.
-- `npm run build`: passed; the homepage and not-found route were generated.
-- `npm start -- --hostname 127.0.0.1`: production server started successfully.
-- Browser: homepage rendered; keyboard activation of “See how it works” reached
-  `#how-it-works`; no captured browser console errors.
-- At a 390px viewport, document width was 390px (no horizontal overflow).
-- Full accessibility and end-to-end checker verification remain for later checkpoints.
-- Next.js correctly ignored the unrelated parent lockfile and reported that fact
-  as a warning. The current Git root is isolated within ComicReady.
+## Content maintenance
 
-## Visual revision — independent press direction
-Replaced the initial soft-card/serif design with bold condensed lettering,
-square ink panels, restrained vermilion/yellow accents, and an original SVG comic
-proof illustration. DESIGN.md reflects this direction. The development notice
-is shorter near the action with full status explained lower on the page.
-Validation: lint, TypeScript, production build, desktop browser review, 390px
-mobile layout without horizontal overflow, keyboard anchor activation, and no
-captured browser console errors. Build and tracing roots are explicitly scoped
-to ComicReady. Next.js generated agent guidance is included for future work.
-
-## Local cloud-storage caveat
-On this machine, macOS evicted some files inside `node_modules` to cloud-only
-storage, causing stalled reads and `ECANCELED` errors. The current local session
-uses a symlink to a fresh lockfile-based install under
-`/private/tmp/comicready-runtime-0929/node_modules`; the previous directory was
-preserved under ignored `work/node_modules-cloud-backup`. Neither location is
-committed. On a fresh checkout, use `npm ci` normally. If the temporary directory
-is cleared, remove the `node_modules` symlink and run `npm ci` again, preferably
-with the checkout outside cloud-managed folders. The sandbox also blocked
-Turbopack's internal port binding; `npm run build -- --webpack` is the supported
-alternative used to verify this visual revision.
-
-## Dimensional hero
-`public/art/comic-world-v1.png` supplies the original AI-generated comic-paper
-background. `ARTWORK.md` records the full generation prompt. Motion provides
-bounded mouse movement with no automatic animation; touch and reduced-motion
-visitors see a static background. The artwork is decorative and no project data
-is sent anywhere by this interaction.
-
-Dimensional hero verification: lint passed; the production Webpack build passed
-including TypeScript; desktop and 390px mobile rendering were reviewed; pointer
-movement changed only the artwork transform; no horizontal overflow or browser
-console errors were observed. Reduced motion is handled by Motion and a CSS
-fallback; OS-level reduced-motion emulation was not available in the browser tool.
+Every live rule needs an official source, short reference, and manual verification.
+Unknown payment remains undisclosed, not unpaid. Nuanced exceptions remain human
+review findings. Recheck deadlines, compensation, licensing, and submission status
+before publishing, then periodically. Do not pad the catalog with invented calls.
