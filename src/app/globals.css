@@ -594,20 +594,47 @@ h3 {
   transition: border-color 160ms, box-shadow 200ms ease, transform 200ms ease;
 }
 
-.cover-art--comic {
-  background: #e3ddd0;
-  border-color: #21211f;
-  padding: 5px;
+.cover-art-placard {
+  border-color: var(--line);
 }
 
-.cover-art--comic .cover-art-shade {
-  background: linear-gradient(
-    180deg,
-    rgba(33, 33, 31, 0.2) 0%,
-    transparent 22%,
-    transparent 78%,
-    rgba(33, 33, 31, 0.15) 100%
-  );
+.cover-art-gradient {
+  background:
+    radial-gradient(ellipse 90% 70% at 20% 15%, rgba(255, 255, 255, 0.12), transparent 55%),
+    linear-gradient(152deg, var(--cover-g0) 0%, var(--cover-g1) 48%, var(--cover-g2) 100%);
+}
+
+.cover-art-placard--fixture .cover-art-gradient {
+  background: linear-gradient(160deg, #2a2a28 0%, #1a1a18 55%, #121210 100%);
+  opacity: 0.95;
+}
+
+.cover-initials {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 11vw, 3.5rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: rgba(255, 253, 247, 0.28);
+  pointer-events: none;
+  user-select: none;
+  transform: rotate(-4deg);
+}
+
+.cover-art-placard--fixture .cover-initials {
+  font-style: normal;
+  font-size: 2rem;
+  color: rgba(255, 253, 247, 0.18);
+  transform: none;
 }
 
 .cover-card-link:hover .cover-art {
@@ -620,20 +647,6 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 0;
-}
-
-.cover-art-preview svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.cover-art-shade {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.08) 38%, rgba(0, 0, 0, 0.55) 100%);
 }
 
 .cover-art-labels {
@@ -667,19 +680,19 @@ h3 {
 
 .cover-type {
   align-self: flex-end;
-  padding: 3px 6px;
-  background: #f1d45c;
-  color: #21211f;
-  border: 1px solid #21211f;
+  padding: 3px 7px;
+  background: rgba(12, 12, 12, 0.55);
+  color: rgba(255, 253, 247, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 2px;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 400;
+  backdrop-filter: blur(6px);
 }
 
-.cover-art--comic .cover-status,
-.cover-art--comic .cover-type {
+.cover-art-placard .cover-status,
+.cover-art-placard .cover-type {
   text-shadow: none;
-  color: inherit;
 }
 
 .cover-organizer {
