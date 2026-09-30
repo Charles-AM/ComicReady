@@ -1,0 +1,6 @@
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { adminDb } from '@/lib/supabase/server';
+import { logout } from './actions';
+export const dynamic='force-dynamic';
+export default async function Admin(){const db=await adminDb();if(!db)redirect('/admin/login');const {data,error}=await db.from('opportunities').select('id,title,status,published,last_verified_at').order('updated_at',{ascending:false});if(error)throw new Error('Could not load admin records. Check the database migration.');return <section className="page-section"><p className="eyebrow">PRIVATE EDITORIAL DESK</p><h1 className="page-title">Keep the source close.</h1><div className="actions"><Link className="button" href="/admin/new">Add a call +</Link><form action={logout}><button className="button secondary">Sign out</button></form></div>{data?.map(c=><article className="requirement" key={c.id}><h2 className="section-title"><Link href={'/admin/'+c.id}>{c.title}</Link></h2><p>{c.published?'Published':'Draft'} · {c.status}</p></article>)}{!data?.length&&<p className="notice">No calls yet. Start with a real organizer’s official guidelines. No fixtures have been added to this database.</p>}</section>;}
