@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { HeroDisplayTitle } from '@/components/hero-display-title';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { Storyboard } from '@/components/storyboard';
 import { getOpportunities } from '@/lib/opportunities';
@@ -29,10 +30,7 @@ export default async function Home() {
       <section className="home-hero" aria-labelledby="hero-title">
         <div className="home-hero-grid">
           <div>
-            <p className="eyebrow">Before you submit</p>
-            <h1 id="hero-title" className="page-title hero-title">
-              Make comics. Make your next move.
-            </h1>
+            <HeroDisplayTitle />
             <p className="lede">
               You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
