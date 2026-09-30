@@ -21,7 +21,7 @@ export function HeroTitle({ variant, id = 'hero-title', className = '' }: HeroTi
       return (
         <h1 id={id} className={root} aria-label="Comic Ready">
           <BrandMark className="hero-title-mark" aria-hidden />
-          <span className="hero-title-lockup-text">Comic Ready</span>
+          <span className="hero-title-lockup-text brand-lockup-text">Comic Ready</span>
         </h1>
       );
     case 'tagline':
