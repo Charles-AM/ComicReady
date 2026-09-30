@@ -19,7 +19,7 @@
   --shadow-panel: 0 4px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
   --shadow-lift: 0 20px 50px rgba(0, 0, 0, 0.55);
   --display: "Bebas Neue", Impact, Haettenschweiler, "Arial Narrow", sans-serif;
-  --accent: #ef4620;
+  --accent: #4a8fd4;
 }
 
 * {
@@ -137,6 +137,11 @@ textarea:focus-visible {
   width: 1.75rem;
   height: 1.75rem;
   flex-shrink: 0;
+}
+
+.brand-lockup--mark-only .brand-mark {
+  width: 2rem;
+  height: 2rem;
 }
 
 .brand-lockup-text {
