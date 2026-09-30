@@ -4,82 +4,56 @@ import { ComicHero } from '@/components/comic-hero';
 const steps = [
   {
     number: '01',
-    label: 'The call',
-    title: 'Read the guidelines like an editor.',
-    text: 'Pick a short-comic or anthology listing. See requirements, payment disclosure, rights wording, and the official source in one place.',
-    span: 'wide' as const,
+    title: 'Read between the guidelines.',
+    text: 'Start with a short-comic or anthology call. See the organizer’s requirements, payment disclosure, rights wording, and official source.',
   },
   {
     number: '02',
-    label: 'Your project',
-    title: 'Map facts to rules.',
-    text: 'Compare format, role, and materials with what the organizer published. Keep eligibility, prep work, and open questions in separate lanes.',
-    span: 'tall' as const,
+    title: 'Find out where you stand.',
+    text: 'Compare your format, role, and materials with the stated rules. Keep eligibility, things to prepare, and unanswered questions separate.',
   },
   {
     number: '03',
-    label: 'Next move',
-    title: 'Walk away with a checklist.',
-    text: 'Print it, mark it up, then go to the organizer’s site when you are ready. No uploads. No creator account.',
-    span: 'wide' as const,
+    title: 'Leave with a to-do list.',
+    text: 'Work through a checklist, print it, and head to the organizer’s website when you’re ready. No comic uploads. No creator account.',
   },
 ];
 
 export default function Home() {
   return (
     <>
-      <div className="issue-line">
-        <span>Independent comic submission readiness</span>
-        <span>Sheet 01 · working proof</span>
-      </div>
       <ComicHero>
         <p className="eyebrow">
           <span className="editorial-tag">Before you submit</span>
-          <span className="eyebrow-note">Source-linked · small catalog</span>
         </p>
-        <h1 id="hero-title" className="hero-title">
-          <span className="title-line">Make comics.</span>
-          <span className="title-line title-line-shift">Make your</span>
-          <span className="title-line title-line-accent">next move.</span>
+        <h1 id="hero-title" className="display-title">
+          Make comics.
+          <br />
+          Make your <span className="title-accent">next move.</span>
         </h1>
-        <p className="intro">
-          You have the story. The call has the rules. ComicReady turns published guidelines into a straight answer about where you stand and what is still
-          missing.
+        <p className="lede">
+          You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
         </p>
         <div className="hero-actions">
-          <Link className="button button-primary" href="/opportunities">
-            Browse submission calls
-          </Link>
-          <Link className="button button-secondary" href="/#how-it-works">
-            See the process
+          <Link className="button" href="/opportunities">
+            Explore submission calls
           </Link>
         </div>
+        <p className="fine-print">A small, source-linked catalog. No creator account.</p>
       </ComicHero>
 
-      <blockquote className="pull-quote">
-        <p>Built for the people who ink, letter, and layout the page — not for mystery scores or fake deadlines.</p>
-      </blockquote>
-
-      <section className="workflow" id="how-it-works" aria-labelledby="workflow-title">
-        <div className="section-heading">
-          <p className="eyebrow">Three-panel workflow</p>
-          <h2 id="workflow-title">
-            Less guesswork.
-            <br />
-            More getting it together.
+      <section className="home-process" id="how-it-works" aria-labelledby="workflow-title">
+        <div className="section-intro">
+          <p className="eyebrow">How it works</p>
+          <h2 id="workflow-title" className="section-title">
+            Less guesswork. More getting it together.
           </h2>
-          <span className="folio" aria-hidden="true">
-            pp. 01–03
-          </span>
         </div>
-        <ol className="workflow-strip">
+        <ol className="process-list">
           {steps.map((step) => (
-            <li key={step.number} className={`workflow-panel panel-${step.span}`}>
-              <div className="panel-gutter">
-                <span className="panel-number">{step.number}</span>
-                <span className="panel-label-text">{step.label}</span>
-              </div>
-              <div className="panel-body">
+            <li key={step.number}>
+              <span className="process-index">{step.number}</span>
+              <div>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </div>
@@ -88,26 +62,26 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="principles" id="our-approach" aria-labelledby="principles-title">
-        <div className="principles-lede">
-          <p className="eyebrow">Integrity first</p>
-          <h2 id="principles-title">
-            The source gets
-            <br />
-            the final word.
-          </h2>
-        </div>
-        <div className="principles-copy">
-          <p>
-            Every reviewed requirement links to the organizer’s published guidelines. When something is unclear, we say so. A readiness check is guidance — not
-            acceptance, not legal advice.
-          </p>
-          <div className="notice">
-            <strong>Development preview</strong>
+      <section className="home-approach" id="our-approach" aria-labelledby="principles-title">
+        <div className="approach-grid">
+          <div>
+            <p className="eyebrow">Our approach</p>
+            <h2 id="principles-title" className="section-title">
+              The source gets the final word.
+            </h2>
+          </div>
+          <div className="approach-body">
             <p>
-              Browse the first reviewed call and check your project against its stated requirements. Hero artwork mixes original vector panels with decorative
-              generated proof art — not a creator submission.
+              Every reviewed requirement will link to the organizer’s published guidelines. If something is unclear, we’ll say so. A readiness check is
+              guidance—not a promise of acceptance or a legal opinion.
             </p>
+            <div className="notice">
+              <strong>Development preview</strong>
+              <p>
+                Browse the first reviewed call and check your project against its stated requirements. The homepage illustration is original vector art, not a
+                sample submission.
+              </p>
+            </div>
           </div>
         </div>
       </section>

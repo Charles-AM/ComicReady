@@ -1,5 +1,28 @@
 import { getOpportunities } from '@/lib/opportunities';
 import { OpportunityList } from '@/components/opportunity-list';
-export const dynamic='force-dynamic';
-export const metadata={title:'Submission calls'};
-export default async function Opportunities(){return <section className="page-section"><p className="eyebrow">FIND YOUR NEXT PAGE</p><h1 className="page-title">Small list.<br/>Clear requirements.</h1><p className="page-intro">English-language short comics and anthologies. Read the source, check your project, and see what to prepare.</p><p className="notice">A deliberately small catalog. Verification records reflect a reading of the public guidelines, not confirmation that the organizer is still responding.</p><OpportunityList calls={await getOpportunities()}/></section>;}
+import { PageHeader } from '@/components/page-header';
+
+export const dynamic = 'force-dynamic';
+export const metadata = { title: 'Submission calls' };
+
+export default async function Opportunities() {
+  return (
+    <section className="page-section layout-catalog">
+      <PageHeader
+        eyebrow="Submission calls"
+        title={
+          <>
+            Small list.
+            <br />
+            Clear requirements.
+          </>
+        }
+        intro="English-language short comics and anthologies. Read the source, check your project, and see what to prepare."
+      />
+      <p className="notice layout-catalog-notice">
+        A deliberately small catalog. Verification reflects a reading of public guidelines, not confirmation that the organizer is still responding.
+      </p>
+      <OpportunityList calls={await getOpportunities()} />
+    </section>
+  );
+}
