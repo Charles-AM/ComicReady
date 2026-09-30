@@ -10,8 +10,8 @@ const links = [
     label: 'Catalog',
     match: (path: string) => path.startsWith('/opportunities') || path.startsWith('/check/') || path.startsWith('/results/'),
   },
-  { href: '/#how-it-works', label: 'Process', match: () => false },
-  { href: '/#our-approach', label: 'Approach', match: () => false },
+  { href: '/#how-it-works', label: 'How it works', match: () => false },
+  { href: '/#standards', label: 'Standards', match: () => false },
 ] as const;
 
 export function SiteNav() {

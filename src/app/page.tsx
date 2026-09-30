@@ -3,19 +3,19 @@ import { Storyboard } from '@/components/storyboard';
 
 const steps = [
   {
-    number: '01',
+    label: 'Pick a call',
     title: 'Read between the guidelines.',
-    text: 'Start with a short-comic or anthology call. See the organizer’s requirements, payment disclosure, rights wording, and official source.',
+    text: 'Open a short-comic or anthology listing. Requirements, payment disclosure, rights wording, and the official source stay together.',
   },
   {
-    number: '02',
+    label: 'Answer plainly',
     title: 'Find out where you stand.',
-    text: 'Compare your format, role, and materials with the stated rules. Keep eligibility, things to prepare, and unanswered questions separate.',
+    text: 'Compare your format, role, and materials with what the organizer published. Eligibility, prep work, and open questions stay in separate lanes.',
   },
   {
-    number: '03',
-    title: 'Leave with a to-do list.',
-    text: 'Work through a checklist, print it, and head to the organizer’s website when you’re ready. No comic uploads. No creator account.',
+    label: 'Leave prepared',
+    title: 'Take a checklist with you.',
+    text: 'Print it, mark it up, then continue on the organizer’s site when you are ready. No uploads. No creator account.',
   },
 ];
 
@@ -43,46 +43,58 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-process" id="how-it-works" aria-labelledby="workflow-title">
-        <div className="section-intro">
-          <p className="eyebrow">How it works</p>
-          <h2 id="workflow-title" className="section-title">
-            Less guesswork. More getting it together.
-          </h2>
+      <section className="workflow-band" id="how-it-works" aria-labelledby="workflow-title">
+        <div className="workflow-band-inner">
+          <header className="workflow-band-header">
+            <div>
+              <p className="eyebrow">How it works</p>
+              <h2 id="workflow-title" className="section-title">
+                Less guesswork. More getting it together.
+              </h2>
+            </div>
+            <p className="workflow-band-lede">
+              <strong>Process</strong> is the path you walk for each call—three practical steps from reading the guidelines to a printable checklist. It is not
+              a score and not a submission portal.
+            </p>
+          </header>
+          <ol className="workflow-panels">
+            {steps.map((step, index) => (
+              <li key={step.label}>
+                <article className="workflow-panel">
+                  <p className="workflow-panel-tag">
+                    Step {index + 1} · {step.label}
+                  </p>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </article>
+              </li>
+            ))}
+          </ol>
         </div>
-        <ol className="process-list">
-          {steps.map((step) => (
-            <li key={step.number}>
-              <span className="process-index">{step.number}</span>
-              <div>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
       </section>
 
-      <section className="home-approach" id="our-approach" aria-labelledby="principles-title">
-        <div className="approach-grid">
-          <div>
-            <p className="eyebrow">Our approach</p>
-            <h2 id="principles-title" className="section-title">
+      <section className="standards-section" id="standards" aria-labelledby="standards-title">
+        <div className="standards-layout">
+          <header className="standards-header">
+            <p className="eyebrow">Standards</p>
+            <h2 id="standards-title" className="section-title">
               The source gets the final word.
             </h2>
-          </div>
-          <div className="approach-body">
-            <p>
-              Every reviewed requirement will link to the organizer’s published guidelines. If something is unclear, we’ll say so. A readiness check is
-              guidance—not a promise of acceptance or a legal opinion.
+            <p className="standards-lede">
+              <strong>Approach</strong> is how ComicReady handles evidence—what we link to, what we refuse to invent, and what a readiness check can and
+              cannot promise.
             </p>
-            <div className="notice">
-              <strong>Development preview</strong>
-              <p>
-                Browse the first reviewed call and check your project against its stated requirements. The homepage illustration is original vector art, not a
-                sample submission.
-              </p>
-            </div>
+          </header>
+          <div className="standards-body">
+            <ul className="standards-list">
+              <li>Every reviewed requirement links to the organizer’s published guidelines.</li>
+              <li>Missing or ambiguous rules stay labeled as unknown—not guessed.</li>
+              <li>Guidance is not acceptance, artistic judgment, or legal advice.</li>
+            </ul>
+            <p className="standards-preview">
+              This site is a development preview: a small catalog, original homepage illustration (not a sample submission), and checks that run against
+              stated requirements only.
+            </p>
           </div>
         </div>
       </section>

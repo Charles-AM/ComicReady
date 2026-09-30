@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { effectiveStatus, roles, verificationLabel, type Opportunity } from '@/lib/model';
 
@@ -10,12 +10,10 @@ function coverClass(slug: string, category: string) {
 }
 
 export function OpportunityList({ calls }: { calls: Opportunity[] }) {
-  const filterPanelId = useId();
   const [query, setQuery] = useState('');
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
   const [category, setCategory] = useState('');
-  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const shown = calls.filter(
     (c) =>
@@ -25,63 +23,13 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
       (!category || c.category === category),
   );
 
-  const categoryTabs = [
-    { value: '', label: 'All items' },
-    { value: 'anthology', label: 'Anthologies' },
-    { value: 'short-comic', label: 'Short comics' },
-  ] as const;
-
   return (
     <>
-      <div className="catalog-toolbar">
-        <div className="catalog-search">
-          <label className="catalog-search-label" htmlFor="catalog-search">
-            Search
-          </label>
-          <input
-            id="catalog-search"
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Title or organizer"
-            aria-describedby="catalog-search-hint"
-          />
-          <span id="catalog-search-hint" className="visually-hidden">
-            Filters the list below as you type
-          </span>
-        </div>
-
-        <ul className="catalog-tabs" role="tablist" aria-label="Call type">
-          {categoryTabs.map((tab) => {
-            const selected = category === tab.value;
-            return (
-              <li key={tab.label} role="presentation">
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  className={selected ? 'is-active' : undefined}
-                  onClick={() => setCategory(tab.value)}
-                >
-                  {tab.label}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-
-        <button
-          type="button"
-          className="btn-quiet filter-toggle"
-          aria-expanded={filtersOpen}
-          aria-controls={filterPanelId}
-          onClick={() => setFiltersOpen((open) => !open)}
-        >
-          More filters
-        </button>
-      </div>
-
-      <div id={filterPanelId} className={`catalog-filter-panel${filtersOpen ? ' is-open' : ''}`} hidden={!filtersOpen}>
+      <div className="catalog-filters">
+        <label>
+          Search
+          <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Title or organizer" />
+        </label>
         <label>
           Creator role
           <select value={role} onChange={(e) => setRole(e.target.value)}>
@@ -98,6 +46,14 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
             {['open', 'rolling', 'closed', 'unknown'].map((s) => (
               <option key={s}>{s}</option>
             ))}
+          </select>
+        </label>
+        <label>
+          Call type
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="">All types</option>
+            <option value="anthology">Anthology</option>
+            <option value="short-comic">Short comic</option>
           </select>
         </label>
       </div>
