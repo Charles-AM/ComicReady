@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { HeroTitle } from '@/components/hero-title';
 import { heroTitleVariant } from '@/lib/hero-title-style';
+import { HeroReadinessStack } from '@/components/hero-readiness-stack';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { getOpportunities } from '@/lib/opportunities';
 
@@ -29,8 +30,8 @@ export default async function Home() {
     <>
       <section className="home-hero home-hero--catalog" aria-labelledby="hero-title">
         <div className="home-hero-catalog-layout">
-          <HeroTitle variant={heroTitleVariant} />
-          <div className="home-hero-aside">
+          <div className="home-hero-main">
+            <HeroTitle variant={heroTitleVariant} />
             <p className="lede home-hero-lede">
               You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
@@ -39,6 +40,7 @@ export default async function Home() {
             </Link>
             <p className="fine-print">Source-linked listings · No creator account</p>
           </div>
+          <HeroReadinessStack />
         </div>
       </section>
 
