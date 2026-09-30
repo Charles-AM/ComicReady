@@ -28,7 +28,7 @@ export function compare(rule:Requirement,input:unknown):boolean|null{
  if(!rule.field||!validInput(rule.field,input)||rule.operator==='review'||rule.value===null)return null;
  const v=rule.value;
  if(rule.operator==='gte'||rule.operator==='lte')return typeof input==='number'&&typeof v==='number'&&Number.isFinite(v)?(rule.operator==='gte'?input>=v:input<=v):null;
- if(rule.operator==='in')return typeof input==='string'&&Array.isArray(v)?v.some(s=>normalize(s)===normalize(input)):null;
+ if(rule.operator==='in')return typeof input==='string'&&Array.isArray(v)&&v.every(s=>typeof s==='string')?v.some(s=>normalize(s)===normalize(input)):null;
  if(rule.operator==='eq'){
   if(typeof input!==typeof v||Array.isArray(v))return null;
   return typeof input==='string'&&typeof v==='string'?normalize(input)===normalize(v):input===v;
