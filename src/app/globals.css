@@ -122,6 +122,42 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
+.brand-mark-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.brand-mark {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.hero-display {
+  margin: 0 0 22px;
+  max-width: none;
+  line-height: 0.85;
+}
+
+.hero-display-line {
+  display: block;
+  width: fit-content;
+  font-family: "Arial Narrow", "Helvetica Neue Condensed", "Liberation Sans Narrow", Impact, Haettenschweiler, sans-serif;
+  font-size: clamp(3rem, 14vw, 6.25rem);
+  font-weight: 700;
+  font-stretch: condensed;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transform: scaleX(1.18);
+  transform-origin: left center;
+}
+
+.hero-display-line + .hero-display-line {
+  margin-top: -0.06em;
+}
+
 .site-header nav {
   display: flex;
   flex-wrap: wrap;
@@ -1419,9 +1455,13 @@ p {
 }
 
 @media (max-width: 480px) {
-  .page-title,
-  .hero-title {
+  .page-title {
     font-size: clamp(1.5rem, 7vw, 1.875rem);
+  }
+
+  .hero-display-line {
+    font-size: clamp(2.5rem, 16vw, 3.75rem);
+    transform: scaleX(1.1);
   }
 
   .section-title {

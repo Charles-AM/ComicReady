@@ -5,12 +5,13 @@ import '@fontsource/source-sans-3/400.css';
 import '@fontsource/source-sans-3/500.css';
 import '@fontsource/source-serif-4/400.css';
 import '@fontsource/source-serif-4/500.css';
+import { BrandMark } from '@/components/brand-mark';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: 'ComicReady — Make comics. Make your next move.', template: '%s | ComicReady' },
+  title: { default: 'Comic Ready', template: '%s | Comic Ready' },
   description: 'Understand published comic submission requirements and what you still need to prepare.',
 };
 
@@ -25,8 +26,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="site-frame">
             <header className="site-banner">
               <div className="site-shell site-header">
-                <Link className="brand" href="/" aria-label="ComicReady home">
-                  ComicReady
+                <Link className="brand brand-mark-link" href="/" aria-label="Comic Ready home">
+                  <BrandMark className="brand-mark" />
                 </Link>
                 <SiteNav />
               </div>
