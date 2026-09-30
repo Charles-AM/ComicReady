@@ -1,4 +1,4 @@
-/** Spine C mark (concept C) — paths only, inherits `currentColor`. */
+/** Checklist panel mark (logo concept B) — readiness, not a reader app. */
 export function BrandMark({ className = '' }: { className?: string }) {
   return (
     <svg
@@ -8,12 +8,15 @@ export function BrandMark({ className = '' }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
     >
+      <rect x="52" y="60" width="152" height="136" stroke="currentColor" strokeWidth="14" />
       <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d="M168 68c-36-24-96-8-96 60s60 84 96 60c14-8 24-22 28-38l-24-8c-2 10-8 18-16 22-18 10-48-2-48-36s30-46 48-36c8 4 14 12 16 22l24-8c-4-16-14-30-28-38z"
+        stroke="currentColor"
+        strokeWidth="12"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M84 96l16 16 32-32M84 128l16 16 32-32M84 160l16 16 32-32"
       />
-      <rect x="176" y="76" width="14" height="104" rx="2" fill="currentColor" />
+      <path fill="currentColor" d="M180 60h16v136h-16z" />
     </svg>
   );
 }
