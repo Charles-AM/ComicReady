@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <rect width="256" height="256" fill="#fff"/>
+  <!-- Checklist + panel: three ticks in a frame -->
+  <path stroke="#111" stroke-width="14" stroke-linecap="square" d="M56 64h144v128H56z"/>
+  <path stroke="#111" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M88 96l16 16 32-32M88 128l16 16 32-32M88 160l16 16 32-32"/>
+  <path fill="#111" d="M184 64h16v128h-16z"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 128" fill="none">
+  <rect width="640" height="128" fill="#fff"/>
+  <g transform="translate(8 8) scale(0.4375)">
+    <path fill="#111" fill-rule="evenodd" d="M48 56h160v104h-48v48H48V56zm48 104h48v48h-48v-48z"/>
+    <path fill="#111" d="M96 108c-18 0-30 12-30 28s12 28 30 28c10 0 18-4 24-10l-12-10c-4 4-9 6-14 6-10 0-16-6-16-14s6-14 16-14c5 0 10 2 14 6l12-10c-6-6-14-10-24-10zm52-4v80h18v-32l28 32h22l-32-36 28-32h-22l-24 28V104h-18z"/>
+  </g>
+  <text x="136" y="78" fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="48" letter-spacing="-0.02em">ComicReady</text>
+</svg>

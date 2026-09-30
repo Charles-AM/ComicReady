@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 128" fill="none">
+  <rect width="640" height="128" fill="#fff"/>
+  <g transform="translate(16 16) scale(0.375)">
+    <path stroke="#111" stroke-width="14" stroke-linecap="square" d="M56 64h144v128H56z"/>
+    <path stroke="#111" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" d="M88 96l16 16 32-32M88 128l16 16 32-32M88 160l16 16 32-32"/>
+    <path fill="#111" d="M184 64h16v128h-16z"/>
+  </g>
+  <text x="136" y="78" fill="#111" font-family="Georgia, serif" font-size="48" letter-spacing="-0.02em">ComicReady</text>
+</svg>
