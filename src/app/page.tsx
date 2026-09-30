@@ -22,23 +22,24 @@ const steps = [
 export default function Home() {
   return (
     <>
-      <section className="store-hero" aria-labelledby="hero-title">
-        <div className="store-hero-grid">
-          <div className="store-hero-copy">
-            <p className="eyebrow store-eyebrow">Before you submit</p>
-            <h1 id="hero-title" className="store-mega" aria-label="ComicReady">
-              <span className="store-mega-line">Comic</span>
-              <span className="store-mega-line store-mega-accent">Ready</span>
+      <section className="home-hero" aria-labelledby="hero-title">
+        <div className="home-hero-grid">
+          <div>
+            <p className="eyebrow">Before you submit</p>
+            <h1 id="hero-title" className="page-title hero-title">
+              Make comics.
+              <br />
+              Make your <span className="text-accent">next move.</span>
             </h1>
-            <p className="store-lede">
+            <p className="lede">
               You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
             </p>
             <Link className="button" href="/opportunities">
-              Browse the catalog
+              Browse submission calls
             </Link>
             <p className="fine-print">Source-linked listings · No creator account</p>
           </div>
-          <div className="store-hero-art">
+          <div className="home-hero-art">
             <Storyboard />
           </div>
         </div>

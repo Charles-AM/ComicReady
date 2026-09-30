@@ -7,16 +7,17 @@ export const metadata = { title: 'Submission calls' };
 export default async function Opportunities() {
   return (
     <section className="page-section layout-catalog">
-      <header className="catalog-hero">
-        <h1 className="mega-title" id="catalog-title">
-          Calls
-        </h1>
-        <div className="catalog-hero-aside">
-          <p className="catalog-hero-copy">
-            English-language short comics and anthologies. Read the source, check your project, and see what to prepare. A deliberately small catalog—verification
-            reflects a reading of public guidelines, not confirmation that the organizer is still responding.
-          </p>
+      <header className="catalog-page-head">
+        <div>
+          <p className="eyebrow">Catalog</p>
+          <h1 className="page-title" id="catalog-title">
+            Submission calls
+          </h1>
         </div>
+        <p className="catalog-hero-copy">
+          English-language short comics and anthologies. Read the source, check your project, and see what to prepare. Verification reflects a reading of public
+          guidelines, not confirmation that the organizer is still responding.
+        </p>
       </header>
       <OpportunityList calls={await getOpportunities()} />
     </section>

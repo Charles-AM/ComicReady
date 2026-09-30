@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Bebas_Neue, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
 import './globals.css';
@@ -9,12 +9,6 @@ const bodyFont = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-body',
-});
-
-const displayFont = Bebas_Neue({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-display',
 });
 
 const monoFont = IBM_Plex_Mono({
@@ -30,22 +24,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable}`}>
+    <html lang="en" className={`${bodyFont.variable} ${monoFont.variable}`}>
       <body>
         <MotionProvider>
           <a href="#main" className="skip-link">
             Skip to content
           </a>
           <div className="site-frame">
-            <div className="site-banner">
+            <header className="site-banner">
               <div className="site-shell site-header">
                 <Link className="brand" href="/" aria-label="ComicReady home">
-                  <span className="brand-name">ComicReady</span>
+                  ComicReady
                 </Link>
                 <SiteNav />
               </div>
-            </div>
-            <main id="main">{children}</main>
+            </header>
+            <main id="main" className="site-shell site-main">
+              {children}
+            </main>
             <footer className="site-footer site-shell">
               <p className="footer-lede">Independent stories. Informed next steps.</p>
               <nav aria-label="Footer">

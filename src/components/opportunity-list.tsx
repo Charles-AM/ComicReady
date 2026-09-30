@@ -72,12 +72,12 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
 
         <button
           type="button"
-          className="button filter-toggle"
+          className="btn-quiet filter-toggle"
           aria-expanded={filtersOpen}
           aria-controls={filterPanelId}
           onClick={() => setFiltersOpen((open) => !open)}
         >
-          Filters
+          More filters
         </button>
       </div>
 
