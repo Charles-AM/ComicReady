@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { CatalogIcon } from './catalog-icon';
 import {
   accentForSlug,
   callInitials,
@@ -54,6 +55,7 @@ export function CallCoverSurface({ call, statusLabel, className = '', style = ca
       )}
       {style === 'category' && (
         <div className="cover-preview-category" aria-hidden="true">
+          <CatalogIcon category={call.category} />
           <CategoryPreviewCopy category={call.category} fixture={call.fixture} />
           <span className="cover-category-rule" />
         </div>

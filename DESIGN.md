@@ -65,3 +65,15 @@ The home hero uses the original vector `Storyboard` illustration (see ARTWORK.md
 Catalog cards use hand-built SVG cover previews in `call-cover-art.tsx`—no
 AI-generated imagery. Decorative art only; not creator submissions or real
 opportunity covers. Text, source links, results and forms never sit on busy art.
+
+## Current homepage refinement
+Preserve the user-selected charcoal surfaces, blue accent, Source Sans/Serif and
+Bebas title. The hero aside is a single editorial proof sheet: a small original
+SVG comic-page drawing above three numbered preparation prompts. Keep the prompts
+readable and explicitly illustrative, never imply a completed eligibility check.
+Use thin warm-white strokes, blue registration details, quiet ruled dividers and
+one offset paper edge. Catalog preview icons use the same stroke language: a bound
+collection for anthologies and sequential panels for short comics. These are type
+symbols, not organizer logos or actual covers. All illustration is code-native,
+aria-hidden, static, and requires no image downloads or animation. Preserve native
+focus states and readable text; reduce padding on narrow screens without clipping.
