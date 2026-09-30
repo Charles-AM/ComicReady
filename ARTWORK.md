@@ -1,3 +1,17 @@
+# Call cover previews
+
+Component: `src/components/call-cover-art.tsx`
+
+Original vector “cover preview” illustrations for catalog cards and call detail
+headers. They are decorative placeholders for the readiness tool—not organizer
+artwork, anthology covers, or sample submissions.
+
+- `sector-13`: science-fiction panel collage
+- `cbk-cba-v76`: struck empty frames (theme: “world without pictures”)
+- `discord-bite`: night scene with muted bi-flag linework
+- `development-anthology`: labeled fixture grid
+- Other slugs: procedural generic panel layout from slug hash
+
 # Comic world background
 
 Asset: `public/art/comic-world-v1.png`

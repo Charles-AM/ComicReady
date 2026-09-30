@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { effectiveStatus, verificationLabel, type Opportunity } from '@/lib/model';
+import { CallCoverSurface } from '@/components/call-cover-surface';
+import { verificationLabel, type Opportunity } from '@/lib/model';
 
 export function coverClass(slug: string, category: string) {
   const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0) % 4;
@@ -18,10 +19,7 @@ export function OpportunityCoverCard({ call, compactMeta = false }: { call: Oppo
   return (
     <article className="cover-card">
       <Link href={'/opportunities/' + call.slug} className="cover-card-link">
-        <div className={`cover-art ${coverClass(call.slug, call.category)}`}>
-          <span className="cover-status">{effectiveStatus(call)}</span>
-          <span className="cover-type">{call.fixture ? 'Fixture' : call.category.replace('-', ' ')}</span>
-        </div>
+        <CallCoverSurface call={call} />
         <div className="cover-info">
           <p className="cover-organizer">{call.organizer}</p>
           <h2 className="cover-title">{call.title}</h2>

@@ -3,7 +3,7 @@ import { EventMarker, ApplicationLink } from '@/components/event-marker';
 import { BackLink } from '@/components/back-link';
 import { notFound } from 'next/navigation';
 import { getOpportunity } from '@/lib/opportunities';
-import { coverClass } from '@/components/opportunity-cover';
+import { CallCoverSurface } from '@/components/call-cover-surface';
 import { effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
 
 export const dynamic = 'force-dynamic';
@@ -18,10 +18,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
       <BackLink href="/opportunities">Catalog</BackLink>
 
       <div className="call-showcase">
-        <div className={`call-showcase-cover cover-art ${coverClass(c.slug, c.category)}`} aria-hidden="true">
-          <span className="cover-status">{effectiveStatus(c)}</span>
-          <span className="cover-type">{c.fixture ? 'Fixture' : c.category.replace('-', ' ')}</span>
-        </div>
+        <CallCoverSurface call={c} className="call-showcase-cover" />
         <header className="call-header">
           <p className="eyebrow">
             {c.fixture ? 'Development fixture' : c.organizer} · {effectiveStatus(c)}
