@@ -5,17 +5,17 @@ const steps = [
   {
     label: 'Pick a call',
     title: 'Read between the guidelines.',
-    text: 'Open a short-comic or anthology listing. Requirements, payment disclosure, rights wording, and the official source stay together.',
+    text: 'Open a short-comic or anthology listing. Payment, rights, deadlines, and the link to the real call sit on one page—no hunting through PDFs.',
   },
   {
     label: 'Answer plainly',
     title: 'Find out where you stand.',
-    text: 'Compare your format, role, and materials with what the organizer published. Eligibility, prep work, and open questions stay in separate lanes.',
+    text: 'Tell us your role, format, and what you have ready. You’ll see what matches the rules, what you still need to prep, and what only the organizer can answer.',
   },
   {
     label: 'Leave prepared',
     title: 'Take a checklist with you.',
-    text: 'Print it, mark it up, then continue on the organizer’s site when you are ready. No uploads. No creator account.',
+    text: 'Print it, scribble on it, then finish on the organizer’s site when you’re ready. Nothing to upload here, and no account to create.',
   },
 ];
 
@@ -30,7 +30,7 @@ export default function Home() {
               Make comics. Make your next move.
             </h1>
             <p className="lede">
-              You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
+              You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
             <Link className="button" href="/opportunities">
               Browse submission calls
@@ -53,8 +53,8 @@ export default function Home() {
               </h2>
             </div>
             <p className="workflow-band-lede">
-              <strong>Process</strong> is the path you walk for each call—three practical steps from reading the guidelines to a printable checklist. It is not
-              a score and not a submission portal.
+              Three steps, same every time: read the call, compare your project, walk away with a to-do list. We’re not grading your comic, and this isn’t where
+              you hit submit.
             </p>
           </header>
           <ol className="workflow-panels">
@@ -81,19 +81,19 @@ export default function Home() {
               The source gets the final word.
             </h2>
             <p className="standards-lede">
-              <strong>Approach</strong> is how ComicReady handles evidence—what we link to, what we refuse to invent, and what a readiness check can and
-              cannot promise.
+              When we cite a rule, it goes back to the organizer’s page. If the guidelines go quiet on something, we leave it blank instead of guessing. Think
+              of the check as prep for your application—not a promise you’ll get in, and not legal advice.
             </p>
           </header>
           <div className="standards-body">
             <ul className="standards-list">
-              <li>Every reviewed requirement links to the organizer’s published guidelines.</li>
-              <li>Missing or ambiguous rules stay labeled as unknown—not guessed.</li>
-              <li>Guidance is not acceptance, artistic judgment, or legal advice.</li>
+              <li>Requirements link to the wording the organizer published.</li>
+              <li>Open questions stay open until you hear back from them.</li>
+              <li>We’re looking at eligibility and paperwork—not a jury on your story.</li>
             </ul>
             <p className="standards-preview">
-              This site is a development preview: a small catalog, original homepage illustration (not a sample submission), and checks that run against
-              stated requirements only.
+              Early build: a handful of calls in the catalog, hand-drawn-style art on the home page (not someone’s submission), and checks that stick to what’s
+              written in the guidelines.
             </p>
           </div>
         </div>
