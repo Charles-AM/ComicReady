@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ComicHero } from '@/components/comic-hero';
+import { Storyboard } from '@/components/storyboard';
 
 const steps = [
   {
@@ -22,25 +22,27 @@ const steps = [
 export default function Home() {
   return (
     <>
-      <ComicHero>
-        <p className="eyebrow">
-          <span className="editorial-tag">Before you submit</span>
-        </p>
-        <h1 id="hero-title" className="display-title">
-          Make comics.
-          <br />
-          Make your <span className="title-accent">next move.</span>
-        </h1>
-        <p className="lede">
-          You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
-        </p>
-        <div className="hero-actions">
-          <Link className="button" href="/opportunities">
-            Explore submission calls
-          </Link>
+      <section className="store-hero" aria-labelledby="hero-title">
+        <div className="store-hero-grid">
+          <div className="store-hero-copy">
+            <p className="eyebrow store-eyebrow">Before you submit</p>
+            <h1 id="hero-title" className="store-mega" aria-label="ComicReady">
+              <span className="store-mega-line">Comic</span>
+              <span className="store-mega-line store-mega-accent">Ready</span>
+            </h1>
+            <p className="store-lede">
+              You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
+            </p>
+            <Link className="button" href="/opportunities">
+              Browse the catalog
+            </Link>
+            <p className="fine-print">Source-linked listings · No creator account</p>
+          </div>
+          <div className="store-hero-art">
+            <Storyboard />
+          </div>
         </div>
-        <p className="fine-print">A small, source-linked catalog. No creator account.</p>
-      </ComicHero>
+      </section>
 
       <section className="home-process" id="how-it-works" aria-labelledby="workflow-title">
         <div className="section-intro">

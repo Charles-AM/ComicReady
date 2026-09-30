@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Big_Shoulders, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { Bebas_Neue, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
 import './globals.css';
@@ -11,9 +11,9 @@ const bodyFont = IBM_Plex_Sans({
   variable: '--font-body',
 });
 
-const displayFont = Big_Shoulders({
+const displayFont = Bebas_Neue({
   subsets: ['latin'],
-  weight: ['700', '800'],
+  weight: '400',
   variable: '--font-display',
 });
 
@@ -36,21 +36,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <a href="#main" className="skip-link">
             Skip to content
           </a>
-          <div className="site-shell">
-            <header className="site-header">
-              <Link className="brand" href="/" aria-label="ComicReady home">
-                <span className="brand-mark" aria-hidden="true">
-                  <svg width="32" height="36" viewBox="0 0 32 36" fill="none">
-                    <rect x="1" y="1" width="30" height="34" stroke="currentColor" strokeWidth="2" />
-                    <path d="M1 13h30M12 13v22" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                </span>
-                <span className="brand-name">ComicReady</span>
-              </Link>
-              <SiteNav />
-            </header>
+          <div className="site-frame">
+            <div className="site-banner">
+              <div className="site-shell site-header">
+                <Link className="brand" href="/" aria-label="ComicReady home">
+                  <span className="brand-name">ComicReady</span>
+                </Link>
+                <SiteNav />
+              </div>
+            </div>
             <main id="main">{children}</main>
-            <footer className="site-footer">
+            <footer className="site-footer site-shell">
               <p className="footer-lede">Independent stories. Informed next steps.</p>
               <nav aria-label="Footer">
                 <Link href="/privacy">Privacy</Link>

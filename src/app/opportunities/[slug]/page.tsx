@@ -5,6 +5,11 @@ import { notFound } from 'next/navigation';
 import { getOpportunity } from '@/lib/opportunities';
 import { effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
 
+function coverClass(slug: string, category: string) {
+  const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0) % 4;
+  return `cover-tone-${category === 'anthology' ? 'anthology' : 'short'}-${bucket}`;
+}
+
 export const dynamic = 'force-dynamic';
 
 export default async function Detail({ params }: { params: Promise<{ slug: string }> }) {
@@ -14,16 +19,30 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
   return (
     <section className="page-section layout-call">
       <EventMarker event="opportunity_viewed" slug={c.slug} enabled={!c.fixture} />
-      <BackLink href="/opportunities">All calls</BackLink>
+      <BackLink href="/opportunities">Catalog</BackLink>
 
-      <header className="call-header">
-        <p className="eyebrow">
-          {c.fixture ? 'Development fixture' : c.organizer} · {effectiveStatus(c)}
-        </p>
-        <h1 className="call-title">{c.title}</h1>
-        <p className="call-description">{c.description}</p>
-        {c.fixture && <p className="notice">Fictional testing data. This is not an actual call and does not accept submissions.</p>}
-      </header>
+      <div className="call-showcase">
+        <div className={`call-showcase-cover cover-art ${coverClass(c.slug, c.category)}`} aria-hidden="true">
+          <span className="cover-status">{effectiveStatus(c)}</span>
+          <span className="cover-type">{c.fixture ? 'Fixture' : c.category.replace('-', ' ')}</span>
+        </div>
+        <header className="call-header">
+          <p className="eyebrow">
+            {c.fixture ? 'Development fixture' : c.organizer} · {effectiveStatus(c)}
+          </p>
+          <h1 className="call-title">{c.title}</h1>
+          <p className="call-description">{c.description}</p>
+          {c.fixture && <p className="notice">Fictional testing data. This is not an actual call and does not accept submissions.</p>}
+          <div className="call-primary-action">
+            <Link className="button" href={'/check/' + c.slug}>
+              Check my project
+            </Link>
+            <ApplicationLink className="button secondary" href={c.official_url} slug={c.slug} fixture={c.fixture}>
+              {c.fixture ? 'Fixture guidelines' : 'Official guidelines'}
+            </ApplicationLink>
+          </div>
+        </header>
+      </div>
 
       <div className="call-layout">
         <div className="call-main">
@@ -43,11 +62,6 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
               </li>
             ))}
           </ol>
-          <div className="call-primary-action">
-            <Link className="button" href={'/check/' + c.slug}>
-              Check my project
-            </Link>
-          </div>
         </div>
 
         <aside className="call-sidebar">
@@ -73,9 +87,6 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
               <dd>{verificationLabel(c.last_verified_at)}</dd>
             </div>
           </dl>
-          <ApplicationLink className="button secondary" href={c.official_url} slug={c.slug} fixture={c.fixture}>
-            {c.fixture ? 'Read fixture guidelines' : 'Official guidelines'}
-          </ApplicationLink>
           <p className="fine-print">Apply through the organizer. ComicReady never accepts comic submissions.</p>
         </aside>
       </div>
