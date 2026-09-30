@@ -15,8 +15,8 @@ export default async function Opportunities() {
           </h1>
         </div>
         <p className="catalog-hero-copy">
-          English-language short comics and anthologies. Read the source, check your project, and see what to prepare. Verification reflects a reading of public
-          guidelines, not confirmation that the organizer is still responding.
+          Short comics and anthologies in English. Open a call, skim the linked guidelines, run a quick check on your project, and see what you still need in
+          hand. We read what’s public—we can’t tell you if someone’s inbox is open today.
         </p>
       </header>
       <OpportunityList calls={await getOpportunities()} />
