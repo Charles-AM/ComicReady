@@ -18,13 +18,18 @@ export function HomeCatalogPeek({ calls }: { calls: Opportunity[] }) {
           Browse all calls
         </Link>
       </div>
-      <ul className="cover-grid home-catalog-peek-grid">
-        {calls.map((call) => (
-          <li key={call.id}>
-            <OpportunityCoverCard call={call} compactMeta />
-          </li>
-        ))}
-      </ul>
+      <div className="cover-rail-wrap">
+        <ul className="cover-grid cover-grid--rail home-catalog-peek-grid">
+          {calls.map((call) => (
+            <li key={call.id}>
+              <OpportunityCoverCard call={call} compactMeta />
+            </li>
+          ))}
+        </ul>
+        <p className="cover-rail-hint" aria-hidden="true">
+          Swipe to browse
+        </p>
+      </div>
     </section>
   );
 }
