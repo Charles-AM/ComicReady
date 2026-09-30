@@ -27,9 +27,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="site-frame">
             <header className="site-banner">
               <div className="site-shell site-header">
-                <Link className="brand brand-lockup" href="/" aria-label="Comic Ready home">
+                <Link className="brand brand-lockup brand-lockup--mark-only" href="/" aria-label="Comic Ready home">
                   <BrandMark className="brand-mark" aria-hidden />
-                  <span className="brand-lockup-text">Comic Ready</span>
                 </Link>
                 <SiteNav />
               </div>
