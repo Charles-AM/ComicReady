@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { Storyboard } from '@/components/storyboard';
+import { getOpportunities } from '@/lib/opportunities';
 
 const steps = [
   {
@@ -19,7 +21,9 @@ const steps = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const catalogCalls = (await getOpportunities()).filter((c) => !c.fixture).slice(0, 6);
+
   return (
     <>
       <section className="home-hero" aria-labelledby="hero-title">
@@ -42,6 +46,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <HomeCatalogPeek calls={catalogCalls} />
 
       <section className="workflow-band" id="how-it-works" aria-labelledby="workflow-title">
         <div className="workflow-band-inner">
@@ -92,8 +98,8 @@ export default function Home() {
               <li>We’re looking at eligibility and paperwork—not a jury on your story.</li>
             </ul>
             <p className="standards-preview">
-              Early build: a handful of calls in the catalog, hand-drawn-style art on the home page (not someone’s submission), and checks that stick to what’s
-              written in the guidelines.
+              Early build: a small set of manually reviewed calls in the catalog, original art on the home page (not someone’s submission), and checks that stick to
+              what’s written in the guidelines.
             </p>
           </div>
         </div>

@@ -1,13 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { effectiveStatus, roles, verificationLabel, type Opportunity } from '@/lib/model';
-
-function coverClass(slug: string, category: string) {
-  const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0) % 4;
-  return `cover-tone-${category === 'anthology' ? 'anthology' : 'short'}-${bucket}`;
-}
+import { OpportunityCoverCard } from '@/components/opportunity-cover';
+import { effectiveStatus, roles, type Opportunity } from '@/lib/model';
 
 export function OpportunityList({ calls }: { calls: Opportunity[] }) {
   const [query, setQuery] = useState('');
@@ -65,23 +60,7 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
       <ul className="cover-grid">
         {shown.map((c) => (
           <li key={c.id}>
-            <article className="cover-card">
-              <Link href={'/opportunities/' + c.slug} className="cover-card-link">
-                <div className={`cover-art ${coverClass(c.slug, c.category)}`}>
-                  <span className="cover-status">{effectiveStatus(c)}</span>
-                  <span className="cover-type">{c.fixture ? 'Fixture' : c.category.replace('-', ' ')}</span>
-                </div>
-                <div className="cover-info">
-                  <p className="cover-organizer">{c.organizer}</p>
-                  <h2 className="cover-title">{c.title}</h2>
-                  <p className="cover-meta">
-                    {c.deadline ? verificationLabel(c.deadline) : 'Deadline not published'}
-                    {' · '}
-                    {c.compensation ? 'Payment listed' : 'Payment not disclosed'}
-                  </p>
-                </div>
-              </Link>
-            </article>
+            <OpportunityCoverCard call={c} />
           </li>
         ))}
       </ul>

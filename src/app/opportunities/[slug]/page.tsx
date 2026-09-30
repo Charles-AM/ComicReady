@@ -3,12 +3,8 @@ import { EventMarker, ApplicationLink } from '@/components/event-marker';
 import { BackLink } from '@/components/back-link';
 import { notFound } from 'next/navigation';
 import { getOpportunity } from '@/lib/opportunities';
+import { coverClass } from '@/components/opportunity-cover';
 import { effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
-
-function coverClass(slug: string, category: string) {
-  const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0) % 4;
-  return `cover-tone-${category === 'anthology' ? 'anthology' : 'short'}-${bucket}`;
-}
 
 export const dynamic = 'force-dynamic';
 
