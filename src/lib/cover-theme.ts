@@ -1,17 +1,21 @@
-/** Deterministic catalog card color + initials — not generated imagery. */
+/**
+ * Catalog card preview style — change this one line to try another look.
+ *
+ * A `stripe`   — dark tile, colored left bar (default, least busy)
+ * B `initials` — flat fill + two letters, centered
+ * C `category` — flat fill + anthology / short comic word only
+ * D `label`    — no “cover art”, organizer name in the tile
+ */
 
-const palettes: readonly [string, string, string][] = [
-  ['#5c3d30', '#2f2438', '#14110f'],
-  ['#3a4a52', '#252018', '#0f1012'],
-  ['#4a3a28', '#1e2830', '#0c0d10'],
-  ['#443828', '#302438', '#101014'],
-  ['#364038', '#281e28', '#0e0e0c'],
-  ['#503432', '#222838', '#121018'],
-];
+export type CatalogPreviewStyle = 'stripe' | 'initials' | 'category' | 'label';
 
-export function paletteForSlug(slug: string): [string, string, string] {
+export const catalogPreviewStyle: CatalogPreviewStyle = 'category';
+
+const accents = ['#8a6a58', '#6a8088', '#887860', '#786878', '#688078', '#886860'] as const;
+
+export function accentForSlug(slug: string) {
   const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0);
-  return palettes[bucket % palettes.length];
+  return accents[bucket % accents.length];
 }
 
 const skip = new Set(['the', 'a', 'an', 'and', '&', 'of']);
@@ -36,4 +40,9 @@ export function callInitials(organizer: string, title: string, slug: string) {
 
   const compact = slug.replace(/[^a-z0-9]/gi, '');
   return (compact.slice(0, 2) || '??').toUpperCase();
+}
+
+export function categoryLabel(category: string, fixture?: boolean) {
+  if (fixture) return 'Fixture';
+  return category === 'anthology' ? 'Anthology' : 'Short comic';
 }
