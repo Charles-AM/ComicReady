@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { HeroDisplayTitle } from '@/components/hero-display-title';
+import { HeroTitle } from '@/components/hero-title';
+import { heroTitleVariant } from '@/lib/hero-title-style';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { Storyboard } from '@/components/storyboard';
 import { getOpportunities } from '@/lib/opportunities';
@@ -30,7 +31,7 @@ export default async function Home() {
       <section className="home-hero" aria-labelledby="hero-title">
         <div className="home-hero-grid">
           <div>
-            <HeroDisplayTitle />
+            <HeroTitle variant={heroTitleVariant} />
             <p className="lede">
               You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
