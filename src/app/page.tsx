@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { HeroTitle } from '@/components/hero-title';
 import { heroTitleVariant } from '@/lib/hero-title-style';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
-import { Storyboard } from '@/components/storyboard';
 import { getOpportunities } from '@/lib/opportunities';
 
 const steps = [
@@ -28,20 +27,17 @@ export default async function Home() {
 
   return (
     <>
-      <section className="home-hero" aria-labelledby="hero-title">
-        <div className="home-hero-grid">
-          <div>
-            <HeroTitle variant={heroTitleVariant} />
-            <p className="lede">
+      <section className="home-hero home-hero--catalog" aria-labelledby="hero-title">
+        <div className="home-hero-catalog-layout">
+          <HeroTitle variant={heroTitleVariant} />
+          <div className="home-hero-aside">
+            <p className="lede home-hero-lede">
               You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
-            <Link className="button" href="/opportunities">
+            <Link className="button button-accent" href="/opportunities">
               Browse submission calls
             </Link>
             <p className="fine-print">Source-linked listings · No creator account</p>
-          </div>
-          <div className="home-hero-art">
-            <Storyboard />
           </div>
         </div>
       </section>
