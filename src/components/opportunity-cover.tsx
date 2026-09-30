@@ -2,11 +2,6 @@ import Link from 'next/link';
 import { CallCoverSurface } from '@/components/call-cover-surface';
 import { verificationLabel, type Opportunity } from '@/lib/model';
 
-export function coverClass(slug: string, category: string) {
-  const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0) % 4;
-  return `cover-tone-${category === 'anthology' ? 'anthology' : 'short'}-${bucket}`;
-}
-
 export function OpportunityCoverCard({ call, compactMeta = false }: { call: Opportunity; compactMeta?: boolean }) {
   const deadlineLine = call.deadline
     ? compactMeta

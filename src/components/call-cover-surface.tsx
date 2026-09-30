@@ -1,21 +1,33 @@
-import { CallCoverArt } from '@/components/call-cover-art';
+import type { CSSProperties } from 'react';
+import { callInitials, paletteForSlug } from '@/lib/cover-theme';
 import { effectiveStatus, type Opportunity } from '@/lib/model';
 
 type CallCoverSurfaceProps = {
-  call: Pick<Opportunity, 'slug' | 'category' | 'title' | 'fixture'>;
+  call: Pick<Opportunity, 'slug' | 'category' | 'title' | 'organizer' | 'fixture'>;
   statusLabel?: string;
   className?: string;
 };
 
 export function CallCoverSurface({ call, statusLabel, className = '' }: CallCoverSurfaceProps) {
   const status = statusLabel ?? effectiveStatus(call as Opportunity);
+  const [g0, g1, g2] = paletteForSlug(call.slug);
+  const initials = call.fixture ? '—' : callInitials(call.organizer, call.title, call.slug);
 
   return (
-    <div className={`cover-art cover-art--comic ${className}`.trim()}>
-      <div className="cover-art-preview">
-        <CallCoverArt slug={call.slug} category={call.category} title={call.title} fixture={call.fixture} />
-      </div>
-      <div className="cover-art-shade" aria-hidden />
+    <div
+      className={`cover-art cover-art-placard ${call.fixture ? 'cover-art-placard--fixture' : ''} ${className}`.trim()}
+      style={
+        {
+          '--cover-g0': g0,
+          '--cover-g1': g1,
+          '--cover-g2': g2,
+        } as CSSProperties
+      }
+    >
+      <div className="cover-art-preview cover-art-gradient" aria-hidden />
+      <p className="cover-initials" aria-hidden="true">
+        {initials}
+      </p>
       <div className="cover-art-labels">
         <span className="cover-status">{status}</span>
         <span className="cover-type">{call.fixture ? 'Fixture' : call.category.replace('-', ' ')}</span>

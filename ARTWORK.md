@@ -1,13 +1,11 @@
-# Call cover previews
+# Catalog card previews
 
-Component: `src/components/call-cover-art.tsx`
+Logic: `src/lib/cover-theme.ts` · layout: `src/components/call-cover-surface.tsx`
 
-Mini **comic page** SVG previews (same ivory/ink/yellow/vermilion language as
-`storyboard.tsx`). Each card shows panel layouts plus a shortened call title so
-the listing is not a blank block. Not organizer artwork or real submissions.
+Each listing shows a **gradient placard** with **organizer/title initials** (two letters).
+Colors come from a small fixed palette keyed by call slug. No AI art, no fake comic pages,
+not organizer cover artwork.
 
 # Home hero
 
-Component: `src/components/storyboard.tsx`
-
-Original vector comic proof on the home page.
+Component: `src/components/storyboard.tsx` — original vector comic proof.
