@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const links = [
+  { href: '/', label: 'Main', match: (path: string) => path === '/' },
   {
     href: '/opportunities',
-    label: 'Find a call',
+    label: 'Catalog',
     match: (path: string) => path.startsWith('/opportunities') || path.startsWith('/check/') || path.startsWith('/results/'),
   },
-  { href: '/#how-it-works', label: 'How it works', match: () => false },
-  { href: '/#our-approach', label: 'Our approach', match: () => false },
+  { href: '/#how-it-works', label: 'Process', match: () => false },
+  { href: '/#our-approach', label: 'Approach', match: () => false },
 ] as const;
 
 export function SiteNav() {
