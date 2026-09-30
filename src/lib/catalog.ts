@@ -1,34 +1,254 @@
 import type { Opportunity, Requirement } from './model';
-const source = 'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/';
-const rule = (id: string, wording: string, rest: Partial<Requirement> = {}): Requirement => ({
-  id, opportunity_id: 'sector-13', kind: 'review', roles: [], formats: [], field: null, operator: 'review', value: null,
-  wording, source_reference: 'Sector 13 contributor guidelines', source_url: source, ...rest,
-});
-/** Reviewed public webpage, not a fabricated call. Not automatically inserted in a database. */
-export const reviewedCatalog: Opportunity[] = [{
-  id: 'sector-13', slug: 'sector-13', title: 'Sector 13', organizer: 'Box of Rain / Sector House 13', category: 'anthology',
-  official_url: source, status: 'rolling', deadline: null, deadline_timezone: null,
-  compensation: 'Unpaid: the organizer states that contributors are not paid.', rights_disclosure: null,
-  last_verified_at: '2026-09-30T13:25:43Z', published: true,
-  description: 'A science-fiction comics fanzine seeking writers, sequential artists, and letterers. Recheck the organizer’s page before contacting them.',
-  roles: ['writer', 'artist', 'writer-artist', 'letterer', 'team'], formats: ['script', 'portfolio'],
-  requirements: [
-    rule('s13-script', 'Have a script or story idea ready to share.', {roles:['writer','writer-artist']}),
-    rule('s13-art', 'Provide examples of your comics or lettering work.', {kind:'preparation',roles:['artist','letterer','writer-artist'],field:'portfolio',operator:'eq',value:true}),
-    rule('s13-length', 'Stories are generally up to seven pages; longer work may be considered. Confirm exceptions.', {roles:['writer','writer-artist','team']}),
-    rule('s13-content', 'Review the science-fiction/fantasy focus, audience guidance, and character restrictions with the organizer.'),
-  ],
-}];
+
+const verifiedAt = '2026-09-30T15:35:00Z';
+
+function rule(
+  opportunityId: string,
+  sourceUrl: string,
+  sourceReference: string,
+  id: string,
+  wording: string,
+  rest: Partial<Requirement> = {},
+): Requirement {
+  return {
+    id,
+    opportunity_id: opportunityId,
+    kind: 'review',
+    roles: [],
+    formats: [],
+    field: null,
+    operator: 'review',
+    value: null,
+    wording,
+    source_reference: sourceReference,
+    source_url: sourceUrl,
+    ...rest,
+  };
+}
+
+/** Reviewed public webpages — not fabricated. Not automatically inserted into Supabase. */
+export const reviewedCatalog: Opportunity[] = [
+  {
+    id: 'sector-13',
+    slug: 'sector-13',
+    title: 'Sector 13',
+    organizer: 'Box of Rain / Sector House 13',
+    category: 'anthology',
+    official_url: 'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    compensation: 'Unpaid: the organizer states that contributors are not paid.',
+    rights_disclosure: null,
+    last_verified_at: verifiedAt,
+    published: true,
+    description:
+      'Science-fiction comics fanzine seeking writers, sequential artists, and letterers. Recheck the organizer’s page before contacting them.',
+    roles: ['writer', 'artist', 'writer-artist', 'letterer', 'team'],
+    formats: ['script', 'portfolio'],
+    requirements: [
+      rule(
+        'sector-13',
+        'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/',
+        'Sector 13 contributor guidelines',
+        's13-script',
+        'Have a script or story idea ready to share.',
+        { roles: ['writer', 'writer-artist'] },
+      ),
+      rule(
+        'sector-13',
+        'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/',
+        'Sector 13 contributor guidelines',
+        's13-art',
+        'Provide examples of your comics or lettering work.',
+        {
+          kind: 'preparation',
+          roles: ['artist', 'letterer', 'writer-artist'],
+          field: 'portfolio',
+          operator: 'eq',
+          value: true,
+        },
+      ),
+      rule(
+        'sector-13',
+        'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/',
+        'Sector 13 contributor guidelines',
+        's13-length',
+        'Stories are generally up to seven pages; longer work may be considered. Confirm exceptions with the organizer.',
+        { roles: ['writer', 'writer-artist', 'team'] },
+      ),
+      rule(
+        'sector-13',
+        'https://www.boxofrainmag.co.uk/submission-guidelines/sector-13/',
+        'Sector 13 contributor guidelines',
+        's13-content',
+        'Review the science-fiction/fantasy focus, audience guidance, and character restrictions with the organizer.',
+      ),
+    ],
+  },
+  {
+    id: 'cbk-cba-v76',
+    slug: 'cbk-cba-v76',
+    title: 'CBA vol 76 — World Without Pictures',
+    organizer: 'CBK Comics',
+    category: 'anthology',
+    official_url: 'https://cbkcomics.com/submissions/',
+    status: 'open',
+    deadline: '2027-02-15T22:59:59Z',
+    deadline_timezone: 'Europe/Stockholm',
+    compensation:
+      'No guaranteed fee; surplus after costs may be shared. Published contributors receive five complimentary copies (organizer’s stated terms).',
+    rights_disclosure: 'Copyright for submitted material remains with the creator (organizer’s stated terms).',
+    last_verified_at: verifiedAt,
+    published: true,
+    description:
+      'Experimental comics and texts for CBK’s anthology series. English-language work; high-resolution print files. Recheck the submissions page before sending.',
+    roles: ['writer', 'writer-artist', 'artist', 'team'],
+    formats: ['completed short comic', 'script'],
+    requirements: [
+      rule(
+        'cbk-cba-v76',
+        'https://cbkcomics.com/submissions/',
+        'CBK submissions guidelines',
+        'cbk-language',
+        'Comics and texts should be in English.',
+      ),
+      rule(
+        'cbk-cba-v76',
+        'https://cbkcomics.com/submissions/',
+        'CBK submissions guidelines',
+        'cbk-length',
+        'Comics are often about 5–30 pages, but other lengths are welcome. Confirm fit for this volume.',
+        { roles: ['writer-artist', 'artist', 'team'] },
+      ),
+      rule(
+        'cbk-cba-v76',
+        'https://cbkcomics.com/submissions/',
+        'CBK submissions guidelines',
+        'cbk-files',
+        'Prepare high-resolution print files (.TIF), bleed, and a short bio (about 500–700 characters) with one URL.',
+        { kind: 'preparation', field: 'bio', operator: 'eq', value: true },
+      ),
+      rule(
+        'cbk-cba-v76',
+        'https://cbkcomics.com/submissions/',
+        'CBK submissions guidelines',
+        'cbk-ai',
+        'Submissions created using AI are not accepted.',
+        { kind: 'eligibility' },
+      ),
+    ],
+  },
+  {
+    id: 'discord-bite',
+    slug: 'discord-bite',
+    title: 'Bite — bisexual erotic horror anthology',
+    organizer: 'Discord Comics',
+    category: 'anthology',
+    official_url: 'https://www.discordcomics.com/Shop/wordpress/bite-submissions-info/',
+    status: 'open',
+    deadline: '2026-10-15T22:59:59Z',
+    deadline_timezone: 'Europe/London',
+    compensation:
+      'Stated rates for writers and artists plus profit share after Kickstarter; payment tied to successful funding (see official page).',
+    rights_disclosure: 'One year exclusive publishing rights, then creators may reuse work (organizer’s stated terms).',
+    last_verified_at: verifiedAt,
+    published: true,
+    description:
+      'Paranormal, mild-horror erotica exploring bisexual themes. Applications from writers, artists, and teams—finished pages not required at submission. 18+ only.',
+    roles: ['writer', 'artist', 'writer-artist', 'team'],
+    formats: ['pitch', 'portfolio', 'script'],
+    requirements: [
+      rule(
+        'discord-bite',
+        'https://www.discordcomics.com/Shop/wordpress/bite-submissions-info/',
+        'Bite submission info',
+        'bite-age',
+        'Applicants must be 18 or older.',
+        { kind: 'eligibility' },
+      ),
+      rule(
+        'discord-bite',
+        'https://www.discordcomics.com/Shop/wordpress/bite-submissions-info/',
+        'Bite submission info',
+        'bite-pages',
+        'Finished anthology stories are intended to run about 11–21 pages. Confirm length expectations for your role.',
+        { roles: ['writer-artist', 'team'] },
+      ),
+      rule(
+        'discord-bite',
+        'https://www.discordcomics.com/Shop/wordpress/bite-submissions-info/',
+        'Bite submission info',
+        'bite-portfolio',
+        'Submit examples of prior comic or script work plus a short pitch—not a finished comic.',
+        { kind: 'preparation', field: 'portfolio', operator: 'eq', value: true },
+      ),
+      rule(
+        'discord-bite',
+        'https://www.discordcomics.com/Shop/wordpress/bite-submissions-info/',
+        'Bite submission info',
+        'bite-ai',
+        'AI-generated content is not accepted.',
+        { kind: 'eligibility' },
+      ),
+    ],
+  },
+];
+
 const fixtureSource = '/development-guidelines';
 export const developmentCall: Opportunity = {
-  id:'dev-anthology',slug:'development-anthology',title:'Practice anthology',organizer:'ComicReady development fixture',category:'anthology',
-  official_url:fixtureSource,status:'open',deadline:null,deadline_timezone:null,compensation:null,rights_disclosure:null,last_verified_at:null,
-  published:true,fixture:true,description:'A fictional call for testing the checker. Not an opportunity and not accepting applications.',
-  roles:['writer','artist','writer-artist','team'],formats:['pitch','completed short comic'],requirements:[
-    rule('dev-rights','You must control the rights needed to submit.',{opportunity_id:'dev-anthology',kind:'eligibility',field:'rights',operator:'eq',value:true,source_url:fixtureSource,source_reference:'Development rule A'}),
-    rule('dev-team','Writers must have an artist collaborator.',{opportunity_id:'dev-anthology',kind:'eligibility',roles:['writer'],field:'collaborator',operator:'eq',value:true,source_url:fixtureSource,source_reference:'Development rule B'}),
-    rule('dev-samples','Prepare at least three completed sequential sample pages.',{opportunity_id:'dev-anthology',kind:'preparation',field:'samplePages',operator:'gte',value:3,source_url:fixtureSource,source_reference:'Development rule C'}),
-    rule('dev-length','The proposed story must be no more than eight pages.',{opportunity_id:'dev-anthology',kind:'eligibility',field:'storyPages',operator:'lte',value:8,source_url:fixtureSource,source_reference:'Development rule D'}),
-    rule('dev-pdf','Prepare a submission PDF.',{opportunity_id:'dev-anthology',kind:'preparation',field:'pdf',operator:'eq',value:true,source_url:fixtureSource,source_reference:'Development rule E'}),
+  id: 'dev-anthology',
+  slug: 'development-anthology',
+  title: 'Practice anthology',
+  organizer: 'ComicReady development fixture',
+  category: 'anthology',
+  official_url: fixtureSource,
+  status: 'open',
+  deadline: null,
+  deadline_timezone: null,
+  compensation: null,
+  rights_disclosure: null,
+  last_verified_at: null,
+  published: true,
+  fixture: true,
+  description: 'A fictional call for testing the checker. Not an opportunity and not accepting applications.',
+  roles: ['writer', 'artist', 'writer-artist', 'team'],
+  formats: ['pitch', 'completed short comic'],
+  requirements: [
+    rule('dev-anthology', fixtureSource, 'Development rule A', 'dev-rights', 'You must control the rights needed to submit.', {
+      kind: 'eligibility',
+      field: 'rights',
+      operator: 'eq',
+      value: true,
+    }),
+    rule('dev-anthology', fixtureSource, 'Development rule B', 'dev-team', 'Writers must have an artist collaborator.', {
+      kind: 'eligibility',
+      roles: ['writer'],
+      field: 'collaborator',
+      operator: 'eq',
+      value: true,
+    }),
+    rule(
+      'dev-anthology',
+      fixtureSource,
+      'Development rule C',
+      'dev-samples',
+      'Prepare at least three completed sequential sample pages.',
+      { kind: 'preparation', field: 'samplePages', operator: 'gte', value: 3 },
+    ),
+    rule(
+      'dev-anthology',
+      fixtureSource,
+      'Development rule D',
+      'dev-length',
+      'The proposed story must be no more than eight pages.',
+      { kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 8 },
+    ),
+    rule('dev-anthology', fixtureSource, 'Development rule E', 'dev-pdf', 'Prepare a submission PDF.', {
+      kind: 'preparation',
+      field: 'pdf',
+      operator: 'eq',
+      value: true,
+    }),
   ],
 };

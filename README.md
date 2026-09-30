@@ -14,8 +14,8 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Without Supabase, the app displays one manually reviewed Sector 13 call from its
-official organizer. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` to exercise a clearly
+Without Supabase, the app displays a small bundled catalog of manually reviewed
+calls with official source links (see `src/lib/catalog.ts`). Set `COMICREADY_ENABLE_DEV_FIXTURES=true` to exercise a clearly
 labeled fictional practice anthology. These fixtures are never seeded to a database.
 With Supabase configured, only its published records appear publicly.
 
