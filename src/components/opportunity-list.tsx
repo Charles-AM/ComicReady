@@ -57,13 +57,18 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
         {shown.length} {shown.length === 1 ? 'call' : 'calls'}
       </p>
 
-      <ul className="cover-grid">
-        {shown.map((c) => (
-          <li key={c.id}>
-            <OpportunityCoverCard call={c} />
-          </li>
-        ))}
-      </ul>
+      <div className="cover-rail-wrap">
+        <ul className="cover-grid cover-grid--rail">
+          {shown.map((c) => (
+            <li key={c.id}>
+              <OpportunityCoverCard call={c} />
+            </li>
+          ))}
+        </ul>
+        <p className="cover-rail-hint" aria-hidden="true">
+          Swipe to browse
+        </p>
+      </div>
 
       {!shown.length && (
         <div className="empty-state">
