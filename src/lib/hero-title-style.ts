@@ -2,7 +2,7 @@
 
 export type HeroTitleVariant = 'editorial' | 'lockup' | 'tagline' | 'ready-focus' | 'stacked-serif' | 'uppercase-tracked';
 
-export const heroTitleVariant: HeroTitleVariant = 'editorial';
+export const heroTitleVariant: HeroTitleVariant = 'stacked-serif';
 
 export const heroTitleOptions: { id: HeroTitleVariant; label: string; note: string }[] = [
   { id: 'editorial', label: 'Editorial serif', note: 'One line “Comic Ready” in Source Serif — matches the rest of the site.' },

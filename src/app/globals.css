@@ -122,16 +122,25 @@ textarea:focus-visible {
   color: var(--ink);
 }
 
-.brand-mark-link {
+.brand-lockup {
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  gap: 10px;
+  line-height: 1;
 }
 
 .brand-mark {
   display: block;
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+}
+
+.brand-lockup-text {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 .hero-title {
