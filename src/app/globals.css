@@ -113,6 +113,7 @@ textarea:focus-visible {
 
 .site-main {
   width: 100%;
+  text-align: left;
 }
 
 .brand {
@@ -219,7 +220,7 @@ textarea:focus-visible {
   line-height: 0.82;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--ink);
   margin-bottom: 0;
 }
 
@@ -428,21 +429,173 @@ h3 {
 
 .home-hero-catalog-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(220px, 380px);
-  gap: 32px 48px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 380px);
+  gap: 40px 56px;
+  align-items: center;
 }
 
-.home-hero-aside {
-  padding-top: clamp(12px, 3vw, 48px);
-  border-top: 1px solid var(--line);
+.home-hero-main {
+  min-width: 0;
+  text-align: left;
+}
+
+.home-hero-main .hero-title {
+  margin-bottom: 20px;
 }
 
 .home-hero-lede {
-  max-width: none;
-  margin-bottom: 24px;
+  max-width: 36em;
+  margin-bottom: 22px;
   font-size: 0.9375rem;
   line-height: 1.6;
+}
+
+.home-hero-main .button {
+  margin-bottom: 12px;
+}
+
+.home-hero-main .fine-print {
+  margin: 0;
+}
+
+/* Hero right: layered prep sheets (CSS only) */
+.hero-readiness-stack {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  min-height: 320px;
+  justify-self: end;
+}
+
+.hero-readiness-sheet {
+  position: absolute;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-panel);
+  padding: 16px 18px;
+}
+
+.hero-readiness-sheet--guidelines {
+  top: 0;
+  left: 0;
+  width: 72%;
+  transform: rotate(-4deg);
+  z-index: 1;
+  opacity: 0.92;
+}
+
+.hero-readiness-sheet--checklist {
+  top: 88px;
+  right: 0;
+  width: 78%;
+  transform: rotate(2deg);
+  z-index: 3;
+  border-left: 3px solid var(--accent);
+}
+
+.hero-readiness-sheet--panel {
+  bottom: 0;
+  left: 8%;
+  width: 64%;
+  height: 118px;
+  transform: rotate(-1.5deg);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--line) 70%, var(--muted));
+  background: color-mix(in srgb, var(--surface) 85%, var(--bg));
+}
+
+.hero-readiness-kicker {
+  margin: 0 0 10px;
+  font-family: var(--body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-readiness-rule {
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 12px;
+}
+
+.hero-readiness-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-readiness-bars span {
+  display: block;
+  height: 6px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--ink) 12%, var(--line));
+}
+
+.hero-readiness-bar-short {
+  width: 62%;
+}
+
+.hero-readiness-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-readiness-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--ink) 88%, var(--muted));
+}
+
+.hero-readiness-item--open {
+  color: var(--muted);
+}
+
+.hero-readiness-mark {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg, transparent 46%, var(--ink) 46%, var(--ink) 54%, transparent 54%) no-repeat center / 10px 10px,
+    var(--surface);
+}
+
+.hero-readiness-mark--open {
+  background: var(--surface);
+}
+
+.hero-readiness-panel-spine {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  width: 6px;
+  height: 100%;
+  background: color-mix(in srgb, var(--accent) 35%, var(--line));
+  border-radius: 0 2px 2px 0;
+}
+
+.hero-readiness-panel-dash {
+  font-family: var(--body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .lede {
@@ -1528,10 +1681,23 @@ p {
   .call-showcase,
   .results-grid {
     grid-template-columns: 1fr;
+    justify-items: start;
   }
 
-  .home-hero-aside {
-    padding-top: 8px;
+  .hero-title--stacked-serif {
+    font-size: clamp(2.65rem, 14vw, 4.75rem);
+    line-height: 0.86;
+  }
+
+  .hero-readiness-stack {
+    justify-self: start;
+    max-width: min(100%, 300px);
+    min-height: 280px;
+    margin-top: 8px;
+  }
+
+  .home-hero-lede {
+    max-width: none;
   }
 
   .cover-grid--rail {
