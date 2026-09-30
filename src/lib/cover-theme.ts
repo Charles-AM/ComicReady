@@ -9,7 +9,7 @@
 
 export type CatalogPreviewStyle = 'stripe' | 'initials' | 'category' | 'label';
 
-export const catalogPreviewStyle: CatalogPreviewStyle = 'stripe';
+export const catalogPreviewStyle: CatalogPreviewStyle = 'category';
 
 const accents = ['#8a6a58', '#6a8088', '#887860', '#786878', '#688078', '#886860'] as const;
 

@@ -601,11 +601,11 @@ h3 {
 
 .cover-art-preview-initials,
 .cover-art-preview-category {
-  background: color-mix(in srgb, var(--cover-accent) 18%, var(--surface-raised));
+  background: color-mix(in srgb, var(--cover-accent) 14%, var(--surface-raised));
+  box-shadow: inset 0 3px 0 var(--cover-accent);
 }
 
-.cover-preview-initials,
-.cover-preview-category {
+.cover-preview-initials {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -616,9 +616,6 @@ h3 {
   padding: 12px;
   pointer-events: none;
   text-align: center;
-}
-
-.cover-preview-initials {
   font-family: var(--serif);
   font-size: clamp(2rem, 9vw, 2.75rem);
   font-weight: 400;
@@ -628,12 +625,55 @@ h3 {
 }
 
 .cover-preview-category {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+  padding: 16px 14px 20px;
+  pointer-events: none;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.cover-category-line {
+  display: block;
   font-family: var(--serif);
-  font-size: 0.9375rem;
+  font-size: clamp(1.5rem, 6.2vw, 1.875rem);
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
   color: var(--ink);
-  opacity: 0.55;
+}
+
+.cover-category-line-single {
+  font-size: clamp(1.375rem, 5.8vw, 1.75rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.cover-category-line-muted {
+  font-family: var(--body);
+  font-size: clamp(0.8125rem, 3.2vw, 0.9375rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-top: 0.35em;
+  color: var(--muted);
+}
+
+.cover-category-rule {
+  display: block;
+  width: 2.25rem;
+  height: 2px;
+  margin-top: 1rem;
+  background: var(--cover-accent);
+  opacity: 0.85;
 }
 
 .cover-preview-label {

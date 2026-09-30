@@ -15,12 +15,30 @@ type CallCoverSurfaceProps = {
   style?: CatalogPreviewStyle;
 };
 
+function CategoryPreviewCopy({ category, fixture }: { category: string; fixture?: boolean }) {
+  if (fixture) {
+    return (
+      <>
+        <span className="cover-category-line">Practice</span>
+        <span className="cover-category-line cover-category-line-muted">fixture</span>
+      </>
+    );
+  }
+  if (category === 'short-comic') {
+    return (
+      <>
+        <span className="cover-category-line">Short</span>
+        <span className="cover-category-line">comic</span>
+      </>
+    );
+  }
+  return <span className="cover-category-line cover-category-line-single">Anthology</span>;
+}
+
 export function CallCoverSurface({ call, statusLabel, className = '', style = catalogPreviewStyle }: CallCoverSurfaceProps) {
   const status = statusLabel ?? effectiveStatus(call as Opportunity);
   const accent = accentForSlug(call.slug);
-  const initials = call.fixture ? '—' : callInitials(call.organizer, call.title, call.slug);
   const type = categoryLabel(call.category, call.fixture);
-
   const css = { '--cover-accent': accent } as CSSProperties;
 
   return (
@@ -31,13 +49,14 @@ export function CallCoverSurface({ call, statusLabel, className = '', style = ca
     >
       {style === 'initials' && (
         <p className="cover-preview-initials" aria-hidden="true">
-          {initials}
+          {call.fixture ? '—' : callInitials(call.organizer, call.title, call.slug)}
         </p>
       )}
       {style === 'category' && (
-        <p className="cover-preview-category" aria-hidden="true">
-          {type}
-        </p>
+        <div className="cover-preview-category" aria-hidden="true">
+          <CategoryPreviewCopy category={call.category} fixture={call.fixture} />
+          <span className="cover-category-rule" />
+        </div>
       )}
       {style === 'label' && (
         <p className="cover-preview-label">{call.fixture ? 'Practice fixture' : call.organizer}</p>
