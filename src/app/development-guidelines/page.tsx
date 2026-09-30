@@ -1,0 +1,3 @@
+import Link from 'next/link';
+import { developmentCall } from '@/lib/catalog';
+export default function Guidelines(){return <section className="page-section reading"><p className="eyebrow">TESTING ONLY / NOT AN OFFICIAL CALL</p><h1 className="page-title">Practice guidelines.</h1><p>This fictional source exists solely to demonstrate the checker. No organizer, deadline, payment, or license is being represented as real. Do not submit work.</p><ol>{developmentCall.requirements.map(r=><li className="requirement" key={r.id}>{r.wording}</li>)}</ol><p>No payment or licensing details are defined in this fixture. Those findings must remain unknown.</p><Link href="/opportunities">Back to calls</Link></section>;}
