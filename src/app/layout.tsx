@@ -1,20 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { Source_Sans_3, Source_Serif_4 } from 'next/font/google';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
 import './globals.css';
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Source_Sans_3({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500'],
   variable: '--font-body',
 });
 
-const monoFont = IBM_Plex_Mono({
+const serifFont = Source_Serif_4({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-mono',
+  variable: '--font-serif',
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${monoFont.variable}`}>
+    <html lang="en" className={`${bodyFont.variable} ${serifFont.variable}`}>
       <body>
         <MotionProvider>
           <a href="#main" className="skip-link">

@@ -27,9 +27,7 @@ export default function Home() {
           <div>
             <p className="eyebrow">Before you submit</p>
             <h1 id="hero-title" className="page-title hero-title">
-              Make comics.
-              <br />
-              Make your <span className="text-accent">next move.</span>
+              Make comics. Make your next move.
             </h1>
             <p className="lede">
               You’ve got a story. What does the submission call need? Turn the guidelines into a clear list of where you stand and what’s still missing.
