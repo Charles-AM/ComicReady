@@ -9,8 +9,8 @@
   --muted: #9a968f;
   --line: #2c2c2c;
   --focus: #b5b0a6;
-  --body: var(--font-body), system-ui, sans-serif;
-  --serif: var(--font-serif), "Iowan Old Style", "Palatino Linotype", serif;
+  --body: "Source Sans 3", system-ui, sans-serif;
+  --serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", serif;
   --gutter: clamp(20px, 4vw, 40px);
   --content: 1080px;
   --read: 40rem;
