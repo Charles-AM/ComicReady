@@ -1,11 +1,16 @@
-# Catalog card previews
+# Catalog card preview
 
-Logic: `src/lib/cover-theme.ts` · layout: `src/components/call-cover-surface.tsx`
+Switch look in **`src/lib/cover-theme.ts`** → `catalogPreviewStyle`:
 
-Each listing shows a **gradient placard** with **organizer/title initials** (two letters).
-Colors come from a small fixed palette keyed by call slug. No AI art, no fake comic pages,
-not organizer cover artwork.
+| Value | What you see |
+|-------|----------------|
+| `stripe` | Plain tile, colored left bar (default) |
+| `initials` | Soft tint + two-letter initials |
+| `category` | Soft tint + “Anthology” / “Short comic” |
+| `label` | Organizer name inside the tile |
+
+Accent color is stable per call slug. Not organizer artwork or AI.
 
 # Home hero
 
-Component: `src/components/storyboard.tsx` — original vector comic proof.
+`src/components/storyboard.tsx` — original vector comic proof.

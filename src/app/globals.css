@@ -594,22 +594,18 @@ h3 {
   transition: border-color 160ms, box-shadow 200ms ease, transform 200ms ease;
 }
 
-.cover-art-placard {
-  border-color: var(--line);
+/* Catalog preview styles — switch in src/lib/cover-theme.ts (`catalogPreviewStyle`) */
+.cover-art-preview-stripe {
+  border-left: 4px solid var(--cover-accent);
 }
 
-.cover-art-gradient {
-  background:
-    radial-gradient(ellipse 90% 70% at 20% 15%, rgba(255, 255, 255, 0.12), transparent 55%),
-    linear-gradient(152deg, var(--cover-g0) 0%, var(--cover-g1) 48%, var(--cover-g2) 100%);
+.cover-art-preview-initials,
+.cover-art-preview-category {
+  background: color-mix(in srgb, var(--cover-accent) 18%, var(--surface-raised));
 }
 
-.cover-art-placard--fixture .cover-art-gradient {
-  background: linear-gradient(160deg, #2a2a28 0%, #1a1a18 55%, #121210 100%);
-  opacity: 0.95;
-}
-
-.cover-initials {
+.cover-preview-initials,
+.cover-preview-category {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -617,36 +613,52 @@ h3 {
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 0 8px;
-  font-family: var(--serif);
-  font-size: clamp(2.75rem, 11vw, 3.5rem);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.06em;
-  line-height: 1;
-  color: rgba(255, 253, 247, 0.28);
+  padding: 12px;
   pointer-events: none;
-  user-select: none;
-  transform: rotate(-4deg);
+  text-align: center;
 }
 
-.cover-art-placard--fixture .cover-initials {
-  font-style: normal;
-  font-size: 2rem;
-  color: rgba(255, 253, 247, 0.18);
-  transform: none;
+.cover-preview-initials {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  opacity: 0.45;
+}
+
+.cover-preview-category {
+  font-family: var(--serif);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
+.cover-preview-label {
+  position: absolute;
+  inset: auto 12px 40px;
+  z-index: 1;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cover-art--fixture {
+  border-style: dashed;
+  opacity: 0.92;
 }
 
 .cover-card-link:hover .cover-art {
   border-color: var(--muted);
   box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
-}
-
-.cover-art-preview {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
 }
 
 .cover-art-labels {
@@ -671,9 +683,9 @@ h3 {
 .cover-status {
   align-self: flex-start;
   padding: 4px 7px;
-  background: #21211f;
-  color: #fffdf7;
-  border: 1px solid #21211f;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
   border-radius: 2px;
   text-transform: capitalize;
 }
@@ -681,18 +693,18 @@ h3 {
 .cover-type {
   align-self: flex-end;
   padding: 3px 7px;
-  background: rgba(12, 12, 12, 0.55);
-  color: rgba(255, 253, 247, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--line);
   border-radius: 2px;
   text-transform: capitalize;
   font-weight: 400;
-  backdrop-filter: blur(6px);
 }
 
-.cover-art-placard .cover-status,
-.cover-art-placard .cover-type {
+.cover-art .cover-status,
+.cover-art .cover-type {
   text-shadow: none;
+  color: inherit;
 }
 
 .cover-organizer {
