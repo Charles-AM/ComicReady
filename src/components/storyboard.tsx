@@ -1,7 +1,7 @@
 /** Original vector illustration: a blank comic proof, not a submitted project. */
 export function Storyboard() {
   return (
-    <svg className="storyboard" viewBox="0 0 480 530" fill="none" role="img" aria-labelledby="storyboard-title">
+    <svg className="storyboard" viewBox="0 0 480 530" fill="none" role="img" aria-labelledby="storyboard-title" width="480" height="530">
       <title id="storyboard-title">An original comic page in progress: a city, a winding landscape, and an empty panel awaiting its next scene.</title>
       <path d="M74 40 443 60 417 496 48 476Z" fill="#E3DDD0" stroke="#21211F" strokeWidth="1.5" />
       <path d="m48 30 365-15 20 449-365 15Z" fill="#FFFDF7" stroke="#21211F" strokeWidth="2" />
