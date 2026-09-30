@@ -1,21 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Source_Sans_3, Source_Serif_4 } from 'next/font/google';
+import '@fontsource/source-sans-3/400.css';
+import '@fontsource/source-sans-3/500.css';
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/500.css';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
 import './globals.css';
-
-const bodyFont = Source_Sans_3({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-body',
-});
-
-const serifFont = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-serif',
-});
 
 export const metadata: Metadata = {
   title: { default: 'ComicReady — Make comics. Make your next move.', template: '%s | ComicReady' },
@@ -24,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${serifFont.variable}`}>
+    <html lang="en">
       <body>
         <MotionProvider>
           <a href="#main" className="skip-link">
