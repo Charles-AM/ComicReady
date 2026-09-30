@@ -594,6 +594,22 @@ h3 {
   transition: border-color 160ms, box-shadow 200ms ease, transform 200ms ease;
 }
 
+.cover-art--comic {
+  background: #e3ddd0;
+  border-color: #21211f;
+  padding: 5px;
+}
+
+.cover-art--comic .cover-art-shade {
+  background: linear-gradient(
+    180deg,
+    rgba(33, 33, 31, 0.2) 0%,
+    transparent 22%,
+    transparent 78%,
+    rgba(33, 33, 31, 0.15) 100%
+  );
+}
+
 .cover-card-link:hover .cover-art {
   border-color: var(--muted);
   box-shadow: var(--shadow-soft);
@@ -620,16 +636,6 @@ h3 {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.08) 38%, rgba(0, 0, 0, 0.55) 100%);
 }
 
-.cover-art-grain {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.14;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-}
-
 .cover-art-labels {
   position: relative;
   z-index: 2;
@@ -652,18 +658,28 @@ h3 {
 .cover-status {
   align-self: flex-start;
   padding: 4px 7px;
-  background: rgba(0, 0, 0, 0.52);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #21211f;
+  color: #fffdf7;
+  border: 1px solid #21211f;
   border-radius: 2px;
-  backdrop-filter: blur(4px);
+  text-transform: capitalize;
 }
 
 .cover-type {
   align-self: flex-end;
   padding: 3px 6px;
-  background: rgba(0, 0, 0, 0.38);
+  background: #f1d45c;
+  color: #21211f;
+  border: 1px solid #21211f;
   border-radius: 2px;
   text-transform: capitalize;
+  font-weight: 500;
+}
+
+.cover-art--comic .cover-status,
+.cover-art--comic .cover-type {
+  text-shadow: none;
+  color: inherit;
 }
 
 .cover-organizer {
