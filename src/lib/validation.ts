@@ -9,9 +9,9 @@ export const requirementSchema=z.object({
 }).superRefine((r,ctx)=>{
  if(r.operator==='review')return;
  if(!r.field||r.value===null)ctx.addIssue({code:'custom',message:'A comparison needs a field and value.'});
- if(['gte','lte'].includes(r.operator)&&(typeof r.value!=='number'||!['samplePages','storyPages'].includes(r.field||'')))ctx.addIssue({code:'custom',message:'Page comparisons require a numeric value and page field.'});
+ if(['gte','lte'].includes(r.operator)&&(typeof r.value!=='number'||!['samplePages','storyPages','age','dpi'].includes(r.field||'')))ctx.addIssue({code:'custom',message:'Numeric comparisons require a numeric field and value.'});
  if(r.operator==='in'&&!Array.isArray(r.value))ctx.addIssue({code:'custom',message:'Use a list for the in operator.'});
- if(['rights','script','synopsis','bio','portfolio','collaborator','pdf'].includes(r.field||'')&&(r.operator!=='eq'||typeof r.value!=='boolean'))ctx.addIssue({code:'custom',message:'Availability fields require equals true or false.'});
+ if(['identityMatch','rights','english','aiUsed','previouslyPublished','genreFit','audienceFit','script','synopsis','bio','portfolio','collaborator','teamRoles','dimensionsReady','pdf'].includes(r.field||'')&&(r.operator!=='eq'||typeof r.value!=='boolean'))ctx.addIssue({code:'custom',message:'Yes/no fields require equals true or false.'});
 });
 export const opportunitySchema=z.object({
  id:z.string().uuid(),slug:z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).max(100),title:z.string().trim().min(2).max(150),organizer:z.string().trim().min(2).max(150),category:z.enum(['anthology','short-comic']),official_url:httpsUrl,

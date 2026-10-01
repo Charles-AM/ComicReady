@@ -119,6 +119,7 @@ export const reviewedCatalog: Opportunity[] = [
         'CBK submissions guidelines',
         'cbk-language',
         'Comics and texts should be in English.',
+        { kind: 'eligibility', field: 'english', operator: 'eq', value: true },
       ),
       rule(
         'cbk-cba-v76',
@@ -133,8 +134,16 @@ export const reviewedCatalog: Opportunity[] = [
         'https://cbkcomics.com/submissions/',
         'CBK submissions guidelines',
         'cbk-files',
-        'Prepare high-resolution print files (.TIF), bleed, and a short bio (about 500–700 characters) with one URL.',
+        'Prepare a short bio (about 500–700 characters) with one URL.',
         { kind: 'preparation', field: 'bio', operator: 'eq', value: true },
+      ),
+      rule(
+        'cbk-cba-v76',
+        'https://cbkcomics.com/submissions/',
+        'CBK submissions guidelines',
+        'cbk-format',
+        'Prepare the high-resolution print artwork as .TIF files with bleed.',
+        { kind: 'preparation', field: 'fileFormat', operator: 'in', value: ['tif'] },
       ),
       rule(
         'cbk-cba-v76',
@@ -142,7 +151,7 @@ export const reviewedCatalog: Opportunity[] = [
         'CBK submissions guidelines',
         'cbk-ai',
         'Submissions created using AI are not accepted.',
-        { kind: 'eligibility' },
+        { kind: 'eligibility', field: 'aiUsed', operator: 'eq', value: false },
       ),
     ],
   },
@@ -175,7 +184,7 @@ export const reviewedCatalog: Opportunity[] = [
         'Bite submission info',
         'bite-age',
         'Applicants must be 18 or older.',
-        { kind: 'eligibility' },
+        { kind: 'eligibility', field: 'age', operator: 'gte', value: 18 },
       ),
       rule(
         'discord-bite',
@@ -199,7 +208,7 @@ export const reviewedCatalog: Opportunity[] = [
         'Bite submission info',
         'bite-ai',
         'AI-generated content is not accepted.',
-        { kind: 'eligibility' },
+        { kind: 'eligibility', field: 'aiUsed', operator: 'eq', value: false },
       ),
     ],
   },
@@ -247,8 +256,8 @@ export const reviewedCatalog: Opportunity[] = [
         'https://ironcircus.com/smut-peddler-baddies/',
         'Smut Peddler Baddies project page',
         'icc-baddies-mature',
-        'Mature erotic content; applicants must meet the organizer’s age requirements.',
-        { kind: 'eligibility' },
+        'Applicants must be 18 or older because the anthology contains mature erotic content.',
+        { kind: 'eligibility', field: 'age', operator: 'gte', value: 18 },
       ),
     ],
   },
@@ -287,7 +296,7 @@ export const reviewedCatalog: Opportunity[] = [
         'ThirdBear Press submissions page',
         'tb-uk',
         'The call is for UK-based creators. Confirm eligibility with the organizer if your situation is unclear.',
-        { kind: 'eligibility', field: 'country', operator: 'review', value: null },
+        { kind: 'eligibility', field: 'country', operator: 'in', value: ['GB'] },
       ),
       rule(
         'thirdbear-2027-singles',
@@ -343,7 +352,7 @@ export const reviewedCatalog: Opportunity[] = [
         "Bird's Eye Comics submissions",
         'bebop-original',
         'Only original content; the organizer states a no-tolerance policy for hate speech.',
-        { kind: 'eligibility' },
+        { kind: 'eligibility', field: 'rights', operator: 'eq', value: true },
       ),
     ],
   },
@@ -378,6 +387,12 @@ export const reviewedCatalog: Opportunity[] = [
       }),
       rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'What Should I Submit — Work Samples', 'kkum-portfolio', 'Provide three relevant work examples or a portfolio link.', {
         kind: 'preparation', field: 'portfolio', operator: 'eq', value: true,
+      }),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'What Should I Propose?', 'kkum-genre', 'The proposal should be an original short horror work in one or more of the listed visual or written formats.', {
+        kind: 'eligibility', field: 'genreFit', operator: 'eq', value: true,
+      }),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'About Your Work', 'kkum-team-roles', 'Teams should identify each collaborator and their role in the proposal.', {
+        kind: 'preparation', roles: ['team'], field: 'teamRoles', operator: 'eq', value: true,
       }),
       rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'Recommended Length', 'kkum-length', 'The recommended finished length is about 4–12 pages; explain in the application if the idea needs a different length.'),
       rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'Important', 'kkum-not-finished', 'Do not create the complete finished work before selection.'),
@@ -416,10 +431,18 @@ export const reviewedCatalog: Opportunity[] = [
         kind: 'preparation', field: 'bio', operator: 'eq', value: true,
       }),
       rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Submission Form', 'afro-pdf', 'Prepare the completed high-resolution artwork as a PDF or JPG at 300 DPI.', {
-        kind: 'preparation', field: 'pdf', operator: 'eq', value: true,
+        kind: 'preparation', field: 'fileFormat', operator: 'in', value: ['pdf', 'jpg'],
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Submission Form', 'afro-dpi', 'Export the completed artwork at 300 DPI or higher.', {
+        kind: 'preparation', field: 'dpi', operator: 'gte', value: 300,
       }),
       rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines / Submission Form', 'afro-size', 'Confirm the required page dimensions with the organizer: the guidelines and upload form publish different sizes.'),
-      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Are Looking For', 'afro-content', 'The work must uplift marginalized voices, avoid hate speech, and contain no AI-generated content.', { kind: 'eligibility' }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Are Looking For', 'afro-content', 'The work must uplift marginalized voices and avoid hate speech.', {
+        kind: 'eligibility', field: 'audienceFit', operator: 'eq', value: true,
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Are Looking For', 'afro-ai', 'AI-generated content is not accepted.', {
+        kind: 'eligibility', field: 'aiUsed', operator: 'eq', value: false,
+      }),
     ],
   },
   {
@@ -444,7 +467,7 @@ export const reviewedCatalog: Opportunity[] = [
     roles: ['artist', 'writer-artist', 'team'],
     formats: ['completed short comic'],
     requirements: [
-      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-rights', 'Submit only original work that you control; fan art and AI-assisted work are not accepted.', {
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-rights', 'Submit only original work that you control; fan art is not accepted.', {
         kind: 'eligibility', field: 'rights', operator: 'eq', value: true,
       }),
       rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submissions', 'lumic-min-pages', 'Comic submissions must contain at least one page.', {
@@ -453,9 +476,25 @@ export const reviewedCatalog: Opportunity[] = [
       rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submissions', 'lumic-max-pages', 'Comic submissions may contain no more than five pages.', {
         kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 5,
       }),
-      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-age', 'Submitting creators must be 18 or older.'),
-      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-audience', 'Content must be suitable for children ages 6–14 and formatted for left-to-right reading.'),
-      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-files', 'Prepare black-and-white pages at 8.5 × 11 inches and 300 DPI.'),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-age', 'Submitting creators must be 18 or older.', {
+        kind: 'eligibility', field: 'age', operator: 'gte', value: 18,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-ai', 'AI-assisted work is not accepted.', {
+        kind: 'eligibility', field: 'aiUsed', operator: 'eq', value: false,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-audience', 'Content must be suitable for children ages 6–14.', {
+        kind: 'eligibility', field: 'audienceFit', operator: 'eq', value: true,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-reading', 'Confirm that the comic is formatted for left-to-right reading.'),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-dpi', 'Prepare the final pages at 300 DPI or higher.', {
+        kind: 'preparation', field: 'dpi', operator: 'gte', value: 300,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-color', 'Prepare the final pages in black and white.', {
+        kind: 'preparation', field: 'colorMode', operator: 'in', value: ['black-and-white'],
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-dimensions', 'Prepare the final pages at 8.5 × 11 inches.', {
+        kind: 'preparation', field: 'dimensionsReady', operator: 'eq', value: true,
+      }),
     ],
   },
   {

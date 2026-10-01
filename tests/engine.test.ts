@@ -1,5 +1,5 @@
 import {describe,expect,test} from 'vitest';
-import {evaluate,relevantFields} from '../src/lib/engine';
+import {evaluate,relevantFields,validInput} from '../src/lib/engine';
 import {developmentCall} from '../src/lib/catalog';
 import type {Opportunity,Project,Requirement} from '../src/lib/model';
 const now=Date.parse('2026-09-30T14:00:00Z');
@@ -29,4 +29,12 @@ describe('reviewed rules',()=>{
  test('irrelevant collaborator input is not requested from artists',()=>expect(relevantFields(call,{role:'artist'})).not.toContain('collaborator'));
  test('stale verification is visible',()=>expect(check(ready,{...call,fixture:false,last_verified_at:'2025-01-01T00:00:00Z'}).findings.find(f=>f.id==='verification')?.outcome).toBe('unknown'));
  test('evaluation is deterministic and does not mutate project or rules',()=>{const before=JSON.stringify({ready,call});expect(check(ready)).toEqual(check(ready));expect(JSON.stringify({ready,call})).toBe(before);});
+ test('age and DPI accept useful integer boundaries',()=>{
+  expect(validInput('age',0)).toBe(true);expect(validInput('age',130)).toBe(true);expect(validInput('age',131)).toBe(false);
+  expect(validInput('dpi',300)).toBe(true);expect(validInput('dpi',0)).toBe(false);expect(validInput('dpi',300.5)).toBe(false);
+ });
+ test('technical file answers use a controlled vocabulary',()=>{
+  expect(validInput('fileFormat',' TIF ')).toBe(true);expect(validInput('fileFormat','psd')).toBe(false);
+  expect(validInput('colorMode','BLACK-AND-WHITE')).toBe(true);expect(validInput('colorMode','cmyk')).toBe(false);
+ });
 });

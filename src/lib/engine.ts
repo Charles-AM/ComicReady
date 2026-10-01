@@ -8,8 +8,12 @@ export function validInput(field:Field,value:unknown):boolean {
  if(field==='role')return typeof value==='string'&&(roles as readonly string[]).includes(value);
  if(field==='format')return typeof value==='string'&&(formats as readonly string[]).includes(value);
  if(field==='samplePages'||field==='storyPages')return typeof value==='number'&&Number.isInteger(value)&&value>=0&&value<=100000;
+ if(field==='age')return typeof value==='number'&&Number.isInteger(value)&&value>=0&&value<=130;
+ if(field==='dpi')return typeof value==='number'&&Number.isInteger(value)&&value>=1&&value<=10000;
  if(field==='country')return typeof value==='string'&&/^[a-z]{2}$/i.test(value.trim());
  if(field==='region')return typeof value==='string'&&value.trim().length>0;
+ if(field==='fileFormat')return typeof value==='string'&&['pdf','jpg','png','tif','other'].includes(normalize(value));
+ if(field==='colorMode')return typeof value==='string'&&['black-and-white','color','either'].includes(normalize(value));
  return typeof value==='boolean';
 }
 /** An unknown selector cannot silently remove a potentially applicable rule. */

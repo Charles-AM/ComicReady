@@ -3,7 +3,7 @@ import { reviewedCatalog, developmentCall } from './catalog';
 import { configured, publicDb } from './supabase/server';
 import type { Opportunity } from './model';
 
-/** Bundled reviewed entries fill gaps until they are synced into Supabase. DB wins on slug collision. */
+/** Bundled reviewed entries fill gaps until they are synced into Supabase. A more recently verified DB review wins. */
 function withBundledReviewed(calls: Opportunity[]): Opportunity[] {
   const bySlug = new Map(calls.map((call) => [call.slug, call]));
   for (const call of reviewedCatalog) {
@@ -12,13 +12,14 @@ function withBundledReviewed(calls: Opportunity[]): Opportunity[] {
       bySlug.set(call.slug, call);
       continue;
     }
+    const storedIsNewer = Date.parse(stored.last_verified_at ?? '') > Date.parse(call.last_verified_at ?? '');
     bySlug.set(call.slug, {
       ...stored,
       deadline_date: stored.deadline_date ?? call.deadline_date,
       deadline_note: stored.deadline_note ?? call.deadline_note,
       compensation_type: stored.compensation_type ?? call.compensation_type,
       region_scope: stored.region_scope ?? call.region_scope,
-      requirements: stored.requirements.length ? stored.requirements : call.requirements,
+      requirements: storedIsNewer && stored.requirements.length ? stored.requirements : call.requirements,
     });
   }
   return [...bySlug.values()].sort((a, b) => {
