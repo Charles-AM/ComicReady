@@ -7,7 +7,19 @@ import type { Opportunity } from './model';
 function withBundledReviewed(calls: Opportunity[]): Opportunity[] {
   const bySlug = new Map(calls.map((call) => [call.slug, call]));
   for (const call of reviewedCatalog) {
-    if (!bySlug.has(call.slug)) bySlug.set(call.slug, call);
+    const stored = bySlug.get(call.slug);
+    if (!stored) {
+      bySlug.set(call.slug, call);
+      continue;
+    }
+    bySlug.set(call.slug, {
+      ...stored,
+      deadline_date: stored.deadline_date ?? call.deadline_date,
+      deadline_note: stored.deadline_note ?? call.deadline_note,
+      compensation_type: stored.compensation_type ?? call.compensation_type,
+      region_scope: stored.region_scope ?? call.region_scope,
+      requirements: stored.requirements.length ? stored.requirements : call.requirements,
+    });
   }
   return [...bySlug.values()].sort((a, b) => {
     const ta = a.last_verified_at ? Date.parse(a.last_verified_at) : 0;
