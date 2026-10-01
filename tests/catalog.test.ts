@@ -11,6 +11,8 @@ describe('reviewed catalog integrity', () => {
       expect(Number.isFinite(Date.parse(call.last_verified_at || ''))).toBe(true);
       expect(call.official_url).toMatch(/^https:\/\//);
       expect(call.requirements.length).toBeGreaterThan(0);
+      expect(call.compensation_type).toMatch(/^(paid|conditional|unpaid|undisclosed)$/);
+      expect(call.region_scope).toMatch(/^(worldwide|restricted|not-stated)$/);
     }
   });
 
@@ -30,6 +32,7 @@ describe('reviewed catalog integrity', () => {
     for (const call of dateOnly) {
       expect(call.deadline).toBeNull();
       expect(call.deadline_timezone).toBeNull();
+      expect(call.deadline_date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
     for (const call of reviewedCatalog.filter((item) => item.deadline)) {
       expect(call.deadline_timezone).toBeTruthy();

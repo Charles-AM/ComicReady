@@ -14,8 +14,9 @@ export type Requirement = {
 export type Opportunity = {
   id: string; slug: string; title: string; organizer: string;
   category: 'anthology' | 'short-comic'; official_url: string;
-  status: 'open' | 'rolling' | 'closed' | 'unknown'; deadline: string | null; deadline_timezone: string | null; deadline_note?: string | null;
-  compensation: string | null; rights_disclosure: string | null;
+  status: 'open' | 'rolling' | 'closed' | 'unknown'; deadline: string | null; deadline_timezone: string | null; deadline_note?: string | null; deadline_date?: string | null;
+  compensation: string | null; compensation_type?: 'paid' | 'conditional' | 'unpaid' | 'undisclosed'; rights_disclosure: string | null;
+  region_scope?: 'worldwide' | 'restricted' | 'not-stated';
   last_verified_at: string | null; published: boolean; description: string;
   roles: Role[]; formats: ProjectFormat[]; requirements: Requirement[]; fixture?: boolean;
 };
