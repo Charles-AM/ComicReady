@@ -1,6 +1,7 @@
 import type { Opportunity, Requirement } from './model';
 
 const verifiedAt = '2026-09-30T17:25:00Z';
+const expandedCatalogVerifiedAt = '2026-09-30T19:38:52Z';
 
 function rule(
   opportunityId: string,
@@ -326,6 +327,142 @@ export const reviewedCatalog: Opportunity[] = [
         'Only original content; the organizer states a no-tolerance policy for hate speech.',
         { kind: 'eligibility' },
       ),
+    ],
+  },
+  {
+    id: 'kkum-hybrid-horror',
+    slug: 'kkum-hybrid-horror',
+    title: 'Hybrid Horror Anthology',
+    organizer: 'KKUM',
+    category: 'anthology',
+    official_url: 'https://www.kkum.org/',
+    status: 'open',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_note: '15 October 2026; submission time and timezone not stated.',
+    compensation: 'Unpaid independent collaboration; contributors are not charged and sales revenue is reinvested in the project (organizer’s stated terms).',
+    rights_disclosure: 'Creators retain copyright and ownership; selected contributors grant permission to publish, distribute, and promote the contribution and excerpts. Full terms follow selection.',
+    last_verified_at: expandedCatalogVerifiedAt,
+    published: true,
+    description:
+      'International call for original short horror combining prose, illustration, manga, comics, or experimental sequential art. Submit a proposal and samples rather than finished pages.',
+    roles: ['writer', 'artist', 'writer-artist', 'team'],
+    formats: ['pitch', 'portfolio'],
+    requirements: [
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'Who Can Apply / Originality', 'kkum-rights', 'Confirm that the proposal is original and that you hold the rights needed to submit and develop it.', {
+        kind: 'eligibility', field: 'rights', operator: 'eq', value: true,
+      }),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'What Should I Submit — Your Proposal', 'kkum-synopsis', 'Prepare a 150–300 word story synopsis, estimated page count, and preferred format.', {
+        kind: 'preparation', field: 'synopsis', operator: 'eq', value: true,
+      }),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'What Should I Submit — Work Samples', 'kkum-portfolio', 'Provide three relevant work examples or a portfolio link.', {
+        kind: 'preparation', field: 'portfolio', operator: 'eq', value: true,
+      }),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'Recommended Length', 'kkum-length', 'The recommended finished length is about 4–12 pages; explain in the application if the idea needs a different length.'),
+      rule('kkum-hybrid-horror', 'https://www.kkum.org/', 'Important', 'kkum-not-finished', 'Do not create the complete finished work before selection.'),
+    ],
+  },
+  {
+    id: 'afrocomiccon-illustrated-revolution-adult',
+    slug: 'afrocomiccon-illustrated-revolution-adult',
+    title: 'The Revolution Will Be Illustrated — adult call',
+    organizer: 'OTEC / AfroComicCon',
+    category: 'anthology',
+    official_url: 'https://afrocomiccon.org/illustratedrevolution/',
+    status: 'open',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_note: '1 December 2026; submission time and timezone not stated.',
+    compensation: '$125–$150 honorarium per accepted page, contingent on successful Spring 2027 Kickstarter funding (organizer’s stated terms).',
+    rights_disclosure: 'The organizer states that original owners retain all rights to submitted comics.',
+    last_verified_at: expandedCatalogVerifiedAt,
+    published: true,
+    description:
+      'Worldwide adult-artist call for completed illustrations, cartoon strips, and graphic short stories about revolution and transformation. Priority is given to Black and Indigenous artists.',
+    roles: ['artist', 'writer-artist', 'team'],
+    formats: ['completed short comic'],
+    requirements: [
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Are Looking For', 'afro-rights', 'You must own the submitted comic or artwork.', {
+        kind: 'eligibility', field: 'rights', operator: 'eq', value: true,
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Need', 'afro-pages', 'Adult comic submissions may be no longer than 15 pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 15,
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Submission Form', 'afro-bio', 'Prepare a creator biography of no more than 100 words.', {
+        kind: 'preparation', field: 'bio', operator: 'eq', value: true,
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Submission Form', 'afro-pdf', 'Prepare the completed high-resolution artwork as a PDF or JPG at 300 DPI.', {
+        kind: 'preparation', field: 'pdf', operator: 'eq', value: true,
+      }),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines / Submission Form', 'afro-size', 'Confirm the required page dimensions with the organizer: the guidelines and upload form publish different sizes.'),
+      rule('afrocomiccon-illustrated-revolution-adult', 'https://afrocomiccon.org/illustratedrevolution/', 'Adult Artist Guidelines — What We Are Looking For', 'afro-content', 'The work must uplift marginalized voices, avoid hate speech, and contain no AI-generated content.', { kind: 'eligibility' }),
+    ],
+  },
+  {
+    id: 'lumicpress-magazine',
+    slug: 'lumicpress-magazine',
+    title: 'LumicPress Magazine one-shots',
+    organizer: 'LumicPress',
+    category: 'short-comic',
+    official_url: 'https://lumicpress.com/lumicpress-magazine-submissions/',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    compensation: '$30 USD per published comic page, for 1–5 pages; payment is on publication rather than acceptance (organizer’s stated terms).',
+    rights_disclosure: 'Creators retain copyright and ownership and grant a non-exclusive, royalty-free license for one publication; reuse requires permission and additional payment.',
+    last_verified_at: expandedCatalogVerifiedAt,
+    published: true,
+    description:
+      'Rolling call for standalone black-and-white, manga-influenced comics for readers ages 6–14. Previously published work is allowed if it is not under an exclusive publishing agreement.',
+    roles: ['artist', 'writer-artist', 'team'],
+    formats: ['completed short comic'],
+    requirements: [
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-rights', 'Submit only original work that you control; fan art and AI-assisted work are not accepted.', {
+        kind: 'eligibility', field: 'rights', operator: 'eq', value: true,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submissions', 'lumic-min-pages', 'Comic submissions must contain at least one page.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'gte', value: 1,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submissions', 'lumic-max-pages', 'Comic submissions may contain no more than five pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 5,
+      }),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-age', 'Submitting creators must be 18 or older.'),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-audience', 'Content must be suitable for children ages 6–14 and formatted for left-to-right reading.'),
+      rule('lumicpress-magazine', 'https://lumicpress.com/lumicpress-magazine-submissions/', 'Submission Guidelines', 'lumic-files', 'Prepare black-and-white pages at 8.5 × 11 inches and 300 DPI.'),
+    ],
+  },
+  {
+    id: 'viz-one-shots',
+    slug: 'viz-one-shots',
+    title: 'VIZ manga one-shots',
+    organizer: 'VIZ Media',
+    category: 'short-comic',
+    official_url: 'https://www.viz.com/blog/posts/submission-guidelines',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    compensation: null,
+    rights_disclosure: null,
+    last_verified_at: expandedCatalogVerifiedAt,
+    published: true,
+    description:
+      'Rolling portal for manga one-shots. Completed pages are preferred, but VIZ states that work in progress and thumbnails with an inked character design may be submitted.',
+    roles: ['writer-artist', 'team'],
+    formats: ['completed short comic', 'pitch'],
+    requirements: [
+      rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For One-Shots', 'viz-min-pages', 'A manga one-shot must be at least 20 pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'gte', value: 20,
+      }),
+      rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For One-Shots', 'viz-max-pages', 'A manga one-shot may be no longer than 50 pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 50,
+      }),
+      rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For both', 'viz-synopsis', 'Prepare a story synopsis covering the direction and atmosphere of the manga.', {
+        kind: 'preparation', field: 'synopsis', operator: 'eq', value: true,
+      }),
+      rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For both', 'viz-bio', 'Include creator biographies and creative goals.', {
+        kind: 'preparation', field: 'bio', operator: 'eq', value: true,
+      }),
+      rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For One-Shots / For both', 'viz-materials', 'Include character descriptions, target audience, comparable titles, and character designs when an artist is attached.'),
     ],
   },
 ];

@@ -63,7 +63,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
             <div>
               <dt>Deadline</dt>
               <dd>
-                {c.deadline ? verificationLabel(c.deadline) : UNKNOWN}
+                {c.deadline ? verificationLabel(c.deadline) : c.deadline_note || UNKNOWN}
                 {c.deadline_timezone && ` · ${c.deadline_timezone}`}
               </dd>
             </div>

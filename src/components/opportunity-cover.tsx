@@ -7,6 +7,10 @@ export function OpportunityCoverCard({ call, compactMeta = false }: { call: Oppo
     ? compactMeta
       ? 'Deadline listed'
       : verificationLabel(call.deadline)
+    : call.deadline_note
+      ? compactMeta
+        ? 'Deadline listed'
+        : call.deadline_note
     : call.status === 'rolling'
       ? 'Rolling submissions'
       : 'Deadline not published';

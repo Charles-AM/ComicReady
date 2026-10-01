@@ -14,7 +14,7 @@ export type Requirement = {
 export type Opportunity = {
   id: string; slug: string; title: string; organizer: string;
   category: 'anthology' | 'short-comic'; official_url: string;
-  status: 'open' | 'rolling' | 'closed' | 'unknown'; deadline: string | null; deadline_timezone: string | null;
+  status: 'open' | 'rolling' | 'closed' | 'unknown'; deadline: string | null; deadline_timezone: string | null; deadline_note?: string | null;
   compensation: string | null; rights_disclosure: string | null;
   last_verified_at: string | null; published: boolean; description: string;
   roles: Role[]; formats: ProjectFormat[]; requirements: Requirement[]; fixture?: boolean;
