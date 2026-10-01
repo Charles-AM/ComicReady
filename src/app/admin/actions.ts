@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { adminDb,configured,sessionDb } from '@/lib/supabase/server';
 import { opportunitySchema,requirementSchema } from '@/lib/validation';
+import {z} from 'zod';
 export type ActionState={error?:string;success?:string;id?:string};
 export async function login(_state:ActionState,form:FormData):Promise<ActionState>{
  if(!configured())return {error:'Supabase is not configured yet.'};
@@ -25,3 +26,15 @@ export async function saveCall(_state:ActionState,form:FormData):Promise<ActionS
  }catch{return {error:'Check all fields, URLs, rule comparisons, and the deadline timezone. A sourced requirement is required.'};}
 }
 export async function resolveCorrection(form:FormData){const db=await adminDb();if(!db)redirect('/admin/login');const id=String(form.get('id'));const {error}=await db.from('corrections').update({resolved:true}).eq('id',id);if(error)throw new Error('Could not resolve correction.');revalidatePath('/admin');}
+
+const verificationSchema=z.object({id:z.string().uuid(),note:z.string().trim().min(3).max(2000),confirmed:z.literal('on')});
+export async function verifyCall(form:FormData){
+ const db=await adminDb();if(!db)redirect('/admin/login');
+ const parsed=verificationSchema.safeParse({id:form.get('id'),note:form.get('note'),confirmed:form.get('confirmed')});
+ if(!parsed.success)throw new Error('Confirm the source review and add a short verification note.');
+ const {data:call,error:readError}=await db.from('opportunities').select('slug').eq('id',parsed.data.id).single();
+ if(readError||!call)throw new Error('The opportunity could not be found.');
+ const {error}=await db.rpc('verify_opportunity',{target_id:parsed.data.id,note:parsed.data.note});
+ if(error)throw new Error('Verification could not be recorded. Apply the verification queue migration and try again.');
+ revalidatePath('/admin');revalidatePath('/opportunities');revalidatePath('/opportunities/'+call.slug);revalidatePath('/results/'+call.slug);
+}

@@ -1717,6 +1717,111 @@ legend {
   border-top: 1px solid var(--line);
 }
 
+.admin-section-head,
+.verification-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.admin-section-head .section-title,
+.verification-card h3 {
+  margin: 0;
+}
+
+.queue-stats {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  margin: 24px 0;
+  border: 1px solid var(--line);
+}
+
+.queue-stats > div {
+  padding: 18px;
+  border-right: 1px solid var(--line);
+}
+
+.queue-stats > div:last-child {
+  border-right: 0;
+}
+
+.queue-stats dt,
+.queue-due {
+  color: var(--muted);
+  font-size: .8125rem;
+}
+
+.queue-stats dd {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem,4vw,2.75rem);
+  line-height: 1;
+}
+
+.verification-queue {
+  display: grid;
+  gap: 16px;
+}
+
+.verification-card {
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--muted);
+}
+
+.verification-card.priority-urgent { border-left-color: #c05050; }
+.verification-card.priority-due { border-left-color: #c09040; }
+.verification-card.priority-needs-details { border-left-color: #8b7ca8; }
+
+.queue-priority {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.verification-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 16px;
+  font-size: .8125rem;
+}
+
+.queue-issues {
+  margin: 18px 0 10px;
+  padding-left: 1.15rem;
+}
+
+.queue-issues li + li { margin-top: 6px; }
+
+.verify-action {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.verify-action summary,
+.current-calls summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.verify-action form {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.verify-action .button { justify-self: start; }
+
+.current-calls { margin-top: 24px; }
+
 .admin-corrections {
   list-style: none;
   margin: 0;
@@ -1779,6 +1884,28 @@ p {
 }
 
 @media (max-width: 768px) {
+  .admin-section-head,
+  .verification-card-head {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .verification-card-links {
+    justify-content: flex-start;
+  }
+
+  .queue-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .queue-stats > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .queue-stats > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+
   .site-header {
     display: grid;
     grid-template-columns: auto 1fr;
