@@ -16,6 +16,9 @@ const scenarios:{slug:string;project:Project;finding:string;outcome:Outcome}[]=[
   {slug:'afrocomiccon-illustrated-revolution-adult',project:{role:'artist',format:'completed short comic',aiUsed:true},finding:'afro-ai',outcome:'ineligible'},
   {slug:'lumicpress-magazine',project:{role:'writer-artist',format:'completed short comic',age:17},finding:'lumic-age',outcome:'ineligible'},
   {slug:'viz-one-shots',project:{role:'writer-artist',format:'completed short comic',storyPages:10},finding:'viz-min-pages',outcome:'ineligible'},
+  {slug:'dirty-water-hot-off-the-press',project:{role:'writer-artist',format:'completed short comic',storyPages:16},finding:'dirty-water-max-pages',outcome:'ineligible'},
+  {slug:'grub-street-volume-76-comics',project:{role:'writer-artist',format:'completed short comic',dpi:150},finding:'grub-dpi',outcome:'prepare'},
+  {slug:'anmly-graphic-narratives-2026-27',project:{role:'writer-artist',format:'completed short comic',aiUsed:true},finding:'anmly-ai',outcome:'ineligible'},
 ];
 
 describe('catalog opportunity scenarios',()=>{

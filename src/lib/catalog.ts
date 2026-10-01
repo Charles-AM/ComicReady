@@ -2,6 +2,7 @@ import type { Opportunity, Requirement } from './model';
 
 const verifiedAt = '2026-09-30T17:25:00Z';
 const expandedCatalogVerifiedAt = '2026-09-30T19:38:52Z';
+const secondCatalogExpansionVerifiedAt = '2026-10-01T16:35:18Z';
 
 function rule(
   opportunityId: string,
@@ -532,6 +533,112 @@ export const reviewedCatalog: Opportunity[] = [
         kind: 'preparation', field: 'bio', operator: 'eq', value: true,
       }),
       rule('viz-one-shots', 'https://www.viz.com/blog/posts/submission-guidelines', 'For One-Shots / For both', 'viz-materials', 'Include character descriptions, target audience, comparable titles, and character designs when an artist is attached.'),
+    ],
+  },
+  {
+    id: 'dirty-water-hot-off-the-press',
+    slug: 'dirty-water-hot-off-the-press',
+    title: 'Hot off the Press',
+    organizer: 'Dirty Water Comics',
+    category: 'short-comic',
+    official_url: 'https://www.dirtywatercomics.com/submissions/hotoffthepress',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: null,
+    compensation: 'Selected creators receive an honorarium; the organizer does not publish the amount or payment timing.',
+    compensation_type: 'paid',
+    region_scope: 'not-stated',
+    rights_disclosure: null,
+    last_verified_at: secondCatalogExpansionVerifiedAt,
+    published: true,
+    description: 'Rolling digital showcase for previously unpublished standalone comics or excerpts from completed work, especially nonfiction, autobiographical, political, historical, and formally eclectic comics.',
+    roles: ['artist', 'writer-artist', 'team'],
+    formats: ['completed short comic'],
+    requirements: [
+      rule('dirty-water-hot-off-the-press', 'https://www.dirtywatercomics.com/submissions/hotoffthepress', 'What Should I Submit?', 'dirty-water-unpublished', 'Submit a comic or excerpt that has not been published previously.', {
+        kind: 'eligibility', field: 'previouslyPublished', operator: 'eq', value: false,
+      }),
+      rule('dirty-water-hot-off-the-press', 'https://www.dirtywatercomics.com/submissions/hotoffthepress', 'What Should I Submit?', 'dirty-water-min-pages', 'The submission must contain at least one comic page.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'gte', value: 1,
+      }),
+      rule('dirty-water-hot-off-the-press', 'https://www.dirtywatercomics.com/submissions/hotoffthepress', 'What Should I Submit?', 'dirty-water-max-pages', 'The submission may contain no more than 15 pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 15,
+      }),
+      rule('dirty-water-hot-off-the-press', 'https://www.dirtywatercomics.com/submissions/hotoffthepress', 'We are interested in / What Should I Submit?', 'dirty-water-focus', 'Review the literary and nonfiction focus and the restrictions on conventional superhero, horror, science-fiction, and fantasy work.'),
+      rule('dirty-water-hot-off-the-press', 'https://www.dirtywatercomics.com/submissions/hotoffthepress', 'Submission instructions', 'dirty-water-email', 'Email the completed submission with “Hot off the Press” in the subject line.'),
+    ],
+  },
+  {
+    id: 'grub-street-volume-76-comics',
+    slug: 'grub-street-volume-76-comics',
+    title: 'Grub Street Volume 76 — comics',
+    organizer: 'Grub Street Literary Magazine',
+    category: 'short-comic',
+    official_url: 'https://grubstreet.submittable.com/submit',
+    status: 'open',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: '2026-12-15',
+    deadline_note: '15 December 2026; submission time and timezone not stated.',
+    compensation: null,
+    compensation_type: 'undisclosed',
+    region_scope: 'not-stated',
+    rights_disclosure: null,
+    last_verified_at: secondCatalogExpansionVerifiedAt,
+    published: true,
+    description: 'Blind-reviewed literary magazine call accepting up to five previously unpublished comic pieces. Each piece must be under ten pages and supplied as high-resolution image files.',
+    roles: ['artist', 'writer-artist', 'team'],
+    formats: ['completed short comic'],
+    requirements: [
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Submission Guidelines', 'grub-unpublished', 'Only previously unpublished work, in print or online, is considered.', {
+        kind: 'eligibility', field: 'previouslyPublished', operator: 'eq', value: false,
+      }),
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Comics guidelines', 'grub-pages', 'Each comic piece must be under ten pages.', {
+        kind: 'eligibility', field: 'storyPages', operator: 'lte', value: 9,
+      }),
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Comics guidelines', 'grub-format', 'Prepare each comic as a PNG, TIFF, or high-quality JPEG file.', {
+        kind: 'preparation', field: 'fileFormat', operator: 'in', value: ['png', 'tif', 'jpg'],
+      }),
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Comics guidelines', 'grub-dpi', 'Prepare comic files at 300 DPI or higher.', {
+        kind: 'preparation', field: 'dpi', operator: 'gte', value: 300,
+      }),
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Comics guidelines', 'grub-dimensions', 'Each comic image must be at least 4 × 6 inches.', {
+        kind: 'preparation', field: 'dimensionsReady', operator: 'eq', value: true,
+      }),
+      rule('grub-street-volume-76-comics', 'https://grubstreet.submittable.com/submit', 'Blind-review process', 'grub-blind', 'Remove identifying information from the work and its file name before submitting.'),
+    ],
+  },
+  {
+    id: 'anmly-graphic-narratives-2026-27',
+    slug: 'anmly-graphic-narratives-2026-27',
+    title: 'ANMLY graphic narratives',
+    organizer: 'ANMLY',
+    category: 'short-comic',
+    official_url: 'https://anmly.org/calls/',
+    status: 'open',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: '2027-02-01',
+    deadline_note: 'Current reading period closes 1 February 2027; submission time and timezone not stated.',
+    compensation: null,
+    compensation_type: 'undisclosed',
+    region_scope: 'not-stated',
+    rights_disclosure: null,
+    last_verified_at: secondCatalogExpansionVerifiedAt,
+    published: true,
+    description: 'Current reading period for challenging, previously unpublished comics and graphic narratives. ANMLY publishes work online and accepts graphic narratives during its general submission windows.',
+    roles: ['artist', 'writer-artist', 'team'],
+    formats: ['completed short comic'],
+    requirements: [
+      rule('anmly-graphic-narratives-2026-27', 'https://anmly.org/calls/', 'General Calls for Submissions', 'anmly-unpublished', 'The work must be previously unpublished, including on a personal blog.', {
+        kind: 'eligibility', field: 'previouslyPublished', operator: 'eq', value: false,
+      }),
+      rule('anmly-graphic-narratives-2026-27', 'https://anmly.org/calls/', 'General Calls for Submissions', 'anmly-ai', 'AI-generated or AI-assisted writing and art are not accepted.', {
+        kind: 'eligibility', field: 'aiUsed', operator: 'eq', value: false,
+      }),
+      rule('anmly-graphic-narratives-2026-27', 'https://anmly.org/calls/', 'General Calls for Submissions', 'anmly-fee', 'The standard submission fee is $3; the organizer provides a hardship waiver by email.'),
+      rule('anmly-graphic-narratives-2026-27', 'https://anmly.org/calls/', 'General Calls for Submissions', 'anmly-fit', 'Review previous ANMLY issues to confirm that the graphic narrative fits the journal’s experimental and boundary-pushing focus.'),
     ],
   },
 ];
