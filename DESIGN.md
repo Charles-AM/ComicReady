@@ -98,3 +98,6 @@ Show the current number of real, published calls accepting submissions in the
 primary catalog action and above the six-call preview. Count effective `open`
 and `rolling` statuses, exclude fixtures and expired deadlines, and refresh the
 homepage data hourly so the promise matches the catalog.
+Use bold Source Sans for the primary navigation rather than condensed display
+type. Its tighter tracking and stronger weight keep Catalog, How it works, and
+Standards legible as controls on both desktop and narrow screens.

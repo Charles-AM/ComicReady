@@ -310,17 +310,20 @@ textarea:focus-visible {
   min-height: 40px;
   display: inline-flex;
   align-items: center;
-  font-family: var(--display);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
+  padding-inline: 2px;
+  font-family: var(--body);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--ink) 82%, var(--muted));
+  transition: color 150ms ease, transform 150ms ease;
 }
 
 .site-header nav a:hover {
   color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .site-header nav a[aria-current="page"] {
@@ -2106,8 +2109,8 @@ p {
     min-height: 44px;
     justify-content: center;
     text-align: center;
-    font-size: clamp(0.68rem, 2.8vw, 0.78rem);
-    letter-spacing: 0.08em;
+    font-size: clamp(0.7rem, 2.8vw, 0.78rem);
+    letter-spacing: 0.055em;
   }
 
   .home-hero-catalog-layout,
@@ -2416,7 +2419,7 @@ p {
 
   .site-header nav a {
     justify-content: flex-start;
-    font-size: 0.66rem;
+    font-size: 0.7rem;
   }
 
   .hero-readiness-stack {
