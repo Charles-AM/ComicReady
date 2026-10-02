@@ -11,6 +11,7 @@ const migrations = [
   '202609300005_checker_fields.sql',
   '202610010001_verification_queue.sql',
   '202610020001_reviewed_catalog.sql',
+  '202610020002_catalog_expansion.sql',
 ];
 
 async function role(name: 'anon' | 'authenticated') {
@@ -48,8 +49,8 @@ test('reviewed catalog migration publishes every sourced call and rule', async (
     where source_url !~ '^https://' or source_reference = ''
   `);
 
-  expect(calls.rows).toEqual([{ count: 13 }]);
-  expect(rules.rows).toEqual([{ count: 67 }]);
+  expect(calls.rows).toEqual([{ count: 17 }]);
+  expect(rules.rows).toEqual([{ count: 89 }]);
   expect(unsafeSources.rows).toEqual([{ count: 0 }]);
 });
 
@@ -69,16 +70,16 @@ test('seeded calls include verification timestamps while the audit stays private
     from public.verification_events
     where result = 'verified'
   `);
-  expect(audits.rows).toEqual([{ count: 13 }]);
+  expect(audits.rows).toEqual([{ count: 17 }]);
 });
 
 test('reviewed catalog migration can be re-applied without duplicates', async () => {
   await db.exec('reset role');
-  await db.exec(readFileSync('supabase/migrations/202610020001_reviewed_catalog.sql', 'utf8'));
+  await db.exec(readFileSync('supabase/migrations/202610020002_catalog_expansion.sql', 'utf8'));
   const calls = await db.query<{ count: number }>('select count(*)::int as count from public.opportunities');
   const rules = await db.query<{ count: number }>('select count(*)::int as count from public.requirements');
   const audits = await db.query<{ count: number }>('select count(*)::int as count from public.verification_events');
-  expect(calls.rows).toEqual([{ count: 13 }]);
-  expect(rules.rows).toEqual([{ count: 67 }]);
-  expect(audits.rows).toEqual([{ count: 13 }]);
+  expect(calls.rows).toEqual([{ count: 17 }]);
+  expect(rules.rows).toEqual([{ count: 89 }]);
+  expect(audits.rows).toEqual([{ count: 17 }]);
 });
