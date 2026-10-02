@@ -13,21 +13,15 @@ import {
   type CatalogSort,
   type PageBand,
 } from '@/lib/catalog-discovery';
-import { effectiveStatus, formats, roles, verificationLabel, type Opportunity } from '@/lib/model';
+import { deadlineLabel, effectiveStatus, formats, roles, type Opportunity } from '@/lib/model';
 
 const SAVED_KEY = 'comicready:saved-opportunities:v1';
-
-function deadlineLabel(call: Opportunity) {
-  if (call.deadline) return `${verificationLabel(call.deadline)}${call.deadline_timezone ? ` · ${call.deadline_timezone}` : ''}`;
-  if (call.deadline_note) return call.deadline_note;
-  return call.status === 'rolling' ? 'Rolling submissions' : 'Not published';
-}
 
 export function OpportunityList({ calls }: { calls: Opportunity[] }) {
   const [query, setQuery] = useState('');
   const [role, setRole] = useState('');
   const [format, setFormat] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('available');
   const [category, setCategory] = useState('');
   const [payment, setPayment] = useState('');
   const [region, setRegion] = useState('');
@@ -61,12 +55,12 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
     setCompared((current) => current.includes(id) ? current.filter((item) => item !== id) : current.length < 3 ? [...current, id] : current);
   }
 
-  const filterCount = [role, format, status, category, payment, region, pageBand].filter(Boolean).length + Number(savedOnly);
+  const filterCount = [role, format, status === 'available' ? '' : status, category, payment, region, pageBand].filter(Boolean).length + Number(savedOnly);
   const shown = useMemo(() => sortCalls(calls.filter((call) =>
     (call.title + ' ' + call.organizer + ' ' + call.description).toLowerCase().includes(query.trim().toLowerCase()) &&
     (!role || call.roles.includes(role as (typeof roles)[number])) &&
     (!format || call.formats.includes(format as (typeof formats)[number])) &&
-    (!status || effectiveStatus(call) === status) &&
+    (!status || (status === 'available' ? ['open', 'rolling'].includes(effectiveStatus(call)) : effectiveStatus(call) === status)) &&
     (!category || call.category === category) &&
     (!payment || paymentType(call) === payment) &&
     (!region || (call.region_scope ?? 'not-stated') === region) &&
@@ -80,7 +74,7 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
     setQuery('');
     setRole('');
     setFormat('');
-    setStatus('');
+    setStatus('available');
     setCategory('');
     setPayment('');
     setRegion('');
@@ -101,7 +95,7 @@ export function OpportunityList({ calls }: { calls: Opportunity[] }) {
         <div className="catalog-filters">
           <label>Creator role<select value={role} onChange={(event) => setRole(event.target.value)}><option value="">All roles</option>{roles.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label>Project format<select value={format} onChange={(event) => setFormat(event.target.value)}><option value="">All formats</option>{formats.map((item) => <option key={item}>{item}</option>)}</select></label>
-          <label>Status<select value={status} onChange={(event) => setStatus(event.target.value)}><option value="">All statuses</option>{['open', 'rolling', 'closed', 'unknown'].map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label>Status<select value={status} onChange={(event) => setStatus(event.target.value)}><option value="available">Available now</option><option value="">All statuses</option>{['open', 'rolling', 'closed', 'unknown'].map((item) => <option key={item}>{item}</option>)}</select></label>
           <label>Call type<select value={category} onChange={(event) => setCategory(event.target.value)}><option value="">All types</option><option value="anthology">Anthology</option><option value="short-comic">Short comic</option></select></label>
           <label>Payment<select value={payment} onChange={(event) => setPayment(event.target.value)}><option value="">Any disclosure</option><option value="paid">Paid</option><option value="conditional">Conditional</option><option value="unpaid">Unpaid</option><option value="undisclosed">Not disclosed</option></select></label>
           <label>Region<select value={region} onChange={(event) => setRegion(event.target.value)}><option value="">Any region</option><option value="worldwide">Worldwide</option><option value="restricted">Region restricted</option><option value="not-stated">Not stated</option></select></label>

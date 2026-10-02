@@ -4,7 +4,7 @@ import { BackLink } from '@/components/back-link';
 import { notFound } from 'next/navigation';
 import { getOpportunity } from '@/lib/opportunities';
 import { CallCoverSurface } from '@/components/call-cover-surface';
-import { effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
+import { deadlineLabel, effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,8 +63,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
             <div>
               <dt>Deadline</dt>
               <dd>
-                {c.deadline ? verificationLabel(c.deadline) : c.deadline_note || UNKNOWN}
-                {c.deadline_timezone && ` · ${c.deadline_timezone}`}
+                {c.deadline || c.deadline_note || c.status === 'rolling' ? deadlineLabel(c) : UNKNOWN}
               </dd>
             </div>
             <div>

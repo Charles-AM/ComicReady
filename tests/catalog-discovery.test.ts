@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { reviewedCatalog } from '../src/lib/catalog';
+import { deadlineLabel, effectiveStatus } from '../src/lib/model';
 import { deadlineValue, isClosingSoon, isRecentlyVerified, matchesPageBand, pageRange, paymentLabel, sortCalls } from '../src/lib/catalog-discovery';
 
 const bySlug = (slug: string) => reviewedCatalog.find((call) => call.slug === slug)!;
@@ -35,5 +36,16 @@ describe('catalog discovery metadata', () => {
     expect(isClosingSoon(bySlug('kkum-hybrid-horror'), now)).toBe(true);
     expect(isClosingSoon(bySlug('afrocomiccon-illustrated-revolution-adult'), now)).toBe(false);
     expect(isRecentlyVerified(bySlug('viz-one-shots'), now)).toBe(true);
+  });
+
+  test('date-only calls close conservatively after the published date worldwide', () => {
+    const call = bySlug('kkum-hybrid-horror');
+    expect(effectiveStatus(call, new Date('2026-10-16T11:59:59Z'))).toBe('open');
+    expect(effectiveStatus(call, new Date('2026-10-16T12:00:00Z'))).toBe('closed');
+  });
+
+  test('exact deadlines render in their published timezone', () => {
+    expect(deadlineLabel(bySlug('discord-bite'))).toContain('Europe/London');
+    expect(deadlineLabel(bySlug('discord-bite'))).not.toContain('UTC');
   });
 });

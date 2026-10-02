@@ -3,7 +3,7 @@ import {evaluate,relevantFields,validInput} from '../src/lib/engine';
 import {developmentCall} from '../src/lib/catalog';
 import type {Opportunity,Project,Requirement} from '../src/lib/model';
 const now=Date.parse('2026-09-30T14:00:00Z');
-const call:Opportunity={...developmentCall,status:'rolling',compensation:'Disclosed',rights_disclosure:'Disclosed'};
+const call:Opportunity={...developmentCall,status:'rolling',compensation:'Disclosed',compensation_type:'paid',rights_disclosure:'Disclosed'};
 const ready:Project={role:'writer',format:'pitch',rights:true,collaborator:true,samplePages:3,storyPages:8,pdf:true};
 const check=(p:Project,c:Opportunity=call)=>evaluate(c,p,now);
 const rule=(changes:Partial<Requirement>):Requirement=>({...call.requirements[0],...changes});
@@ -24,6 +24,15 @@ describe('reviewed rules',()=>{
  test('undisclosed payment is not unpaid',()=>expect(check(ready,{...call,compensation:null}).findings.find(f=>f.id==='payment')).toMatchObject({outcome:'unknown',title:'Payment not disclosed; confirm with organizer.'}));
  test('closed deadline does not make insufficient samples a permanent failure',()=>{const r=check({...ready,samplePages:1},{...call,deadline:'2026-09-29T00:00:00Z'});expect(r.summary).toBe('ineligible');expect(r.findings.find(f=>f.id==='dev-samples')?.outcome).toBe('prepare');});
  test('at the exact deadline the window is closed',()=>expect(check(ready,{...call,deadline:new Date(now).toISOString()}).summary).toBe('ineligible'));
+ test('a date-only deadline remains open through that date anywhere on earth',()=>{
+  const dateOnly={...call,status:'open' as const,deadline:null,deadline_date:'2026-09-30',deadline_note:'30 September 2026; time and timezone not stated.'};
+  expect(evaluate(dateOnly,ready,Date.parse('2026-10-01T11:59:59Z')).findings.find(f=>f.id==='call-closed')).toBeUndefined();
+  expect(evaluate(dateOnly,ready,Date.parse('2026-10-01T12:00:00Z')).findings.find(f=>f.id==='call-closed')?.outcome).toBe('ineligible');
+ });
+ test('an explicitly undisclosed payment remains unknown even when explanatory text exists',()=>{
+  const result=check(ready,{...call,compensation:'The organizer says payment details will be shared later.',compensation_type:'undisclosed'});
+  expect(result.findings.find(f=>f.id==='payment')?.outcome).toBe('unknown');
+ });
  test('no reviewed rules cannot pass',()=>expect(check(ready,{...call,requirements:[]}).summary).toBe('unknown'));
  test('every finding preserves a source',()=>expect(check({}).findings.every(f=>Boolean(f.sourceUrl&&f.sourceReference))).toBe(true));
  test('irrelevant collaborator input is not requested from artists',()=>expect(relevantFields(call,{role:'artist'})).not.toContain('collaborator'));

@@ -18,6 +18,7 @@ export const opportunitySchema=z.object({
  status:z.enum(['open','rolling','closed','unknown']),deadline:z.string().datetime({offset:true}).nullable(),deadline_timezone:z.string().max(100).nullable(),deadline_note:z.string().trim().max(300).nullable().optional(),deadline_date:z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),compensation:z.string().max(1500).nullable(),compensation_type:z.enum(['paid','conditional','unpaid','undisclosed']).optional(),region_scope:z.enum(['worldwide','restricted','not-stated']).optional(),rights_disclosure:z.string().max(1500).nullable(),description:z.string().trim().min(10).max(1500),roles:z.array(z.enum(roles)).min(1),formats:z.array(z.enum(formats)).min(1),published:z.boolean(),
 }).superRefine((o,ctx)=>{
  if(o.deadline&&!o.deadline_timezone)ctx.addIssue({code:'custom',message:'Record the deadline’s published timezone.'});
+ if(o.deadline_timezone)try{new Intl.DateTimeFormat('en',{timeZone:o.deadline_timezone});}catch{ctx.addIssue({code:'custom',path:['deadline_timezone'],message:'Use a valid IANA timezone such as America/New_York.'});}
  if(o.deadline&&o.deadline_note)ctx.addIssue({code:'custom',message:'Use either an exact deadline or a date-only note, not both.'});
  if(!o.deadline&&o.deadline_date&&!o.deadline_note)ctx.addIssue({code:'custom',message:'Add a public note explaining that the deadline time or timezone is not stated.'});
 });

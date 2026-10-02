@@ -1,4 +1,4 @@
-import {fields,roles,formats,UNKNOWN,type Field,type Opportunity,type Project,type Requirement} from './model';
+import {deadlineCloseAt,fields,roles,formats,UNKNOWN,type Field,type Opportunity,type Project,type Requirement} from './model';
 export type Outcome='meets'|'ineligible'|'prepare'|'unknown';
 export type Finding={id:string;outcome:Outcome;title:string;explanation:string;sourceUrl:string;sourceReference:string;requirementId?:string};
 export type Evaluation={findings:Finding[];summary:Outcome;counts:Record<Outcome,number>};
@@ -43,10 +43,11 @@ export function compare(rule:Requirement,input:unknown):boolean|null{
 export function evaluate(call:Opportunity,project:Project,now:number):Evaluation{
  const findings:Finding[]=[];
  function meta(id:string,outcome:Outcome,title:string,explanation:string){findings.push({id,outcome,title,explanation,sourceUrl:call.official_url,sourceReference:call.fixture?'Development guidelines':'Official guidelines'});}
- if(call.status==='closed'||(call.deadline!==null&&Date.parse(call.deadline)<=now))meta('call-closed','ineligible','This call is closed.','This submission window is not usable now. This does not make your project permanently ineligible.');
+ const closesAt=deadlineCloseAt(call);
+ if(call.status==='closed'||(closesAt!==null&&closesAt<=now))meta('call-closed','ineligible','This call is closed.','This submission window is not usable now. This does not make your project permanently ineligible.');
  else if(call.status==='unknown')meta('call-status','unknown','Confirm whether this call is open.',UNKNOWN);
  if(call.deadline===null&&call.status==='open')meta('deadline','unknown',call.deadline_note?'Confirm the exact deadline time and timezone.':'Confirm the deadline.',call.deadline_note?`${call.deadline_note} The organizer does not state an exact submission time or timezone.`:UNKNOWN);
- if(!call.compensation)meta('payment','unknown','Payment not disclosed; confirm with organizer.',UNKNOWN);
+ if(!call.compensation||call.compensation_type==='undisclosed')meta('payment','unknown','Payment not disclosed; confirm with organizer.',UNKNOWN);
  if(!call.rights_disclosure)meta('licensing','unknown','Confirm the copyright and licensing terms.',UNKNOWN+' ComicReady does not provide a legal opinion.');
  if(!call.fixture&&(!call.last_verified_at||now-Date.parse(call.last_verified_at)>90*86400000))meta('verification','unknown','The guidelines need a fresh review.','The source has not been manually checked in the last 90 days. Confirm the current requirements.');
  if(!call.requirements.length)meta('no-rules','unknown','No reviewed requirements are available.',UNKNOWN);

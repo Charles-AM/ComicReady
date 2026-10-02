@@ -1,4 +1,4 @@
-import type { Opportunity } from './model';
+import { deadlineCloseAt, type Opportunity } from './model';
 
 export type CatalogSort = 'deadline' | 'recently-verified' | 'rolling-first' | 'title';
 export type PageBand = 'up-to-5' | '6-to-20' | '20-plus';
@@ -50,7 +50,7 @@ export function deadlineValue(call: Opportunity) {
 }
 
 export function isClosingSoon(call: Opportunity, now = Date.now(), days = 30) {
-  const deadline = deadlineValue(call);
+  const deadline = deadlineCloseAt(call) ?? Number.POSITIVE_INFINITY;
   return Number.isFinite(deadline) && deadline > now && deadline - now <= days * 86_400_000;
 }
 

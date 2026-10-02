@@ -24,7 +24,36 @@ export const UNKNOWN = 'Cannot determine from published guidelines';
 export function verificationLabel(value: string | null) {
   return value ? new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(value)) + ' UTC' : 'Not yet manually verified';
 }
+
+/**
+ * Date-only deadlines do not publish a timezone. Treat them as open through the
+ * end of that calendar date anywhere on earth so ComicReady never closes a call
+ * early for a creator in another region.
+ */
+export function deadlineCloseAt(call: Opportunity): number | null {
+  const value = call.deadline
+    ? Date.parse(call.deadline)
+    : call.deadline_date
+      ? Date.parse(`${call.deadline_date}T23:59:59.999-12:00`)
+      : Number.NaN;
+  return Number.isFinite(value) ? value : null;
+}
+
+export function deadlineLabel(call: Opportunity) {
+  if (call.deadline) {
+    const requestedZone = call.deadline_timezone || 'UTC';
+    try {
+      return `${new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: requestedZone }).format(new Date(call.deadline))} ${requestedZone}`;
+    } catch {
+      return `${new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(call.deadline))} UTC`;
+    }
+  }
+  if (call.deadline_note) return call.deadline_note;
+  return call.status === 'rolling' ? 'Rolling submissions' : 'Deadline not published';
+}
+
 export function effectiveStatus(call: Opportunity, now = new Date()) {
-  if (call.status === 'closed' || (call.deadline && Date.parse(call.deadline) <= now.getTime())) return 'closed';
+  const closesAt = deadlineCloseAt(call);
+  if (call.status === 'closed' || (closesAt !== null && closesAt <= now.getTime())) return 'closed';
   return call.status;
 }

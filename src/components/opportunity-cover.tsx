@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { CallCoverSurface } from '@/components/call-cover-surface';
 import { isClosingSoon, isRecentlyVerified, paymentLabel } from '@/lib/catalog-discovery';
-import { verificationLabel, type Opportunity } from '@/lib/model';
+import { deadlineLabel, type Opportunity } from '@/lib/model';
 
 type OpportunityCoverCardProps = {
   call: Opportunity;
@@ -14,17 +14,7 @@ type OpportunityCoverCardProps = {
 };
 
 export function OpportunityCoverCard({ call, compactMeta = false, saved, compared, compareDisabled, onToggleSaved, onToggleCompare }: OpportunityCoverCardProps) {
-  const deadlineLine = call.deadline
-    ? compactMeta
-      ? 'Deadline listed'
-      : verificationLabel(call.deadline)
-    : call.deadline_note
-      ? compactMeta
-        ? 'Deadline listed'
-        : call.deadline_note
-    : call.status === 'rolling'
-      ? 'Rolling submissions'
-      : 'Deadline not published';
+  const deadlineLine = compactMeta && (call.deadline || call.deadline_note) ? 'Deadline listed' : deadlineLabel(call);
 
   return (
     <article className="cover-card">
