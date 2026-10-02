@@ -13,7 +13,7 @@ function ArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
   );
 }
 
-export function HomeCatalogPeek({ calls }: { calls: Opportunity[] }) {
+export function HomeCatalogPeek({ calls, availableCallCount }: { calls: Opportunity[]; availableCallCount: number }) {
   const railRef = useRef<HTMLUListElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [canGoPrevious, setCanGoPrevious] = useState(false);
@@ -66,7 +66,9 @@ export function HomeCatalogPeek({ calls }: { calls: Opportunity[] }) {
     <section className="home-catalog-peek" aria-labelledby="home-catalog-title">
       <div className="home-catalog-peek-head">
         <div className="home-catalog-peek-intro">
-          <p className="eyebrow">In the catalog · six selected calls</p>
+          <p className="eyebrow">
+            Six selected · {availableCallCount} {availableCallCount === 1 ? 'call' : 'calls'} accepting submissions
+          </p>
           <h2 id="home-catalog-title" className="section-title">
             Real calls, linked to the source.
           </h2>

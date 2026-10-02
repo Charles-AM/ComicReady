@@ -4,6 +4,9 @@ import { heroTitleVariant } from '@/lib/hero-title-style';
 import { HeroReadinessStack } from '@/components/hero-readiness-stack';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { getOpportunities } from '@/lib/opportunities';
+import { effectiveStatus } from '@/lib/model';
+
+export const revalidate = 3600;
 
 const steps = [
   {
@@ -24,7 +27,13 @@ const steps = [
 ];
 
 export default async function Home() {
-  const catalogCalls = (await getOpportunities()).filter((c) => !c.fixture).slice(0, 6);
+  const opportunities = await getOpportunities();
+  const availableCalls = opportunities.filter((call) => {
+    const status = effectiveStatus(call);
+    return !call.fixture && (status === 'open' || status === 'rolling');
+  });
+  const catalogCalls = availableCalls.slice(0, 6);
+  const availableCallCount = availableCalls.length;
 
   return (
     <>
@@ -36,15 +45,15 @@ export default async function Home() {
               You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
             </p>
             <Link className="button button-accent" href="/opportunities">
-              Browse submission calls
+              Browse {availableCallCount} {availableCallCount === 1 ? 'open call' : 'open calls'}
             </Link>
-            <p className="fine-print">Source-linked listings · No creator account</p>
+            <p className="fine-print">Currently accepting submissions · Source-linked listings · No creator account</p>
           </div>
           <HeroReadinessStack />
         </div>
       </section>
 
-      <HomeCatalogPeek calls={catalogCalls} />
+      <HomeCatalogPeek calls={catalogCalls} availableCallCount={availableCallCount} />
 
       <section className="workflow-band" id="how-it-works" aria-labelledby="workflow-title">
         <div className="workflow-band-inner">

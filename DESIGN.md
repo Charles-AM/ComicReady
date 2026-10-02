@@ -94,3 +94,7 @@ very quiet blue and clay light in the page background. Cover tiles are compact
 and use six muted editorial colors—coral, blue, ochre, plum, sage, and rose—so
 the catalog feels varied without resembling organizer artwork. Keep the color
 behind high-contrast type and source information; it is atmosphere, not status.
+Show the current number of real, published calls accepting submissions in the
+primary catalog action and above the six-call preview. Count effective `open`
+and `rolling` statuses, exclude fixtures and expired deadlines, and refresh the
+homepage data hourly so the promise matches the catalog.
