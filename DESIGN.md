@@ -88,3 +88,9 @@ and all six stay in the document; motion only smooths navigation and switches of
 with reduced-motion preferences. The treatment combines editorial numbering,
 design-system carousel conventions, and restrained gallery pacing while keeping
 ComicReady's charcoal proof-sheet visual language.
+
+The canvas uses a welcoming midnight blue-charcoal instead of flat black, with
+very quiet blue and clay light in the page background. Cover tiles are compact
+and use six muted editorial colors—coral, blue, ochre, plum, sage, and rose—so
+the catalog feels varied without resembling organizer artwork. Keep the color
+behind high-contrast type and source information; it is atmosphere, not status.

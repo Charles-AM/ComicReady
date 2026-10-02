@@ -11,7 +11,7 @@ export type CatalogPreviewStyle = 'stripe' | 'initials' | 'category' | 'label';
 
 export const catalogPreviewStyle: CatalogPreviewStyle = 'category';
 
-const accents = ['#8a6a58', '#6a8088', '#887860', '#786878', '#688078', '#886860'] as const;
+const accents = ['#cf826b', '#72a5ce', '#c7a35e', '#a886b0', '#70a68f', '#c8797e'] as const;
 
 export function accentForSlug(slug: string) {
   const bucket = slug.split('').reduce((n, c) => n + c.charCodeAt(0), 0);
