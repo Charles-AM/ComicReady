@@ -77,3 +77,14 @@ collection for anthologies and sequential panels for short comics. These are typ
 symbols, not organizer logos or actual covers. All illustration is code-native,
 aria-hidden, static, and requires no image downloads or animation. Preserve native
 focus states and readable text; reduce padding on narrow screens without clipping.
+
+## Catalog issue rack
+The homepage previews exactly six calls in a horizontal issue rack instead of a
+generic card grid. On desktop, reveal roughly three covers plus the edge of the
+next one so scrolling is obvious. On phones, reveal one cover plus part of the
+next. Pair native scrolling with previous/next controls, a `01 / 06` position
+marker, visible scrollbar, and numbered folios. Every call remains a normal link
+and all six stay in the document; motion only smooths navigation and switches off
+with reduced-motion preferences. The treatment combines editorial numbering,
+design-system carousel conventions, and restrained gallery pacing while keeping
+ComicReady's charcoal proof-sheet visual language.
