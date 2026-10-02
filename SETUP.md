@@ -62,7 +62,8 @@ with `npm run build` as build command and `.next` as publish directory. The chec
 `netlify.toml` selects Node 24 and disables development fixtures. Let Netlify use its
 automatic Next.js adapter. Set both Supabase public variables below before deploying.
 Do not add a service-role key. Check the deployment log and open the resulting URL.
-No production domain or successful deployment is assumed by this repository.
+The production site uses `https://comicready.com`; `www.comicready.com` redirects
+to the root domain, while the Netlify subdomain remains available as a fallback.
 
 ## Environment variables
 - `NEXT_PUBLIC_SUPABASE_URL`: your project's HTTPS API URL.
@@ -70,8 +71,10 @@ No production domain or successful deployment is assumed by this repository.
 - `COMICREADY_ENABLE_DEV_FIXTURES`: optional; `false` on hosted production.
 
 Changing a public variable requires a fresh build. Keep `.env.local` untracked.
-In Supabase Auth URL settings, set Site URL to the deployed HTTPS origin. There is
-no public registration page, and password login does not use a callback route.
+In Supabase Auth URL settings, set Site URL to `https://comicready.com`. Add
+`https://comicready.com/thgizcblljqbah/reset-password` to the redirect allowlist,
+and retain the matching Netlify URL as a recovery fallback. There is no public
+registration page; the callback route is used only for invited-admin recovery.
 
 ## Measurement and corrections
 The second migration provides daily event aggregates and a private correction inbox.

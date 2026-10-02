@@ -13,8 +13,16 @@ import { SiteNav } from '@/components/site-nav';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://comicready.com'),
   title: { default: 'Comic Ready', template: '%s | Comic Ready' },
   description: 'Understand published comic submission requirements and what you still need to prepare.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Comic Ready',
+    url: '/',
+    title: 'Comic Ready',
+    description: 'Understand published comic submission requirements and what you still need to prepare.',
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
