@@ -1,12 +1,13 @@
 import { redirect, notFound } from 'next/navigation';
 import { adminDb } from '@/lib/supabase/server';
 import { AdminEditor } from '@/components/admin-editor';
+import {ADMIN_LOGIN_PATH} from '@/lib/admin-route';
 import type { Opportunity } from '@/lib/model';
 import { PageHeader } from '@/components/page-header';
 
 export default async function Edit({ params }: { params: Promise<{ id: string }> }) {
   const db = await adminDb();
-  if (!db) redirect('/admin/login');
+  if (!db) redirect(ADMIN_LOGIN_PATH);
 
   const { id } = await params;
   let call: Opportunity | undefined;

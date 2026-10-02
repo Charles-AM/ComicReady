@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {ADMIN_LOGIN_PATH,ADMIN_PATH} from '@/lib/admin-route';
 import { redirect } from 'next/navigation';
 import { adminDb } from '@/lib/supabase/server';
 import { logout, resolveCorrection, verifyCall } from './actions';
@@ -11,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Admin() {
   const db = await adminDb();
-  if (!db) redirect('/admin/login');
+  if (!db) redirect(ADMIN_LOGIN_PATH);
 
   const { data, error } = await db.from('opportunities').select('id,slug,title,official_url,status,published,deadline,deadline_date,compensation,rights_disclosure,last_verified_at,updated_at,requirements(id,source_url)').order('updated_at', { ascending: false });
   if (error) throw new Error('Could not load admin records. Check the database migration.');
@@ -32,7 +33,7 @@ export default async function Admin() {
     <section className="page-section layout-admin">
       <PageHeader eyebrow="Private editorial desk" title="Keep the source close." />
       <div className="actions">
-        <Link className="button" href="/admin/new">
+        <Link className="button" href={`${ADMIN_PATH}/new`}>
           Add a call
         </Link>
         <form action={logout}>
@@ -52,14 +53,14 @@ export default async function Admin() {
         </dl>
         <div className="verification-queue">
           {actionItems.map(item=>{const blocked=item.issues.some(issue=>issue.kind==='missing-rules'||issue.kind==='missing-source');return <article className={'verification-card priority-'+item.priority} key={item.id}>
-            <div className="verification-card-head"><div><span className="queue-priority">{item.priority.replace('-',' ')}</span><h3><Link href={'/admin/'+item.id}>{item.title}</Link></h3><p className="admin-list-meta">{item.published?'Published':'Draft'} · {item.status} · {item.last_verified_at?'Checked '+verificationLabel(item.last_verified_at):'Never verified'}</p></div><div className="verification-card-links"><a href={item.official_url} target="_blank" rel="noreferrer">Official source ↗</a><Link href={'/admin/'+item.id}>Edit record</Link></div></div>
+            <div className="verification-card-head"><div><span className="queue-priority">{item.priority.replace('-',' ')}</span><h3><Link href={ADMIN_PATH+'/'+item.id}>{item.title}</Link></h3><p className="admin-list-meta">{item.published?'Published':'Draft'} · {item.status} · {item.last_verified_at?'Checked '+verificationLabel(item.last_verified_at):'Never verified'}</p></div><div className="verification-card-links"><a href={item.official_url} target="_blank" rel="noreferrer">Official source ↗</a><Link href={ADMIN_PATH+'/'+item.id}>Edit record</Link></div></div>
             <ul className="queue-issues">{item.issues.map(issue=><li key={issue.kind}>{issue.label}</li>)}</ul>
             {item.dueAt&&<p className="queue-due">Next review {Date.parse(item.dueAt)<=now?'was':'is'} due {date(item.dueAt)}.</p>}
             {blocked?<p className="notice">Add the missing sourced requirements before recording verification.</p>:<details className="verify-action"><summary>Record completed source review</summary><form action={verifyCall}><input type="hidden" name="id" value={item.id}/><label>What did you confirm or change?<textarea name="note" required minLength={3} maxLength={2000} placeholder="Checked deadline, payment, rights, eligibility, and application link against the official page."/></label><label className="check-label"><input type="checkbox" name="confirmed" required/>I checked the current official source and every published rule.</label><button className="button" type="submit">Mark verified now</button></form></details>}
           </article>})}
           {!actionItems.length&&<p className="notice">Nothing needs attention. All calls are inside their review window and have complete source coverage.</p>}
         </div>
-        {!!currentItems.length&&<details className="current-calls"><summary>{currentItems.length} current {currentItems.length===1?'call':'calls'}</summary><ul className="admin-list">{currentItems.map(item=><li key={item.id}><Link href={'/admin/'+item.id}>{item.title}</Link><span className="admin-list-meta">Next review {item.dueAt?date(item.dueAt):'not scheduled'}{item.issues.length?` · ${item.issues.length} ${item.issues.length===1?'fact':'facts'} to reconfirm`:''}</span></li>)}</ul></details>}
+        {!!currentItems.length&&<details className="current-calls"><summary>{currentItems.length} current {currentItems.length===1?'call':'calls'}</summary><ul className="admin-list">{currentItems.map(item=><li key={item.id}><Link href={ADMIN_PATH+'/'+item.id}>{item.title}</Link><span className="admin-list-meta">Next review {item.dueAt?date(item.dueAt):'not scheduled'}{item.issues.length?` · ${item.issues.length} ${item.issues.length===1?'fact':'facts'} to reconfirm`:''}</span></li>)}</ul></details>}
         {!data?.length&&<p className="notice">No calls yet. Start with a real organizer’s official guidelines.</p>}
       </section>
 

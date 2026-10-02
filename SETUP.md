@@ -25,7 +25,7 @@ Only the SQL editor/project owner can change the admin allowlist. No admin email
 or password is stored in public code. To revoke access, delete the corresponding
 row from `admin_users`.
 
-5. Visit `/admin/login`. Add a sourced opportunity, enter role/format rules,
+5. Visit the private admin path shared with the authorized operator. Add a sourced opportunity, enter role/format rules,
    review the private preview, and save as a draft. After checking the official
    source, tick verification and publish. Edits reset verification unless you
    explicitly recheck the review box. To close a call, choose `closed`; to hide it,

@@ -4,15 +4,16 @@ import { revalidatePath } from 'next/cache';
 import { adminDb,configured,sessionDb } from '@/lib/supabase/server';
 import { opportunitySchema,requirementSchema } from '@/lib/validation';
 import {z} from 'zod';
+import {ADMIN_LOGIN_PATH,ADMIN_PATH} from '@/lib/admin-route';
 export type ActionState={error?:string;success?:string;id?:string};
 export async function login(_state:ActionState,form:FormData):Promise<ActionState>{
  if(!configured())return {error:'Supabase is not configured yet.'};
  const db=await sessionDb();const {error}=await db.auth.signInWithPassword({email:String(form.get('email')||''),password:String(form.get('password')||'')});
  if(error)return {error:'Sign-in failed. Check your credentials.'};
  if(!await adminDb()){await db.auth.signOut();return {error:'This account is not authorized as an admin.'};}
- redirect('/admin');
+ redirect(ADMIN_PATH);
 }
-export async function logout(){const db=await sessionDb();await db.auth.signOut();redirect('/admin/login');}
+export async function logout(){const db=await sessionDb();await db.auth.signOut();redirect(ADMIN_LOGIN_PATH);}
 export async function saveCall(_state:ActionState,form:FormData):Promise<ActionState>{
  const db=await adminDb();if(!db)return {error:'Admin authorization required. Sign in again.'};
  try{
@@ -22,19 +23,19 @@ export async function saveCall(_state:ActionState,form:FormData):Promise<ActionS
   const verified=form.get('verified')==='on';if(doc.published&&!verified)return {error:'Review the official source and check the verification box before publishing.'};
   const {error}=await db.rpc('save_opportunity',{doc,rules,verified,note:String(form.get('note')||'')});
   if(error)return {error:'Save failed. Check that the slug is unique and the database migration is installed.'};
-  revalidatePath('/opportunities');revalidatePath('/admin');return {success:doc.published?'Published and verified.':'Draft saved.',id:doc.id};
+  revalidatePath('/opportunities');revalidatePath(ADMIN_PATH);return {success:doc.published?'Published and verified.':'Draft saved.',id:doc.id};
  }catch{return {error:'Check all fields, URLs, rule comparisons, and the deadline timezone. A sourced requirement is required.'};}
 }
-export async function resolveCorrection(form:FormData){const db=await adminDb();if(!db)redirect('/admin/login');const id=String(form.get('id'));const {error}=await db.from('corrections').update({resolved:true}).eq('id',id);if(error)throw new Error('Could not resolve correction.');revalidatePath('/admin');}
+export async function resolveCorrection(form:FormData){const db=await adminDb();if(!db)redirect(ADMIN_LOGIN_PATH);const id=String(form.get('id'));const {error}=await db.from('corrections').update({resolved:true}).eq('id',id);if(error)throw new Error('Could not resolve correction.');revalidatePath(ADMIN_PATH);}
 
 const verificationSchema=z.object({id:z.string().uuid(),note:z.string().trim().min(3).max(2000),confirmed:z.literal('on')});
 export async function verifyCall(form:FormData){
- const db=await adminDb();if(!db)redirect('/admin/login');
+ const db=await adminDb();if(!db)redirect(ADMIN_LOGIN_PATH);
  const parsed=verificationSchema.safeParse({id:form.get('id'),note:form.get('note'),confirmed:form.get('confirmed')});
  if(!parsed.success)throw new Error('Confirm the source review and add a short verification note.');
  const {data:call,error:readError}=await db.from('opportunities').select('slug').eq('id',parsed.data.id).single();
  if(readError||!call)throw new Error('The opportunity could not be found.');
  const {error}=await db.rpc('verify_opportunity',{target_id:parsed.data.id,note:parsed.data.note});
  if(error)throw new Error('Verification could not be recorded. Apply the verification queue migration and try again.');
- revalidatePath('/admin');revalidatePath('/opportunities');revalidatePath('/opportunities/'+call.slug);revalidatePath('/results/'+call.slug);
+ revalidatePath(ADMIN_PATH);revalidatePath('/opportunities');revalidatePath('/opportunities/'+call.slug);revalidatePath('/results/'+call.slug);
 }
