@@ -14,10 +14,11 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Without Supabase, the app displays a small bundled catalog of manually reviewed
-calls with official source links (see `src/lib/catalog.ts`). Set `COMICREADY_ENABLE_DEV_FIXTURES=true` to exercise a clearly
-labeled fictional practice anthology. These fixtures are never seeded to a database.
-With Supabase configured, only its published records appear publicly.
+Without Supabase, local development displays the bundled, manually reviewed
+catalog in `src/lib/catalog.ts`. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` to
+exercise a clearly labeled fictional practice anthology. The fictional fixture
+is never seeded. Once Supabase is configured, its published rows are the only
+public catalog source; bundled records are not merged into database results.
 
 ## What works
 
@@ -41,7 +42,7 @@ npm run check
 ```
 
 Runs lint, meaningful rules/database/request tests, TypeScript, and the production
-build. Database tests execute both migrations in PGlite with a small test Auth shim;
+build. Database tests execute the migrations in PGlite with a small test Auth shim;
 real Supabase sign-in and hosted deployment still need integration verification.
 Webpack is used for portable production builds. The lockfile records compatible
 installed versions; use `npm ci` for reproducibility.
@@ -57,9 +58,10 @@ It remains a standard Next.js app and is portable to other Next-compatible hosts
 
 - `src/lib/engine.ts`: pure rules evaluation, independent of UI and database.
 - `src/lib/model.ts`: typed opportunities, project facts, and requirements.
-- `src/lib/catalog.ts`: reviewed fallback entry and explicit development fixture.
+- `src/lib/catalog.ts`: reviewed local catalog and explicit development fixture.
 - `src/lib/supabase/`: anonymous public reads and cookie-backed admin authorization.
-- `supabase/migrations/`: schema, RLS, transactional admin saves, aggregate events.
+- `supabase/migrations/`: schema, RLS, reviewed catalog import, transactional admin saves, and aggregate events.
+- `scripts/generate-reviewed-catalog-migration.mjs`: deterministic SQL export for reviewed calls.
 - `tests/`: behavioral rules, real Postgres policy, and input-validation tests.
 - `DESIGN.md` and `ARTWORK.md`: visual system and artwork provenance.
 

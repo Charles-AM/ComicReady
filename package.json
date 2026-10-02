@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
+    "catalog:migration": "node --experimental-strip-types scripts/generate-reviewed-catalog-migration.mjs",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "next typegen && tsc --noEmit",
     "check": "npm run lint && npm test && npm run typecheck && npm run build",

@@ -2,13 +2,14 @@
 
 ## Run locally
 Node 24 LTS recommended. `npm ci`, copy `.env.example` to `.env.local`, then
-`npm run dev`. The catalog works without Supabase using one reviewed official
-source. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` locally to include the fictional
+`npm run dev`. The catalog works without Supabase using the bundled reviewed
+calls. Set `COMICREADY_ENABLE_DEV_FIXTURES=true` locally to include the fictional
 practice call. Fixtures are never inserted into the database.
 
 ## Supabase
-1. Create a Supabase project and run both files in `supabase/migrations/`, in filename order,
-   in the SQL editor (or apply all migrations with the Supabase CLI).
+1. Create a Supabase project and apply every file in `supabase/migrations/` in
+   filename order using the SQL editor or Supabase CLI. The final reviewed-catalog
+   migration imports the 13 manually reviewed calls and their verification records.
 2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
    Never put a service-role key in a `NEXT_PUBLIC_` variable. The app does not
    need a service-role key; admin requests use the authenticated user's RLS permissions.
@@ -32,16 +33,25 @@ row from `admin_users`.
 6. Confirm in an incognito browser that drafts and their requirements cannot be
    read. Public routes deliberately use an anonymous client even while you are signed in.
 
-There is no automatic seed. When Supabase is configured its published records
-replace the bundled catalog. Enter real guidelines manually, including payment,
-rights, deadlines with their stated timezone, sources, and verification notes.
-The bundled Sector 13 entry was reviewed on 2026-09-30. Its flexible seven-page
-language must remain human-reviewed, and its missing licensing terms unknown.
+When Supabase is configured, its published records replace the bundled catalog
+entirely. The reviewed-catalog migration uses deterministic UUIDs and is safe to
+reapply without duplicate calls, rules, or verification events. New or changed
+calls must still be reviewed in the admin area before publication, including
+payment, rights, deadlines with their stated timezone, source links, and notes.
+
+After changing `src/lib/catalog.ts`, regenerate the checked-in import migration:
+
+```sh
+node --experimental-strip-types scripts/generate-reviewed-catalog-migration.mjs
+```
+
+Review the SQL diff before applying it. Never include the fictional fixture.
 
 ## Verification limits
-Local database tests run the actual migration in PGlite (Postgres), with an
+Local database tests run the actual migrations in PGlite (Postgres), with an
 `auth.uid()` test shim. They check RLS for anonymous users, ordinary signed-in
-users, admins, drafts, transactional rollback, and publication verification.
+users, admins, drafts, transactional rollback, publication verification, and
+the complete reviewed catalog import.
 They do not replace a final test against your hosted Supabase Auth instance.
 Hosted setup is separate from local verification; do not assume it has completed from passing local tests.
 
