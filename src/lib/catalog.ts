@@ -4,6 +4,7 @@ const verifiedAt = '2026-09-30T17:25:00Z';
 const expandedCatalogVerifiedAt = '2026-09-30T19:38:52Z';
 const secondCatalogExpansionVerifiedAt = '2026-10-01T16:35:18Z';
 const thirdCatalogExpansionVerifiedAt = '2026-10-02T13:50:36Z';
+const fourthCatalogExpansionVerifiedAt = '2026-10-03T13:42:30Z';
 
 function rule(
   opportunityId: string,
@@ -782,6 +783,119 @@ export const reviewedCatalog: Opportunity[] = [
       }),
       rule('arkansas-international-graphic-literature-2026', 'https://acwlp.submittable.com/submit', 'General Submissions — Graphic Literature 2026', 'arkansas-one-piece', 'Submit no more than one piece while a decision is pending.'),
       rule('arkansas-international-graphic-literature-2026', 'https://acwlp.submittable.com/submit', 'General Submissions — Graphic Literature 2026', 'arkansas-fee', 'The standard submission fee is $4 USD; the organizer offers fee waivers for BIPOC creators and people who need financial assistance.'),
+    ],
+  },
+  {
+    id: 'mad-cave-creator-owned-submissions',
+    slug: 'mad-cave-creator-owned-submissions',
+    title: 'Creator-owned comic submissions',
+    organizer: 'Mad Cave Studios',
+    category: 'short-comic',
+    official_url: 'https://madcavestudios.com/creators/',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: null,
+    compensation: null,
+    compensation_type: 'undisclosed',
+    region_scope: 'not-stated',
+    rights_disclosure:
+      'The submission agreement states that review creates no contract or compensation obligation and requires applicants to warrant ownership and authority to submit. Read the complete agreement before submitting.',
+    last_verified_at: fourthCatalogExpansionVerifiedAt,
+    published: true,
+    description:
+      'Rolling creator-owned submissions for one-shots, mini-series, and original graphic novels across Mad Cave and its imprints. The online form requires a linked pitch PDF and sample art.',
+    roles: ['writer', 'artist', 'writer-artist', 'team'],
+    formats: ['pitch'],
+    requirements: [
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/creators/', 'Creator Owned Submission Form', 'mad-cave-age', 'Applicants must be at least 18 years old.', {
+        kind: 'eligibility', field: 'age', operator: 'gte', value: 18,
+      }),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/submission-agreement/', 'Submission Agreement', 'mad-cave-rights', 'You must own or control the rights needed to submit the project and disclose any collaborators or co-creators.', {
+        kind: 'eligibility', field: 'rights', operator: 'eq', value: true,
+      }),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/creators/', 'Creator Owned Submission Form', 'mad-cave-samples', 'Include 6–8 pages of comic art in the linked pitch PDF.', {
+        kind: 'preparation', field: 'samplePages', operator: 'gte', value: 6,
+      }),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/creators/', 'Creator Owned Submission Form', 'mad-cave-pdf', 'Prepare a pitch PDF that can be shared through an accessible link.', {
+        kind: 'preparation', field: 'pdf', operator: 'eq', value: true,
+      }),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/creators/', 'Creator Owned Submission Form', 'mad-cave-breakdown', 'Include a series breakdown in the pitch PDF.', {
+        kind: 'preparation', field: 'synopsis', operator: 'eq', value: true,
+      }),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/creators/', 'Creator Owned Submission Form', 'mad-cave-format', 'Choose the applicable format: one-shot, mini-series, or original graphic novel.'),
+      rule('mad-cave-creator-owned-submissions', 'https://madcavestudios.com/submission-agreement/', 'Submission Agreement', 'mad-cave-agreement', 'Read the complete submission agreement before sending work; it contains the organizer’s terms for review, ownership warranties, disputes, and remedies.'),
+    ],
+  },
+  {
+    id: 'black-panel-press-submissions',
+    slug: 'black-panel-press-submissions',
+    title: 'Graphic novel and shorter-comic submissions',
+    organizer: 'Black Panel Press',
+    category: 'short-comic',
+    official_url: 'https://blackpanelpress.com/pages/graphic-novel-submissions',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: null,
+    compensation: 'The organizer states that published creators receive royalties; the rate and agreement terms are not disclosed on the submissions page.',
+    compensation_type: 'conditional',
+    region_scope: 'not-stated',
+    rights_disclosure: 'The organizer states that creators maintain ownership of their copyright; confirm the complete contract terms before accepting an offer.',
+    last_verified_at: fourthCatalogExpansionVerifiedAt,
+    published: true,
+    description:
+      'Rolling submissions for graphic novels, shorter comics, and single issues. Completed work is preferred, and comics teams must already be assembled.',
+    roles: ['writer', 'artist', 'writer-artist', 'team'],
+    formats: ['pitch', 'completed short comic'],
+    requirements: [
+      rule('black-panel-press-submissions', 'https://blackpanelpress.com/pages/graphic-novel-submissions', 'Graphic Novel Submissions', 'black-panel-team', 'Writers and artists must submit with an assembled comics team; the publisher does not pair collaborators.', {
+        kind: 'eligibility', roles: ['writer', 'artist'], field: 'collaborator', operator: 'eq', value: true,
+      }),
+      rule('black-panel-press-submissions', 'https://blackpanelpress.com/pages/graphic-novel-submissions', 'Graphic Novel Submissions', 'black-panel-samples', 'Include at least ten illustrated pages, preferably in color when applicable.', {
+        kind: 'preparation', field: 'samplePages', operator: 'gte', value: 10,
+      }),
+      rule('black-panel-press-submissions', 'https://blackpanelpress.com/pages/graphic-novel-submissions', 'Graphic Novel Submissions', 'black-panel-pdf', 'Provide the complete work as a PDF when it is available, using an accessible link that does not expire.', {
+        kind: 'preparation', field: 'pdf', operator: 'eq', value: true,
+      }),
+      rule('black-panel-press-submissions', 'https://blackpanelpress.com/pages/graphic-novel-submissions', 'Graphic Novel Submissions', 'black-panel-length', 'The publisher primarily seeks graphic novels of 60 or more pages but also considers shorter comics and single-issue projects.'),
+      rule('black-panel-press-submissions', 'https://blackpanelpress.com/pages/graphic-novel-submissions', 'Graphic Novel Submissions', 'black-panel-genre', 'The publisher does not seek superhero stories, conventional commercial genre fiction, or work built mainly from familiar genre formulas.'),
+    ],
+  },
+  {
+    id: 'fantagraphics-comic-submissions',
+    slug: 'fantagraphics-comic-submissions',
+    title: 'Comic and graphic novel submissions',
+    organizer: 'Fantagraphics',
+    category: 'short-comic',
+    official_url: 'https://www.fantagraphics.com/pages/submissions',
+    status: 'rolling',
+    deadline: null,
+    deadline_timezone: null,
+    deadline_date: null,
+    compensation: null,
+    compensation_type: 'undisclosed',
+    region_scope: 'not-stated',
+    rights_disclosure: null,
+    last_verified_at: fourthCatalogExpansionVerifiedAt,
+    published: true,
+    description:
+      'Rolling submissions for independently created comics and graphic novels. The publisher requests substantial finished sequential art, a synopsis, and the projected final length.',
+    roles: ['writer', 'artist', 'writer-artist', 'team'],
+    formats: ['pitch', 'completed short comic'],
+    requirements: [
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'What should I submit?', 'fantagraphics-samples', 'Submit at least 20 pages of completed sequential art as high-quality reproductions; do not send original artwork.', {
+        kind: 'preparation', field: 'samplePages', operator: 'gte', value: 20,
+      }),
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'What should I submit?', 'fantagraphics-synopsis', 'Include a synopsis of the complete storyline.', {
+        kind: 'preparation', field: 'synopsis', operator: 'eq', value: true,
+      }),
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'Creative team guidance', 'fantagraphics-team', 'Creators limited to one production role must assemble their own team; the publisher does not pair collaborators.', {
+        kind: 'eligibility', roles: ['writer', 'artist'], field: 'collaborator', operator: 'eq', value: true,
+      }),
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'What should I submit?', 'fantagraphics-length', 'State the projected final page count; the publisher does not prescribe a standard format or page length.'),
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'How and where should I send my submission?', 'fantagraphics-cover-letter', 'Include a cover letter with your name and mailing address; a résumé is not required.'),
+      rule('fantagraphics-comic-submissions', 'https://www.fantagraphics.com/pages/submissions', 'Editorial focus', 'fantagraphics-focus', 'Review the publisher’s editorial focus before submitting; it says mainstream superhero, vigilante, horror, fantasy, and science-fiction pitches are rarely a fit.'),
     ],
   },
 ];

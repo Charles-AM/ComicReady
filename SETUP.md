@@ -9,7 +9,7 @@ practice call. Fixtures are never inserted into the database.
 ## Supabase
 1. Create a Supabase project and apply every file in `supabase/migrations/` in
    filename order using the SQL editor or Supabase CLI. The reviewed-catalog
-   migrations import the 17 manually reviewed calls and their verification records.
+   migrations import the 20 manually reviewed calls and their verification records.
 2. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
    Never put a service-role key in a `NEXT_PUBLIC_` variable. The app does not
    need a service-role key; admin requests use the authenticated user's RLS permissions.

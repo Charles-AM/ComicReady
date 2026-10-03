@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { reviewedCatalog } from '../src/lib/catalog.ts';
 
-const output = fileURLToPath(new URL('../supabase/migrations/202610020002_catalog_expansion.sql', import.meta.url));
+const output = fileURLToPath(new URL('../supabase/migrations/202610030001_catalog_expansion.sql', import.meta.url));
 
 function stableUuid(value) {
   const bytes = createHash('sha256').update(`comicready:${value}`).digest().subarray(0, 16);

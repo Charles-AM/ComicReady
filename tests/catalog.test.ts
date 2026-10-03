@@ -51,4 +51,24 @@ describe('reviewed catalog integrity', () => {
     expect(vizResult.findings.find((finding) => finding.id === 'payment')?.outcome).toBe('unknown');
     expect(vizResult.findings.find((finding) => finding.id === 'licensing')?.outcome).toBe('unknown');
   });
+
+  test('rolling publisher submissions keep eligibility, preparation, and disclosure outcomes separate', () => {
+    const madCave = reviewedCatalog.find((call) => call.slug === 'mad-cave-creator-owned-submissions')!;
+    const madCaveResult = evaluate(
+      madCave,
+      { role: 'writer-artist', format: 'pitch', age: 17, rights: true, samplePages: 3, pdf: true, synopsis: true },
+      Date.parse('2026-10-03T14:00:00Z'),
+    );
+    expect(madCaveResult.findings.find((finding) => finding.id === 'mad-cave-age')?.outcome).toBe('ineligible');
+    expect(madCaveResult.findings.find((finding) => finding.id === 'mad-cave-samples')?.outcome).toBe('prepare');
+    expect(madCaveResult.findings.find((finding) => finding.id === 'payment')?.outcome).toBe('unknown');
+
+    const blackPanel = reviewedCatalog.find((call) => call.slug === 'black-panel-press-submissions')!;
+    const blackPanelResult = evaluate(
+      blackPanel,
+      { role: 'writer', format: 'pitch', collaborator: false, samplePages: 10, pdf: true },
+      Date.parse('2026-10-03T14:00:00Z'),
+    );
+    expect(blackPanelResult.findings.find((finding) => finding.id === 'black-panel-team')?.outcome).toBe('ineligible');
+  });
 });
