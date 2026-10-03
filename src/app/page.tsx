@@ -8,7 +8,10 @@ import { effectiveStatus } from '@/lib/model';
 import type { Metadata } from 'next';
 import { StructuredData } from '@/components/structured-data';
 
-export const revalidate = 3600;
+// Keep the public count and featured calls close to the reviewed catalog state.
+// This page remains cached for performance, but refreshes soon after an admin
+// publishes or closes an opportunity.
+export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Comic submission calls and readiness checks',
   description: 'Find verified comic submission calls, compare your project with published requirements, and leave with a source-linked preparation checklist.',
