@@ -8,6 +8,8 @@ import {buildVerificationQueue,verificationQueueCounts,type VerificationCandidat
 import {verificationLabel} from '@/lib/model';
 import {verificationNow} from '@/lib/verification-now';
 import type { Metadata } from 'next';
+import { AdminAnalytics } from '@/components/admin-analytics';
+import { buildAnalytics, type EventCountRow } from '@/lib/admin-analytics';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
@@ -22,11 +24,11 @@ export default async function Admin() {
   const { data, error } = await db.from('opportunities').select('id,slug,title,official_url,status,published,deadline,deadline_date,compensation,rights_disclosure,last_verified_at,updated_at,requirements(id,source_url)').order('updated_at', { ascending: false });
   if (error) throw new Error('Could not load admin records. Check the database migration.');
 
-  const { data: counts, error: countError } = await db.from('event_counts').select('*').order('day', { ascending: false }).limit(500);
+  const { data: counts, error: countError } = await db.from('event_counts').select('*').order('day', { ascending: false }).limit(5000);
   const { data: corrections, error: correctionError } = await db.from('corrections').select('*').eq('resolved', false).order('created_at', { ascending: false }).limit(100);
 
-  const totals: Record<string, number> = {};
-  for (const row of counts || []) totals[row.event] = (totals[row.event] || 0) + Number(row.count);
+  const analytics = buildAnalytics((counts || []) as EventCountRow[]);
+  const calls = Object.fromEntries((data || []).map((item) => [item.slug, { id: item.id, title: item.title }]));
   const now=await verificationNow();
   const queue=buildVerificationQueue((data||[]) as VerificationCandidate[],now);
   const queueCounts=verificationQueueCounts(queue);
@@ -69,23 +71,7 @@ export default async function Admin() {
         {!data?.length&&<p className="notice">No calls yet. Start with a real organizer’s official guidelines.</p>}
       </section>
 
-      <section className="admin-block">
-        <h2 className="section-title">Aggregate funnel counts</h2>
-        <p className="muted">Totals across the latest 500 daily buckets (up to 90 days). Event counts, not unique people.</p>
-        {countError ? (
-          <p className="notice">Apply the measurement migration to enable counts.</p>
-        ) : (
-          <dl className="facts facts-compact">
-            {Object.entries(totals).map(([name, count]) => (
-              <div key={name}>
-                <dt>{name.replaceAll('_', ' ')}</dt>
-                <dd>{count}</dd>
-              </div>
-            ))}
-            {!counts?.length && <p>No measured events yet.</p>}
-          </dl>
-        )}
-      </section>
+      {countError ? <section className="admin-block"><h2 className="section-title">Audience & activity</h2><p className="notice">Apply the measurement migration to enable analytics.</p></section> : <AdminAnalytics summary={analytics} calls={calls}/>}
 
       <section className="admin-block">
         <h2 className="section-title">Correction inbox</h2>

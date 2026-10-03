@@ -2,6 +2,7 @@ import {expect,test} from 'vitest';
 import {boundedJson,eventSchema,correctionSchema,sameOrigin} from '../src/lib/request-validation';
 test('measurement rejects project details and unrecognized events',()=>{
  expect(eventSchema.safeParse({event:'fit_check_completed',slug:'test-call'}).success).toBe(true);
+ expect(eventSchema.safeParse({event:'page_viewed',slug:'home'}).success).toBe(true);
  expect(eventSchema.safeParse({event:'fit_check_completed',slug:'test-call',project:{storyPages:8}}).success).toBe(false);
  expect(eventSchema.safeParse({event:'story_uploaded',slug:'test-call'}).success).toBe(false);
 });

@@ -1,4 +1,4 @@
-export const eventNames=['opportunity_viewed','fit_check_started','fit_check_completed','checklist_printed','official_application_clicked'] as const;
+export const eventNames=['page_viewed','opportunity_viewed','fit_check_started','fit_check_completed','checklist_printed','official_application_clicked'] as const;
 export type ProductEvent=typeof eventNames[number];
 export function track(event:ProductEvent,slug:string){
  if(typeof window==='undefined'||location.pathname.startsWith('/thgizcblljqbah'))return;

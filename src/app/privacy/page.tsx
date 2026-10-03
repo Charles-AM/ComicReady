@@ -22,8 +22,8 @@ export default function Privacy() {
       </p>
       <h2 className="reading-heading">Usage counts</h2>
       <p>
-        When the database is connected, ComicReady counts call views, checks started/completed, print-dialog requests, official application-link clicks, and
-        corrections. Browser events contain only an event name and a public call slug. The app stores daily totals, not visitor IDs, project answers, IP
+        When the database is connected, ComicReady counts homepage and catalog visits, call views, checks started/completed, print-dialog requests, official application-link clicks, and
+        corrections. Browser events contain only an event name and a public page or call slug. The app stores daily totals, not visitor IDs, project answers, IP
         addresses, or browsing histories.
       </p>
       <MeasurementPreference />

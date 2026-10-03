@@ -26,7 +26,7 @@ public catalog source; bundled records are not merged into database results.
 - Answer relevant project questions, receive deterministic findings, mark a checklist,
   and print/save it using the browser. Facts and progress stay on that browser/device.
 - Admin-only call/rule editing, private preview, verification, publication, closure,
-  correction review, and aggregate funnel counts.
+  correction review, and a responsive aggregate activity dashboard.
 - Supabase RLS hides drafts and rules from public readers, including public pages
   viewed while signed in as an administrator.
 - Privacy preference, correction form, accessible labels/focus, responsive layouts,
@@ -67,8 +67,9 @@ It remains a standard Next.js app and is portable to other Next-compatible hosts
 
 ## Measurement
 
-The private dashboard reports daily aggregate counts for opportunity views, checks
-started/completed, print-dialog requests, official-link clicks, and corrections.
+The private dashboard reports daily aggregate counts and 7/30-day trends for site visits,
+opportunity views, checks started/completed, print-dialog requests, official-link clicks,
+and corrections. It also shows top calls and recent active days.
 No project facts, persistent visitor identifiers, IP addresses, or referrers are
 stored in these tables. Counts are approximate interactions, not unique users or
 confirmed submissions/PDF saves. Browser opt-out, DNT, and GPC suppress optional

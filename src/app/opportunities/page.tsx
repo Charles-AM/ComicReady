@@ -2,6 +2,7 @@ import { getOpportunities } from '@/lib/opportunities';
 import { OpportunityList } from '@/components/opportunity-list';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/breadcrumbs';
+import { EventMarker } from '@/components/event-marker';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default async function Opportunities() {
   return (
     <section className="page-section layout-catalog">
+      <EventMarker event="page_viewed" slug="catalog" />
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Submission calls' }]} />
       <header className="catalog-page-head">
         <div>

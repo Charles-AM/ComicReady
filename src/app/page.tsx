@@ -7,6 +7,7 @@ import { getOpportunities } from '@/lib/opportunities';
 import { effectiveStatus } from '@/lib/model';
 import type { Metadata } from 'next';
 import { StructuredData } from '@/components/structured-data';
+import { EventMarker } from '@/components/event-marker';
 
 // Keep the public count and featured calls close to the reviewed catalog state.
 // This page remains cached for performance, but refreshes soon after an admin
@@ -66,6 +67,7 @@ export default async function Home() {
 
   return (
     <>
+      <EventMarker event="page_viewed" slug="home" />
       <StructuredData
         data={{
           '@context': 'https://schema.org',
