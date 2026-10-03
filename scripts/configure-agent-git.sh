@@ -2,8 +2,8 @@
 # Use the repo owner's Git identity on Cloud Agent VMs (avoids Cursor Agent as author).
 set -euo pipefail
 
-git config --local user.name "Charles Appiah Manu Jnr"
-git config --local user.email "cappiahmanu@gmail.com"
+git config --local user.name "V Builders"
+git config --local user.email "v-builders@users.noreply.github.com"
 git config --local commit.gpgsign false
 
 echo "Repo git author: $(git config --local user.name) <$(git config --local user.email)>"

@@ -37,7 +37,7 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
           description: c.description,
           url: `https://comicready.com/opportunities/${c.slug}`,
           dateModified: c.last_verified_at,
-          author: { '@type': 'Person', name: 'Charles Appiah Manu Jnr', url: 'https://comicready.com/about' },
+          author: { '@type': 'Organization', name: 'V Builders', url: 'https://comicready.com/about' },
           publisher: { '@type': 'Organization', name: 'ComicReady', url: 'https://comicready.com/' },
           about: { '@type': 'CreativeWork', name: `${c.organizer} submission call` },
         }}

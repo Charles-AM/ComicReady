@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   title: { default: 'Comic Ready', template: '%s | Comic Ready' },
   description: 'Understand published comic submission requirements and what you still need to prepare.',
   applicationName: 'ComicReady',
-  authors: [{ name: 'Charles Appiah Manu Jnr', url: '/about' }],
-  creator: 'Charles Appiah Manu Jnr',
+  authors: [{ name: 'V Builders', url: '/about' }],
+  creator: 'V Builders',
   publisher: 'ComicReady',
   robots: {
     index: true,
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               '@type': 'Organization',
               name: 'ComicReady',
               url: 'https://comicready.com/',
-              founder: { '@type': 'Person', name: 'Charles Appiah Manu Jnr', url: 'https://comicready.com/about' },
+              creator: { '@type': 'Organization', name: 'V Builders', url: 'https://comicready.com/about' },
             },
           ]}
         />

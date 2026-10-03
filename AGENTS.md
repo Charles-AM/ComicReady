@@ -22,4 +22,4 @@ When committing:
 
 - Use **`git commit --no-verify`** so managed hooks do not append `Co-authored-by:` lines.
 - Do **not** add `Made with Cursor`, `Co-authored-by: Cursor`, or `cursoragent@cursor.com` to commit messages or PR bodies.
-- Author must be **Charles Appiah Manu Jnr** `<cappiahmanu@gmail.com>` only (no co-authors from Cursor).
+- Author must be **V Builders** `<v-builders@users.noreply.github.com>` only (no co-authors from Cursor).

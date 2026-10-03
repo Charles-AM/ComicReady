@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { PageHeader } from '@/components/page-header';
 import { StructuredData } from '@/components/structured-data';
@@ -20,8 +19,8 @@ export default function AboutPage() {
           name: 'About ComicReady',
           url: 'https://comicready.com/about',
           mainEntity: {
-            '@type': 'Person',
-            name: 'Charles Appiah Manu Jnr',
+            '@type': 'Organization',
+            name: 'V Builders',
             url: 'https://comicready.com/about',
           },
         }}
@@ -34,21 +33,13 @@ export default function AboutPage() {
       />
       <h2 className="reading-heading">Who maintains it</h2>
       <p>
-        ComicReady was created and is maintained by <strong>Charles Appiah Manu Jnr</strong>. Charles reviews opportunity records against organizers’ public
-        pages, maintains the checker’s rules, and records when each listing was last verified.
+        ComicReady is maintained by <strong>V Builders</strong>. We review opportunity records against organizers’ public pages, maintain the checker’s rules,
+        and record when each listing was last verified.
       </p>
       <h2 className="reading-heading">How calls are reviewed</h2>
       <p>
         Each published requirement links to the organizer’s source. Deadlines, payment disclosures, rights language, role restrictions, and required materials
         are recorded only when the public guidelines support them. Missing or unclear information stays marked for confirmation with the organizer.
-      </p>
-      <h2 className="reading-heading">What the result means</h2>
-      <p>
-        A ComicReady result is preparation guidance based on published requirements. It is not an acceptance decision or legal advice. Creators should always
-        recheck the organizer’s page before submitting.
-      </p>
-      <p>
-        <Link href="/opportunities">Browse current submission calls</Link> or <Link href="/contact">report a correction</Link>.
       </p>
     </section>
   );

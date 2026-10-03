@@ -57,7 +57,7 @@ Hosted setup is separate from local verification; do not assume it has completed
 
 
 ## Netlify
-Import `Charles-AM/ComicReady` from GitHub. Use the Free plan and repository root,
+Import the ComicReady repository from GitHub. Use the Free plan and repository root,
 with `npm run build` as build command and `.next` as publish directory. The checked-in
 `netlify.toml` selects Node 24 and disables development fixtures. Let Netlify use its
 automatic Next.js adapter. Set both Supabase public variables below before deploying.

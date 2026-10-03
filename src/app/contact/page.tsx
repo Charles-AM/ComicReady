@@ -27,9 +27,7 @@ export default async function Contact() {
         <CorrectionForm calls={calls.filter((c) => !c.fixture).map((c) => ({ slug: c.slug, title: c.title }))} />
       ) : (
         <p className="notice">
-          The private correction inbox is not connected in this preview.{' '}
-          <a href="https://github.com/Charles-AM/ComicReady/issues/new">Report a correction on GitHub</a>. GitHub issues are public; do not include unpublished
-          work or private information.
+          The private correction inbox is not connected in this preview. Connect Supabase to enable correction reports.
         </p>
       )}
     </section>
