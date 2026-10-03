@@ -17,6 +17,11 @@ test('requests require matching origin and JSON',()=>{
  expect(sameOrigin(request('https://unrelated.example'))).toBe(false);
  expect(sameOrigin(request('https://comicready.example','text/plain'))).toBe(false);
 });
+test('requests accept the public host behind the deployment proxy',()=>{
+ const headers={origin:'https://comicready.com','content-type':'application/json',host:'comicready.com','x-forwarded-host':'comicready.com'};
+ expect(sameOrigin(new Request('https://internal-host.example/api/events',{method:'POST',headers,body:'{}'}))).toBe(true);
+ expect(sameOrigin(new Request('https://internal-host.example/api/events',{method:'POST',headers:{...headers,origin:'https://unrelated.example'},body:'{}'}))).toBe(false);
+});
 test('JSON limit is checked without trusting content-length',async()=>{
  await expect(boundedJson(new Request('https://example.com',{method:'POST',body:'x'.repeat(513)}),512)).rejects.toThrow('Too large');
 });
