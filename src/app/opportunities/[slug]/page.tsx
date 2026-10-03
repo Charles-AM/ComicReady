@@ -7,13 +7,14 @@ import { deadlineLabel, effectiveStatus, verificationLabel, UNKNOWN } from '@/li
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { StructuredData } from '@/components/structured-data';
+import { metaDescription } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const c = await getOpportunity((await params).slug);
   if (!c) return { title: 'Submission call not found' };
-  const description = `${c.organizer}: ${c.description}`.slice(0, 160);
+  const description = metaDescription(`${c.organizer}: ${c.description}`);
   return {
     title: c.title,
     description,
