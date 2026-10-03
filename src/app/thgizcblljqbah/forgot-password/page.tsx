@@ -1,7 +1,11 @@
 import { AdminPasswordRequest } from '@/components/admin-password-recovery';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
 
-export const metadata = { title: 'Recover admin access' };
+export const metadata: Metadata = {
+  title: 'Recover admin access',
+  description: 'Request a password link for an existing ComicReady administrator account.',
+};
 
 export default function ForgotPasswordPage() {
   return (

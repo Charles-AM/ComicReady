@@ -4,6 +4,12 @@ import { AdminEditor } from '@/components/admin-editor';
 import {ADMIN_LOGIN_PATH} from '@/lib/admin-route';
 import type { Opportunity } from '@/lib/model';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edit opportunity',
+  description: 'Private ComicReady editor for maintaining an opportunity and its source-linked requirements.',
+};
 
 export default async function Edit({ params }: { params: Promise<{ id: string }> }) {
   const db = await adminDb();

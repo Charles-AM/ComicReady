@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { developmentCall } from '@/lib/catalog';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Development fixture guidelines',
+  description: 'Fictional ComicReady guidelines used only to test the project checker during development.',
+};
 
 export default function Guidelines() {
   return (

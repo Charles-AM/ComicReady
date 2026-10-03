@@ -5,24 +5,50 @@ import { HeroReadinessStack } from '@/components/hero-readiness-stack';
 import { HomeCatalogPeek } from '@/components/home-catalog-peek';
 import { getOpportunities } from '@/lib/opportunities';
 import { effectiveStatus } from '@/lib/model';
+import type { Metadata } from 'next';
+import { StructuredData } from '@/components/structured-data';
 
 export const revalidate = 3600;
+export const metadata: Metadata = {
+  title: 'Comic submission calls and readiness checks',
+  description: 'Find verified comic submission calls, compare your project with published requirements, and leave with a source-linked preparation checklist.',
+  alternates: { canonical: '/' },
+};
 
 const steps = [
   {
-    label: 'Pick a call',
-    title: 'Read between the guidelines.',
-    text: 'Open a short-comic or anthology listing. Payment, rights, deadlines, and the link to the real call sit on one page—no hunting through PDFs.',
+    label: 'Choose a call',
+    title: 'Read the published details.',
+    text: 'Review the deadline, payment disclosure, rights terms, eligibility rules, and the organizer’s official source in one place.',
   },
   {
-    label: 'Answer plainly',
-    title: 'Find out where you stand.',
-    text: 'Tell us your role, format, and what you have ready. You’ll see what matches the rules, what you still need to prep, and what only the organizer can answer.',
+    label: 'Describe your project',
+    title: 'Compare it with the requirements.',
+    text: 'Answer only the questions relevant to the call. The checker keeps unknown answers separate from passes and failures.',
   },
   {
-    label: 'Leave prepared',
-    title: 'Take a checklist with you.',
-    text: 'Print it, scribble on it, then finish on the organizer’s site when you’re ready. Nothing to upload here, and no account to create.',
+    label: 'Prepare the submission',
+    title: 'Work through a practical checklist.',
+    text: 'Mark items complete, print the result, and submit through the organizer when you are ready. ComicReady does not collect your files.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'Does ComicReady guarantee that my comic will be accepted?',
+    answer: 'No. ComicReady compares your answers with requirements published by the organizer. It cannot predict an editorial decision or provide legal advice.',
+  },
+  {
+    question: 'Where do the eligibility rules come from?',
+    answer: 'Every displayed requirement links to the organizer’s official source. Each listing also shows when the guidelines were last manually verified.',
+  },
+  {
+    question: 'What happens when a guideline is unclear?',
+    answer: 'The checker reports that it cannot determine the answer from published guidelines and tells you to confirm the point with the organizer.',
+  },
+  {
+    question: 'Does ComicReady store my comic or project answers?',
+    answer: 'No comic files are uploaded. Project answers and checklist progress stay in local browser storage on the device you use.',
   },
 ];
 
@@ -37,12 +63,23 @@ export default async function Home() {
 
   return (
     <>
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: { '@type': 'Answer', text: item.answer },
+          })),
+        }}
+      />
       <section className="home-hero home-hero--catalog" aria-labelledby="hero-title">
         <div className="home-hero-catalog-layout">
           <div className="home-hero-main">
             <HeroTitle variant={heroTitleVariant} />
             <p className="lede home-hero-lede">
-              You’ve got a story. Before you pitch it, see what the call actually asks for—a straight read of the guidelines and a short list of what’s still open.
+              Compare your comic project with a call’s published requirements. See what matches, what you need to prepare, and what the organizer has not made clear.
             </p>
             <Link className="button button-accent" href="/opportunities">
               Browse {availableCallCount} {availableCallCount === 1 ? 'open call' : 'open calls'}
@@ -61,12 +98,11 @@ export default async function Home() {
             <div>
               <p className="eyebrow">How it works</p>
               <h2 id="workflow-title" className="section-title">
-                Less guesswork. More getting it together.
+                From published guidelines to a practical checklist.
               </h2>
             </div>
             <p className="workflow-band-lede">
-              Three steps, same every time: read the call, compare your project, walk away with a to-do list. We’re not grading your comic, and this isn’t where
-              you hit submit.
+              Review the call, compare your project, and leave with a list you can act on. The organizer still makes every submission decision.
             </p>
           </header>
           <ol className="workflow-panels">
@@ -93,8 +129,8 @@ export default async function Home() {
               The source gets the final word.
             </h2>
             <p className="standards-lede">
-              When we cite a rule, it goes back to the organizer’s page. If the guidelines go quiet on something, we leave it blank instead of guessing. Think
-              of the check as prep for your application—not a promise you’ll get in, and not legal advice.
+              Every rule links to the organizer’s page. If the guidelines do not answer a question, the result says so instead of guessing. The check is
+              preparation guidance, not an acceptance promise or legal advice.
             </p>
           </header>
           <div className="standards-body">
@@ -104,11 +140,26 @@ export default async function Home() {
               <li>We’re looking at eligibility and paperwork—not a jury on your story.</li>
             </ul>
             <p className="standards-preview">
-              Early build: a small set of manually reviewed calls in the catalog, original art on the home page (not someone’s submission), and checks that stick to
-              what’s written in the guidelines.
+              Catalog records are reviewed by hand. The checker uses structured rules from those records and never evaluates artistic quality.
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="faq-section" aria-labelledby="faq-title">
+        <header className="faq-header">
+          <p className="eyebrow">Questions creators ask</p>
+          <h2 id="faq-title" className="section-title">How ComicReady works</h2>
+        </header>
+        <div className="faq-list">
+          {faqs.map((item) => (
+            <details key={item.question}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+        <p className="faq-more">More detail is available on the <Link href="/about">About page</Link> and in the <Link href="/privacy">privacy explanation</Link>.</p>
       </section>
     </>
   );

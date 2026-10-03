@@ -2,8 +2,12 @@ import Link from 'next/link';
 import { HeroTitle } from '@/components/hero-title';
 import { heroTitleOptions } from '@/lib/hero-title-style';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
 
-export const metadata = { title: 'Hero title options' };
+export const metadata: Metadata = {
+  title: 'Hero title options',
+  description: 'Private ComicReady interface preview for comparing home-page title treatments.',
+};
 
 export default function HeroOptionsPage() {
   return (

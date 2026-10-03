@@ -7,8 +7,13 @@ import { PageHeader } from '@/components/page-header';
 import {buildVerificationQueue,verificationQueueCounts,type VerificationCandidate} from '@/lib/verification-queue';
 import {verificationLabel} from '@/lib/model';
 import {verificationNow} from '@/lib/verification-now';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+export const metadata: Metadata = {
+  title: 'Editorial workspace',
+  description: 'Private ComicReady workspace for reviewing sources, corrections, and catalog records.',
+};
 
 export default async function Admin() {
   const db = await adminDb();

@@ -1,12 +1,19 @@
 import Link from 'next/link';
 import { MeasurementPreference } from '@/components/measurement-preference';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
-export const metadata = { title: 'Privacy' };
+export const metadata: Metadata = {
+  title: 'Privacy',
+  description: 'Learn how ComicReady keeps project answers on your device and measures only aggregate, privacy-conscious product events.',
+  alternates: { canonical: '/privacy' },
+};
 
 export default function Privacy() {
   return (
     <section className="page-section layout-reading">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]} />
       <PageHeader eyebrow="Last updated 30 September 2026" title="Your project stays yours." />
       <h2 className="reading-heading">Project facts and checklist</h2>
       <p>

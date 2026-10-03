@@ -1,7 +1,11 @@
 import { PageHeader } from '@/components/page-header';
 import { AdminLogin } from '@/components/admin-login';
+import type { Metadata } from 'next';
 
-export const metadata = { title: 'Admin sign in' };
+export const metadata: Metadata = {
+  title: 'Admin sign in',
+  description: 'Private sign-in for the ComicReady editorial workspace.',
+};
 
 export default function LoginPage() {
   return (

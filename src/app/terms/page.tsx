@@ -1,11 +1,18 @@
 import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
-export const metadata = { title: 'Terms' };
+export const metadata: Metadata = {
+  title: 'Terms',
+  description: 'Read the scope and limitations of ComicReady’s source-linked comic submission readiness guidance.',
+  alternates: { canonical: '/terms' },
+};
 
 export default function Terms() {
   return (
     <section className="page-section layout-reading">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Terms' }]} />
       <PageHeader
         eyebrow="Last updated 30 September 2026"
         title={

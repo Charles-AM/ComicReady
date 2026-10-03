@@ -1,12 +1,26 @@
 import Link from 'next/link';
 import { EventMarker, ApplicationLink } from '@/components/event-marker';
-import { BackLink } from '@/components/back-link';
 import { notFound } from 'next/navigation';
 import { getOpportunity } from '@/lib/opportunities';
 import { CallCoverSurface } from '@/components/call-cover-surface';
 import { deadlineLabel, effectiveStatus, verificationLabel, UNKNOWN } from '@/lib/model';
+import type { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/breadcrumbs';
+import { StructuredData } from '@/components/structured-data';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const c = await getOpportunity((await params).slug);
+  if (!c) return { title: 'Submission call not found' };
+  const description = `${c.organizer}: ${c.description}`.slice(0, 160);
+  return {
+    title: c.title,
+    description,
+    alternates: { canonical: `/opportunities/${c.slug}` },
+    openGraph: { type: 'article', url: `/opportunities/${c.slug}`, title: c.title, description },
+  };
+}
 
 export default async function Detail({ params }: { params: Promise<{ slug: string }> }) {
   const c = await getOpportunity((await params).slug);
@@ -14,8 +28,21 @@ export default async function Detail({ params }: { params: Promise<{ slug: strin
 
   return (
     <section className="page-section layout-call">
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: c.title,
+          description: c.description,
+          url: `https://comicready.com/opportunities/${c.slug}`,
+          dateModified: c.last_verified_at,
+          author: { '@type': 'Person', name: 'Charles Appiah Manu Jnr', url: 'https://comicready.com/about' },
+          publisher: { '@type': 'Organization', name: 'ComicReady', url: 'https://comicready.com/' },
+          about: { '@type': 'CreativeWork', name: `${c.organizer} submission call` },
+        }}
+      />
       <EventMarker event="opportunity_viewed" slug={c.slug} enabled={!c.fixture} />
-      <BackLink href="/opportunities">Catalog</BackLink>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Submission calls', href: '/opportunities' }, { label: c.title }]} />
 
       <div className="call-showcase">
         <CallCoverSurface call={c} className="call-showcase-cover" />

@@ -10,12 +10,22 @@ import '@fontsource/source-serif-4/500.css';
 import { BrandMark } from '@/components/brand-mark';
 import { MotionProvider } from '@/components/motion-provider';
 import { SiteNav } from '@/components/site-nav';
+import { StructuredData } from '@/components/structured-data';
 import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://comicready.com'),
   title: { default: 'Comic Ready', template: '%s | Comic Ready' },
   description: 'Understand published comic submission requirements and what you still need to prepare.',
+  applicationName: 'ComicReady',
+  authors: [{ name: 'Charles Appiah Manu Jnr', url: '/about' }],
+  creator: 'Charles Appiah Manu Jnr',
+  publisher: 'ComicReady',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
   openGraph: {
     type: 'website',
     siteName: 'Comic Ready',
@@ -29,6 +39,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <StructuredData
+          data={[
+            {
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'ComicReady',
+              url: 'https://comicready.com/',
+              description: 'Source-linked comic submission calls and project readiness checks for independent creators.',
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'ComicReady',
+              url: 'https://comicready.com/',
+              founder: { '@type': 'Person', name: 'Charles Appiah Manu Jnr', url: 'https://comicready.com/about' },
+            },
+          ]}
+        />
         <MotionProvider>
           <a href="#main" className="skip-link">
             Skip to content
@@ -48,6 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <footer className="site-footer site-shell">
               <p className="footer-lede">Independent stories. Informed next steps.</p>
               <nav aria-label="Footer">
+                <Link href="/about">About</Link>
                 <Link href="/privacy">Privacy</Link>
                 <Link href="/terms">Terms</Link>
                 <Link href="/contact">Corrections</Link>

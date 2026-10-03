@@ -1,7 +1,11 @@
 import { AdminPasswordUpdate } from '@/components/admin-password-recovery';
 import { PageHeader } from '@/components/page-header';
+import type { Metadata } from 'next';
 
-export const metadata = { title: 'Set admin password' };
+export const metadata: Metadata = {
+  title: 'Set admin password',
+  description: 'Choose a password for an authorized ComicReady administrator account.',
+};
 
 export default function ResetPasswordPage() {
   return (

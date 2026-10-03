@@ -1,12 +1,19 @@
 import { getOpportunities } from '@/lib/opportunities';
 import { OpportunityList } from '@/components/opportunity-list';
+import type { Metadata } from 'next';
+import { Breadcrumbs } from '@/components/breadcrumbs';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Submission calls' };
+export const metadata: Metadata = {
+  title: 'Comic submission calls',
+  description: 'Browse verified short-comic and anthology submission calls with sourced deadlines, payment disclosures, rights terms, and eligibility checks.',
+  alternates: { canonical: '/opportunities' },
+};
 
 export default async function Opportunities() {
   return (
     <section className="page-section layout-catalog">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Submission calls' }]} />
       <header className="catalog-page-head">
         <div>
           <p className="eyebrow">Catalog</p>

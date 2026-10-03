@@ -4,5 +4,11 @@
 [build.environment]
   NODE_VERSION = "24"
   COMICREADY_ENABLE_DEV_FIXTURES = "false"
+
+[[redirects]]
+  from = "https://comicready.netlify.app/*"
+  to = "https://comicready.com/:splat"
+  status = 301
+  force = true
 # Netlify automatically provisions its supported Next.js adapter.
 # Add Supabase public project variables through the Netlify dashboard.
